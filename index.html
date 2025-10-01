@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Moje služba — Pomůžu vám s&nbsp;vytvořením jednoduchého webu</title>
+  <meta name=\"description\" content=\"Nabízím vytvoření jednoduchého, rychlého a responzivního webu s profesionálním vzhledem. Ideální pro malé projekty, freelancery a lokální podniky.\" \/>
+  <meta name="author" content="Vaše jméno" />
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Moje služba — Tvorba jednoduchých webů" />
+  <meta property=\"og:description\" content=\"Rychlý, čistý a dostupný web nasazený na moderním a bezpečném hostingu.\" \/>
+  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Moje+sluzba" />
+  <meta name="theme-color" content="#0ea5e9" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230ea5e9'/><text x='50' y='57' font-size='44' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'>W</text></svg>">
+  <style>
+    :root{
+      --bg:#0b1020; /* tmavý podklad */
+      --card:#0f172a;
+      --muted:#94a3b8;
+      --text:#e2e8f0;
+      --brand:#0ea5e9;
+      --brand-2:#22d3ee;
+      --ring:rgba(14,165,233,.5);
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg, #0b1020 0%, #0b1226 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Noto Sans",sans-serif;line-height:1.6}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .container{max-width:1100px;margin-inline:auto;padding:24px}
+    header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(8px);background:rgba(11,16,32,.6);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
+    .logo-badge{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 10px 30px rgba(34,211,238,.25)}
+    .logo-badge span{font-weight:800}
+    .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#041017;border:none;padding:12px 18px;border-radius:12px;font-weight:700;box-shadow:0 10px 30px rgba(14,165,233,.35);transition:transform .08s ease, box-shadow .2s ease}
+    .cta:hover{transform:translateY(-1px);box-shadow:0 14px 36px rgba(14,165,233,.45)}
+    .ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.12)}
+
+    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding-block:48px}
+    .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0}
+    .hero p{color:var(--muted);font-size:18px}
+    .card{background:linear-gradient(180deg,var(--card),rgba(15,23,42,.6));border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:22px}
+    .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(14,165,233,.12);color:#a5f3fc;border:1px solid rgba(34,211,238,.35);padding:8px 12px;border-radius:999px;font-weight:600;font-size:14px}
+
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+    .section{padding-block:56px}
+    .section h2{font-size:clamp(22px,4vw,32px);margin:0 0 16px}
+    .muted{color:var(--muted)}
+
+    .price{display:flex;gap:18px;align-items:baseline}
+    .price .big{font-size:42px;font-weight:800}
+
+    .faq details{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px}
+    .faq details summary{cursor:pointer;font-weight:600}
+    .faq details + details{margin-top:12px}
+
+    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:28px;color:var(--muted);font-size:14px}
+
+    /* responsivita */
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <div class="logo">
+        <div class="logo-badge"><span>W</span></div>
+        <span>Moje Služba</span>
+      </div>
+      <nav>
+        <a class="cta ghost" href="#sluzba">Služba</a>
+        <a class="cta ghost" href="#cena">Cena</a>
+        <a class="cta" href="#kontakt">Nezávazně poptat</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <span class="pill">⚡ Rychle, jednoduše, bez starostí</span>
+        <h1>Tvořím jednoduché, rychlé a hezké weby — ideální pro projekty, které se chtějí profesionálně představit</h1>
+        <p class="muted">Pomohu vám od nápadu po zveřejnění na moderní a bezpečný hosting. Moderní design, srozumitelný obsah a měřitelný výsledek.</p>
+        <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
+          <a class="cta" href="#kontakt">Chci nezávaznou konzultaci</a>
+          <a class="cta ghost" href="#ukazka">Ukázka webu</a>
+        </div>
+      </div>
+      <div class="card" aria-label="Náhled webu">
+        <img src="https://via.placeholder.com/720x480.png?text=Ukazka+webu" alt="Ukázka jednoduchého webu" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)"/>
+        <ul style="margin:14px 0 0 0; padding-left:18px; color:var(--muted)">
+          <li>Responzivní design (mobil, tablet, desktop)</li>
+          <li>Rychlé načítání a čistý kód</li>
+          <li>Rychlé nasazení a zabezpečený provoz</li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sluzba" class="section">
+      <h2>Co pro vás udělám</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>🎯 Konzultace a obsah</h3>
+          <p class="muted">Krátký call / zprávy, ujasníme cíle a připravím strukturu a texty.</p>
+        </div>
+        <div class="card">
+          <h3>🧱 Tvorba webu<\/h3>
+          <p class=\"muted\">Jednostránkový web (landing page) s moderním vzhledem, rychlým načítáním a důrazem na srozumitelný obsah.<\/p>
+        </div>
+        <div class="card">
+          <h3>🚀 Nasazení<\/h3>
+          <p class=\"muted\">Postarám se o nasazení na spolehlivý hosting a nastavení vlastní domény. Všechno vyřeším za vás.<\/p>
+        </div>
+      </div>
+    </section>
+
+    <section id="ukazka" class="section">
+      <h2>Ukázkový obsah</h2>
+      <div class="card">
+        <p class="muted">Tento web je plně statický a dá se snadno upravit. Nahraďte texty, barvy a obrázky podle své značky. Níže je sekce FAQ a kontakt.</p>
+      </div>
+    </section>
+
+    <section id="cena" class="section">
+      <h2>Cena</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Start</h3>
+          <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
+          <ul class="muted">
+            <li>Jednoduchý one‑page</li>
+            <li>Základní copywriting</li>
+            <li>Nastavení GitHub Pages</li>
+          </ul>
+        </div>
+        <div class="card" style="border-color:rgba(34,211,238,.35)">
+          <h3>Pro</h3>
+          <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
+          <ul class=\"muted\">
+            <li>One‑page + 2 podstránky</li>
+            <li>Lehké SEO (základní metadata a struktura)</li>
+            <li>Kontaktní formulář a základní analytika</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Custom</h3>
+          <div class="price"><span class="big">na dotaz</span></div>
+          <ul class="muted">
+            <li>Více stránek, blog, vícejazyčnost</li>
+            <li>Grafický návrh na míru</li>
+            <li>Napojení na služby třetích stran</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class=\"section faq\">
+      <h2>Časté dotazy<\/h2>
+      <details>
+        <summary>Co potřebuji od vás na začátku?<\/summary>
+        <p class=\"muted\">Krátký popis služby, logotyp nebo název, případně barvy a 2–3 reference. Vše můžeme doladit společně.<\/p>
+      <\/details>
+      <details>
+        <summary>Jak rychle bude hotovo?<\/summary>
+        <p class=\"muted\">Jednoduchý web obvykle do 3 pracovních dnů od schválení textů a podkladů.<\/p>
+      <\/details>
+      <details>
+        <summary>Budete se starat i o průběžné aktualizace?<\/summary>
+        <p class=\"muted\">Ano, na přání zajistím i průběžné drobné úpravy obsahu a správu. Stačí poslat podklady a vše zařídím.<\/p>
+      <\/details>
+    <\/section>
+
+    <section id="kontakt" class="section">
+      <div class="card">
+        <h2>Pojďme to rozjet</h2>
+        <p class="muted">Napište mi a pošlu vám krátký dotazník. Domluvíme si termín i rozsah.</p>
+        <form id="form" action="mailto:vas@email.cz" method="post" enctype="text/plain" style="display:grid; gap:12px; max-width:560px">
+          <label>Jméno<br><input required placeholder="Jan Novák" name="jmeno" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></label>
+          <label>E‑mail<br><input required type="email" placeholder="jan@example.com" name="email" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></label>
+          <label>Co potřebujete<br><textarea placeholder="Stručně popište svůj záměr…" name="zprava" rows="4" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></textarea></label>
+          <button class="cta" type="submit">Odeslat</button>
+          <small class=\"muted\">Ozvu se do 24 hodin s krátkým dotazníkem a návrhem dalšího postupu.<\/small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      © <span id="year"></span> Moje Služba · IČO 12345678 · <a href="#">Obchodní podmínky</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
