@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Moje služba — Pomůžu vám s&nbsp;vytvořením jednoduchého webu</title>
-  <meta name=\"description\" content=\"Nabízím vytvoření jednoduchého, rychlého a responzivního webu s profesionálním vzhledem. Ideální pro malé projekty, freelancery a lokální podniky.\" \/>
+  <title>Tvorba jednoduchých webů — rychle, hezky, bez starostí</title>
+  <meta name="description" content="Pomohu vám vytvořit pěkný a rychlý prezentační web. Jasná nabídka, čistý design, nasazení na spolehlivý hosting a podpora do budoucna." />
   <meta name="author" content="Vaše jméno" />
-  <!-- Open Graph / Social -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Moje služba — Tvorba jednoduchých webů" />
-  <meta property=\"og:description\" content=\"Rychlý, čistý a dostupný web nasazený na moderním a bezpečném hostingu.\" \/>
-  <meta property="og:image" content="https://via.placeholder.com/1200x630.png?text=Moje+sluzba" />
+  <meta property="og:title" content="Tvorba jednoduchých webů" />
+  <meta property="og:description" content="Jednoduchý, moderní a rychlý web pro vaši službu nebo projekt." />
+  <meta property="og:image" content="https://dummyimage.com/1200x630/0ea5e9/ffffff.png&text=Tvorba+jednoduchych+webu" />
   <meta name="theme-color" content="#0ea5e9" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230ea5e9'/><text x='50' y='57' font-size='44' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'>W</text></svg>">
   <style>
@@ -22,6 +21,9 @@
       --brand:#0ea5e9;
       --brand-2:#22d3ee;
       --ring:rgba(14,165,233,.5);
+      /* zde si můžete snadno vyměnit náhledy */
+      --shot-desktop: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1600&auto=format&fit=crop');
+      --shot-mobile:  url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop');
     }
     *{box-sizing:border-box}
     html,body{margin:0;padding:0;background:linear-gradient(180deg, #0b1020 0%, #0b1226 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Noto Sans",sans-serif;line-height:1.6}
@@ -57,10 +59,22 @@
 
     footer{border-top:1px solid rgba(255,255,255,.08);padding-block:28px;color:var(--muted);font-size:14px}
 
-    /* responsivita */
+    /* Mockup zařízení */
+    .mockup{position:relative;display:flex;align-items:flex-end;gap:28px;justify-content:center}
+    .mockup .laptop{position:relative;width:min(560px,100%);}
+    .mockup .laptop .bezel{background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.08);border-bottom:none;border-radius:16px 16px 0 0;aspect-ratio:16/10;position:relative;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.35)}
+    .mockup .laptop .screen{position:absolute;inset:10px;background:#0b1226 center/cover no-repeat;border-radius:10px;background-image: var(--shot-desktop);}
+    .mockup .laptop .base{height:14px;background:linear-gradient(180deg,#1b2238,#0f172a);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 10px 10px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));}
+
+    .mockup .phone{position:absolute;right:-6%;bottom:10px;width:min(160px,36vw);aspect-ratio:9/19;border-radius:26px;background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 28px rgba(0,0,0,.4)}
+    .mockup .phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40%;height:14px;background:#0e152b;border-radius:0 0 12px 12px;border:1px solid rgba(255,255,255,.06);border-top:none}
+    .mockup .phone .screen{position:absolute;inset:12px;background:#0b1226 center/cover no-repeat;border-radius:18px;background-image: var(--shot-mobile);}
+
     @media (max-width: 900px){
       .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
+      .mockup{gap:18px}
+      .mockup .phone{right:-2%;width:min(120px,30vw)}
     }
   </style>
 </head>
@@ -69,11 +83,12 @@
     <div class="container nav">
       <div class="logo">
         <div class="logo-badge"><span>W</span></div>
-        <span>Moje Služba</span>
+        <span>Tvorba webů</span>
       </div>
       <nav>
         <a class="cta ghost" href="#sluzba">Služba</a>
         <a class="cta ghost" href="#cena">Cena</a>
+        <a class="cta ghost" href="#proces">Jak to probíhá</a>
         <a class="cta" href="#kontakt">Nezávazně poptat</a>
       </nav>
     </div>
@@ -83,19 +98,30 @@
     <section class="hero">
       <div>
         <span class="pill">⚡ Rychle, jednoduše, bez starostí</span>
-        <h1>Tvořím jednoduché, rychlé a hezké weby — ideální pro projekty, které se chtějí profesionálně představit</h1>
-        <p class="muted">Pomohu vám od nápadu po zveřejnění na moderní a bezpečný hosting. Moderní design, srozumitelný obsah a měřitelný výsledek.</p>
+        <h1>Pěkný a rychlý web, který prodá vaši službu</h1>
+        <p class="muted">Zaměřím se na jasnou nabídku, čistý vzhled a rychlé dodání. Nasazení na spolehlivý hosting a podpora do budoucna jsou součástí.</p>
         <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
           <a class="cta" href="#kontakt">Chci nezávaznou konzultaci</a>
-          <a class="cta ghost" href="#ukazka">Ukázka webu</a>
+          <a class="cta ghost" href="#demo">Zobrazit demo</a>
         </div>
       </div>
       <div class="card" aria-label="Náhled webu">
-        <img src="https://via.placeholder.com/720x480.png?text=Ukazka+webu" alt="Ukázka jednoduchého webu" style="width:100%;border-radius:12px;border:1px solid rgba(255,255,255,.08)"/>
+        <div class="mockup">
+          <div class="laptop">
+            <div class="bezel">
+              <div class="screen" role="img" aria-label="Náhled webu na laptopu"></div>
+            </div>
+            <div class="base"></div>
+          </div>
+          <div class="phone">
+            <div class="notch"></div>
+            <div class="screen" role="img" aria-label="Náhled webu na mobilu"></div>
+          </div>
+        </div>
         <ul style="margin:14px 0 0 0; padding-left:18px; color:var(--muted)">
-          <li>Responzivní design (mobil, tablet, desktop)</li>
-          <li>Rychlé načítání a čistý kód</li>
-          <li>Rychlé nasazení a zabezpečený provoz</li>
+          <li>Responzivní vzhled: mobil, tablet, desktop</li>
+          <li>Rychlé načítání a čistý design</li>
+          <li>Bezpečný provoz s HTTPS</li>
         </ul>
       </div>
     </section>
@@ -104,43 +130,54 @@
       <h2>Co pro vás udělám</h2>
       <div class="grid">
         <div class="card">
-          <h3>🎯 Konzultace a obsah</h3>
-          <p class="muted">Krátký call / zprávy, ujasníme cíle a připravím strukturu a texty.</p>
+          <h3>🎯 Jasná nabídka</h3>
+          <p class="muted">Vykomunikujeme cíle a připravím texty, které vaši službu srozumitelně prodají.</p>
         </div>
         <div class="card">
-          <h3>🧱 Tvorba webu<\/h3>
-          <p class=\"muted\">Jednostránkový web (landing page) s moderním vzhledem, rychlým načítáním a důrazem na srozumitelný obsah.<\/p>
+          <h3>🧱 Tvorba webu</h3>
+          <p class="muted">Jednoduchý prezentační web s moderním vzhledem a logickou strukturou obsahu.</p>
         </div>
         <div class="card">
-          <h3>🚀 Nasazení<\/h3>
-          <p class=\"muted\">Postarám se o nasazení na spolehlivý hosting a nastavení vlastní domény. Všechno vyřeším za vás.<\/p>
+          <h3>🚀 Nasazení a podpora</h3>
+          <p class="muted">Zařídím doménu i nasazení na spolehlivý hosting. Drobné úpravy a podpora dle dohody.</p>
         </div>
       </div>
     </section>
 
-    <section id="ukazka" class="section">
-      <h2>Ukázkový obsah</h2>
-      <div class="card">
-        <p class="muted">Tento web je plně statický a dá se snadno upravit. Nahraďte texty, barvy a obrázky podle své značky. Níže je sekce FAQ a kontakt.</p>
+    <section id="demo" class="section">
+      <h2>Ukázkové sekce webu</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Benefit #1</h3>
+          <p class="muted">Stručný argument, proč je vaše služba pro zákazníka výhodná.</p>
+        </div>
+        <div class="card">
+          <h3>Benefit #2</h3>
+          <p class="muted">Druhý silný argument – třeba rychlost dodání nebo dostupná cena.</p>
+        </div>
+        <div class="card">
+          <h3>Benefit #3</h3>
+          <p class="muted">Důvěryhodnost: reference, léta praxe, záruka spokojenosti.</p>
+        </div>
       </div>
     </section>
 
     <section id="cena" class="section">
-      <h2>Cena</h2>
+      <h2>Ceník</h2>
       <div class="grid">
         <div class="card">
           <h3>Start</h3>
           <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
           <ul class="muted">
-            <li>Jednoduchý one‑page</li>
-            <li>Základní copywriting</li>
-            <li>Nastavení GitHub Pages</li>
+            <li>Jednostránkový web</li>
+            <li>Základní texty</li>
+            <li>Nasazení na hosting</li>
           </ul>
         </div>
         <div class="card" style="border-color:rgba(34,211,238,.35)">
           <h3>Pro</h3>
           <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class=\"muted\">
+          <ul class="muted">
             <li>One‑page + 2 podstránky</li>
             <li>Lehké SEO (základní metadata a struktura)</li>
             <li>Kontaktní formulář a základní analytika</li>
@@ -152,27 +189,31 @@
           <ul class="muted">
             <li>Více stránek, blog, vícejazyčnost</li>
             <li>Grafický návrh na míru</li>
-            <li>Napojení na služby třetích stran</li>
+            <li>Integrace dalších služeb</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class=\"section faq\">
-      <h2>Časté dotazy<\/h2>
+    <section id="proces" class="section faq">
+      <h2>Jak to probíhá</h2>
       <details>
-        <summary>Co potřebuji od vás na začátku?<\/summary>
-        <p class=\"muted\">Krátký popis služby, logotyp nebo název, případně barvy a 2–3 reference. Vše můžeme doladit společně.<\/p>
-      <\/details>
+        <summary>1) Rychlá konzultace</summary>
+        <p class="muted">Krátký call / zprávy – ujasníme cíle, podklady a termín.</p>
+      </details>
       <details>
-        <summary>Jak rychle bude hotovo?<\/summary>
-        <p class=\"muted\">Jednoduchý web obvykle do 3 pracovních dnů od schválení textů a podkladů.<\/p>
-      <\/details>
+        <summary>2) Návrh obsahu a vzhledu</summary>
+        <p class="muted">Pošlu návrh struktury a textů, doladíme tón a vizuál.</p>
+      </details>
       <details>
-        <summary>Budete se starat i o průběžné aktualizace?<\/summary>
-        <p class=\"muted\">Ano, na přání zajistím i průběžné drobné úpravy obsahu a správu. Stačí poslat podklady a vše zařídím.<\/p>
-      <\/details>
-    <\/section>
+        <summary>3) Tvorba a nasazení</summary>
+        <p class="muted">Připravím web, nasadím na hosting a vše otestuji.</p>
+      </details>
+      <details>
+        <summary>4) Podpora</summary>
+        <p class="muted">Dle dohody zajišťuji drobné úpravy a průběžnou správu.</p>
+      </details>
+    </section>
 
     <section id="kontakt" class="section">
       <div class="card">
@@ -181,9 +222,9 @@
         <form id="form" action="mailto:vas@email.cz" method="post" enctype="text/plain" style="display:grid; gap:12px; max-width:560px">
           <label>Jméno<br><input required placeholder="Jan Novák" name="jmeno" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></label>
           <label>E‑mail<br><input required type="email" placeholder="jan@example.com" name="email" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></label>
-          <label>Co potřebujete<br><textarea placeholder="Stručně popište svůj záměr…" name="zprava" rows="4" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></textarea></label>
+          <label>Vaše zpráva<br><textarea placeholder="Stručně popište svůj záměr…" name="zprava" rows="4" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></textarea></label>
           <button class="cta" type="submit">Odeslat</button>
-          <small class=\"muted\">Ozvu se do 24 hodin s krátkým dotazníkem a návrhem dalšího postupu.<\/small>
+          <small class="muted">Ozvu se do 24 hodin s návrhem dalšího postupu.</small>
         </form>
       </div>
     </section>
@@ -191,12 +232,21 @@
 
   <footer>
     <div class="container">
-      © <span id="year"></span> Moje Služba · IČO 12345678 · <a href="#">Obchodní podmínky</a>
+      © <span id="year"></span> Vaše značka · IČO 12345678 · <a href="#">Obchodní podmínky</a> · <a href="#">Zásady ochrany osobních údajů</a>
     </div>
   </footer>
 
   <script>
+    // rok ve footeru
     document.getElementById('year').textContent = new Date().getFullYear();
+    // plynulé skrolování pro interní odkazy
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id=a.getAttribute('href');
+        const el=document.querySelector(id);
+        if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});} 
+      });
+    });
   </script>
 </body>
 </html>
