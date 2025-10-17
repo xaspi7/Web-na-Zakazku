@@ -59,19 +59,29 @@
 
     footer{border-top:1px solid rgba(255,255,255,.08);padding-block:28px;color:var(--muted);font-size:14px}
 
-    /* Mockup zařízení */
+    /* Mockup zařízení – živý náhled stejné stránky v iframech */
     .mockup{position:relative;display:flex;align-items:flex-end;gap:28px;justify-content:center}
-    .mockup .laptop{position:relative;width:min(560px,100%);}
-    .mockup .laptop .bezel{background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.08);border-bottom:none;border-radius:16px 16px 0 0;aspect-ratio:16/10;position:relative;overflow:hidden;box-shadow:0 20px 40px rgba(0,0,0,.35)}
-    .mockup .laptop .screen{position:absolute;inset:10px;background:#0b1226 center/cover no-repeat;border-radius:10px;background-image: var(--shot-desktop);}
-    .mockup .laptop .base{height:14px;background:linear-gradient(180deg,#1b2238,#0f172a);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 10px 10px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));}
+    .frame{position:relative;background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 40px rgba(0,0,0,.35)}
+    .frame.laptop{width:min(560px,100%);border-radius:16px; padding:10px 10px 0 10px}
+    .frame.laptop .screen{position:relative;overflow:hidden;border-radius:10px}
+    .frame.laptop .base{height:14px;background:linear-gradient(180deg,#1b2238,#0f172a);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 10px 10px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));}
 
-    .mockup .phone{position:absolute;right:-6%;bottom:10px;width:min(160px,36vw);aspect-ratio:9/19;border-radius:26px;background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.12);box-shadow:0 14px 28px rgba(0,0,0,.4)}
-    .mockup .phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40%;height:14px;background:#0e152b;border-radius:0 0 12px 12px;border:1px solid rgba(255,255,255,.06);border-top:none}
-    .mockup .phone .screen{position:absolute;inset:12px;background:#0b1226 center/cover no-repeat;border-radius:18px;background-image: var(--shot-mobile);}
+    .frame.phone{position:absolute;right:-6%;bottom:10px;width:min(160px,36vw);aspect-ratio:9/19;border-radius:26px}
+    .frame.phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40%;height:14px;background:#0e152b;border-radius:0 0 12px 12px;border:1px solid rgba(255,255,255,.06);border-top:none;z-index:2}
+    .frame.phone .screen{position:absolute;inset:12px;overflow:hidden;border-radius:18px}
+
+    /* Držák iframe + škálování */
+    .iframe-holder{position:relative; width:var(--vw,100%); height:var(--vh,100%); transform-origin: top left;}
+    .iframe-holder iframe{position:absolute; top:0; left:0; width:var(--cw); height:var(--ch); border:0; transform:scale(var(--scale)); transform-origin: top left; background:#0b1226}
+
+    /* Režim embed: když stránku načítáme uvnitř iframe, schovat hlavičku/patičku/mockup, aby se neukládal mockup do mockupu */
+    body.embed header, body.embed footer, body.embed .hide-in-embed{display:none !important}
+    body.embed main{padding-top:12px}
 
     @media (max-width: 900px){
-      .hero{grid-template-columns:1fr}
+      .mockup{gap:18px}
+      .frame.phone{right:-2%;width:min(120px,30vw)}
+    }
       .grid{grid-template-columns:1fr}
       .mockup{gap:18px}
       .mockup .phone{right:-2%;width:min(120px,30vw)}
@@ -116,14 +126,32 @@
         
         <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
           <a class="cta" href="#kontakt">Chci nezávaznou konzultaci</a>
-          <a class="cta ghost" href="#demo">Zobrazit demo</a>
+          
         </div>
       </div>
-      <div class="card" aria-label="Náhled webu">
-        <div class="mockup">
-          <div class="laptop">
-            <div class="bezel">
-              <div class="screen" role="img" aria-label="Náhled webu na laptopu"></div>
+      <div class=\"card hide-in-embed\" aria-label=\"Náhled webu\">
+        <div class=\"mockup\">
+          <!-- Notebook s živým náhledem této stránky -->
+          <div class=\"frame laptop\">
+            <div class=\"screen\">
+              <div class=\"iframe-holder\" id=\"desk-holder\"></div>
+            </div>
+            <div class=\"base\"></div>
+          </div>
+          <!-- Telefon s živým náhledem této stránky -->
+          <div class=\"frame phone\">
+            <div class=\"notch\"></div>
+            <div class=\"screen\">
+              <div class=\"iframe-holder\" id=\"mob-holder\"></div>
+            </div>
+          </div>
+        </div>
+        <ul style=\"margin:14px 0 0 0; padding-left:18px; color:var(--muted)\">
+          <li>Responzivní vzhled: mobil, tablet, desktop (živý náhled)</li>
+          <li>Rychlé načítání a čistý design</li>
+          <li>Bezpečný provoz s HTTPS</li>
+        </ul>
+      </div>
             </div>
             <div class="base"></div>
           </div>
@@ -245,7 +273,42 @@
         if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});} 
       });
     });
-    </script>
+      </script>
+  <script>
+    // Režim embed: pokud je v URL ?embed=1, přidej class a zkrať stránku pro náhledy
+    (function(){
+      const params=new URLSearchParams(location.search);
+      if(params.get('embed')==='1') document.body.classList.add('embed');
+    })();
+
+    // Vytvoř iframy do mockupu se škálováním (desktop a mobil)
+    (function(){
+      const desk={ holder: document.getElementById('desk-holder'), cw:1280, ch:800 };
+      const mob ={ holder: document.getElementById('mob-holder') , cw:390,  ch:844 };
+      function mount(holder, cw, ch){
+        if(!holder) return;
+        const iframe=document.createElement('iframe');
+        const url=new URL(location.href);
+        url.searchParams.set('embed','1');
+        iframe.src=url.toString();
+        holder.style.setProperty('--cw', cw+'px');
+        holder.style.setProperty('--ch', ch+'px');
+        holder.appendChild(iframe);
+        const resize=()=>{
+          const w=holder.clientWidth||cw;
+          const scale=w/cw;
+          holder.style.setProperty('--scale', scale);
+          holder.style.setProperty('--vw', cw+'px');
+          holder.style.setProperty('--vh', ch+'px');
+          holder.style.height=(ch*scale)+'px';
+        };
+        resize();
+        addEventListener('resize', resize);
+      }
+      mount(desk.holder, desk.cw, desk.ch);
+      mount(mob.holder,  mob.cw,  mob.ch);
+    })();
+  </script>
   <script>
     // Toggle mobilního menu
     const btn=document.querySelector('.nav-toggle');
