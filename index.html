@@ -63,12 +63,12 @@
     .mockup{position:relative;display:flex;align-items:flex-end;gap:28px;justify-content:center}
     .frame{position:relative;background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.08);box-shadow:0 20px 40px rgba(0,0,0,.35)}
     .frame.laptop{width:min(560px,100%);border-radius:16px; padding:10px 10px 0 10px}
-    .frame.laptop .screen{position:relative;overflow:hidden;border-radius:10px}
+    .frame.laptop .screen{position:relative;overflow:hidden;border-radius:10px;aspect-ratio:16/10;min-height:260px;background:#0b1226;display:grid;place-items:center;color:var(--muted);font-size:14px}
     .frame.laptop .base{height:14px;background:linear-gradient(180deg,#1b2238,#0f172a);border:1px solid rgba(255,255,255,.08);border-top:none;border-radius:0 0 10px 10px;filter:drop-shadow(0 8px 24px rgba(0,0,0,.35));}
 
     .frame.phone{position:absolute;right:-6%;bottom:10px;width:min(160px,36vw);aspect-ratio:9/19;border-radius:26px}
     .frame.phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40%;height:14px;background:#0e152b;border-radius:0 0 12px 12px;border:1px solid rgba(255,255,255,.06);border-top:none;z-index:2}
-    .frame.phone .screen{position:absolute;inset:12px;overflow:hidden;border-radius:18px}
+    .frame.phone .screen{position:absolute;inset:12px;overflow:hidden;border-radius:18px;background:#0b1226;display:grid;place-items:center}
 
     /* Držák iframe + škálování */
     .iframe-holder{position:relative; width:var(--vw,100%); height:var(--vh,100%); transform-origin: top left;}
@@ -79,12 +79,10 @@
     body.embed main{padding-top:12px}
 
     @media (max-width: 900px){
-      .mockup{gap:18px}
-      .frame.phone{right:-2%;width:min(120px,30vw)}
-    }
+      .hero{grid-template-columns:1fr}
       .grid{grid-template-columns:1fr}
       .mockup{gap:18px}
-      .mockup .phone{right:-2%;width:min(120px,30vw)}
+      .frame.phone{right:-2%;width:min(120px,30vw)}
     }
       /* mobilní hlavička */
     .nav-toggle{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:20px;color:var(--text)}
@@ -121,47 +119,30 @@
   <main class="container">
     <section class="hero">
       <div>
-        
         <h1>Pěkný a rychlý web, který prodá vaši službu</h1>
-        
         <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
           <a class="cta" href="#kontakt">Chci nezávaznou konzultaci</a>
-          
         </div>
       </div>
-      <div class=\"card hide-in-embed\" aria-label=\"Náhled webu\">
-        <div class=\"mockup\">
+      <div class="card hide-in-embed" aria-label="Náhled webu">
+        <div class="mockup">
           <!-- Notebook s živým náhledem této stránky -->
-          <div class=\"frame laptop\">
-            <div class=\"screen\">
-              <div class=\"iframe-holder\" id=\"desk-holder\"></div>
-            </div>
-            <div class=\"base\"></div>
-          </div>
-          <!-- Telefon s živým náhledem této stránky -->
-          <div class=\"frame phone\">
-            <div class=\"notch\"></div>
-            <div class=\"screen\">
-              <div class=\"iframe-holder\" id=\"mob-holder\"></div>
-            </div>
-          </div>
-        </div>
-        <ul style=\"margin:14px 0 0 0; padding-left:18px; color:var(--muted)\">
-          <li>Responzivní vzhled: mobil, tablet, desktop (živý náhled)</li>
-          <li>Rychlé načítání a čistý design</li>
-          <li>Bezpečný provoz s HTTPS</li>
-        </ul>
-      </div>
+          <div class="frame laptop">
+            <div class="screen">
+              <div class="iframe-holder" id="desk-holder">Načítám náhled…</div>
             </div>
             <div class="base"></div>
           </div>
-          <div class="phone">
+          <!-- Telefon s živým náhledem této stránky -->
+          <div class="frame phone">
             <div class="notch"></div>
-            <div class="screen" role="img" aria-label="Náhled webu na mobilu"></div>
+            <div class="screen">
+              <div class="iframe-holder" id="mob-holder">Načítám náhled…</div>
+            </div>
           </div>
         </div>
         <ul style="margin:14px 0 0 0; padding-left:18px; color:var(--muted)">
-          <li>Responzivní vzhled: mobil, tablet, desktop</li>
+          <li>Responzivní vzhled: mobil, tablet, desktop (živý náhled)</li>
           <li>Rychlé načítání a čistý design</li>
           <li>Bezpečný provoz s HTTPS</li>
         </ul>
