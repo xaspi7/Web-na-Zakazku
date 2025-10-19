@@ -3,312 +3,214 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tvorba jednoduchých webů — rychle, hezky, bez starostí</title>
-  <meta name="description" content="Pomohu vám vytvořit pěkný a rychlý prezentační web. Jasná nabídka, čistý design, nasazení na spolehlivý hosting a podpora do budoucna." />
-  <meta name="author" content="Vaše jméno" />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="Tvorba jednoduchých webů" />
-  <meta property="og:description" content="Jednoduchý, moderní a rychlý web pro vaši službu nebo projekt." />
-  <meta property="og:image" content="https://dummyimage.com/1200x630/0ea5e9/ffffff.png&text=Tvorba+jednoduchych+webu" />
+  <title>Tvorba webů — čistý, rychlý a profesionální web</title>
+  <meta name="description" content="Navrhnu a dodám přehledný prezentační web. Krátké texty, moderní vzhled, nasazení na spolehlivý hosting a průběžná podpora." />
   <meta name="theme-color" content="#0ea5e9" />
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='46' fill='%230ea5e9'/><text x='50' y='57' font-size='44' text-anchor='middle' fill='white' font-family='Arial, Helvetica, sans-serif'>W</text></svg>">
   <style>
+    /* ====== Design tokens ====== */
     :root{
-      --bg:#0b1020; /* tmavý podklad */
-      --card:#0f172a;
-      --muted:#94a3b8;
-      --text:#e2e8f0;
-      --brand:#0ea5e9;
-      --brand-2:#22d3ee;
-      --ring:rgba(14,165,233,.5);
-      /* zde si můžete snadno vyměnit náhledy */
-      --shot-desktop: url('https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?q=80&w=1600&auto=format&fit=crop');
-      --shot-mobile:  url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?q=80&w=1200&auto=format&fit=crop');
+      --bg:#0b1020;           /* pozadí */
+      --panel:#0f172a;        /* panely */
+      --muted:#94a3b8;        /* sekundární text */
+      --text:#e2e8f0;         /* primární text */
+      --brand:#0ea5e9;        /* hlavní akcent */
+      --brand2:#22d3ee;       /* přechod akcentu */
+      --ring:rgba(14,165,233,.4);
+      --radius:16px;
+      --shadow:0 6px 24px rgba(0,0,0,.25);
     }
+
+    /* ====== Reset + základ ====== */
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:linear-gradient(180deg, #0b1020 0%, #0b1226 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,"Noto Sans",sans-serif;line-height:1.6}
+    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b1020 0%,#0b1226 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,"Noto Sans",sans-serif;line-height:1.55}
+    img{max-width:100%;display:block}
     a{color:var(--brand);text-decoration:none}
-    a:hover{text-decoration:underline}
-    .container{max-width:1100px;margin-inline:auto;padding:24px}
-    header{position:sticky;top:0;backdrop-filter:saturate(1.2) blur(8px);background:rgba(11,16,32,.6);border-bottom:1px solid rgba(255,255,255,.06);z-index:50}
-    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px}
-    .logo{display:flex;align-items:center;gap:10px;font-weight:700}
-    .logo-badge{display:grid;place-items:center;width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 10px 30px rgba(34,211,238,.25)}
-    .logo-badge span{font-weight:800}
-    .cta{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#041017;border:none;padding:12px 18px;border-radius:12px;font-weight:700;box-shadow:0 10px 30px rgba(14,165,233,.35);transition:transform .08s ease, box-shadow .2s ease}
-    .cta:hover{transform:translateY(-1px);box-shadow:0 14px 36px rgba(14,165,233,.45)}
-    .ghost{background:transparent;color:var(--text);border:1px solid rgba(255,255,255,.12)}
 
-    .hero{display:grid;grid-template-columns:1.2fr .8fr;gap:32px;align-items:center;padding-block:48px}
-    .hero h1{font-size:clamp(28px,5vw,48px);line-height:1.1;margin:0}
-    .hero p{color:var(--muted);font-size:18px}
-    .card{background:linear-gradient(180deg,var(--card),rgba(15,23,42,.6));border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:22px}
-    /* kompaktnější karta v hero sekci */
-    .hero .card{padding:12px;border-radius:14px;box-shadow:none;background:rgba(15,23,42,.6)}
-    .pill{display:inline-flex;align-items:center;gap:8px;background:rgba(14,165,233,.12);color:#a5f3fc;border:1px solid rgba(34,211,238,.35);padding:8px 12px;border-radius:999px;font-weight:600;font-size:14px}
+    .container{max-width:1080px;margin-inline:auto;padding:20px}
+    .stack{display:grid;gap:20px}
 
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
-    .section{padding-block:56px}
-    .section h2{font-size:clamp(22px,4vw,32px);margin:0 0 16px}
-    .muted{color:var(--muted)}
+    /* ====== Header ====== */
+    header{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.6);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
+    .nav{display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 8px 24px rgba(14,165,233,.35)}
+    .menu{display:flex;gap:10px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600}
+    .btn--primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#041017;border:none;box-shadow:0 10px 24px rgba(14,165,233,.35)}
+    .burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:18px;color:var(--text)}
 
-    .price{display:flex;gap:18px;align-items:baseline}
-    .price .big{font-size:42px;font-weight:800}
+    /* ====== Hero ====== */
+    .hero{display:grid;grid-template-columns:1fr;gap:18px;padding-block:30px}
+    .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
+    .hero .lead{color:var(--muted)}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 
-    .faq details{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 16px}
-    .faq details summary{cursor:pointer;font-weight:600}
-    .faq details + details{margin-top:12px}
+    /* Kompaktní mockup (SVG + screenshot proměnné) */
+    .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+    .device{position:relative;isolation:isolate}
+    .device.laptop{aspect-ratio:16/10;border-radius:12px;background:#0b1226;overflow:hidden}
+    .device.phone{aspect-ratio:9/19;border-radius:22px;background:#0b1226;overflow:hidden}
+    .screen{position:absolute;inset:0;background:center/cover no-repeat;filter:contrast(1.02)}
+    :root{ --shot-desktop:url('obrazky/nahled-desktop.jpg'); --shot-mobile:url('obrazky/nahled-mobil.jpg'); }
+    .laptop .screen{background-image:var(--shot-desktop), linear-gradient(180deg,#0b1226,#0b1226)}
+    .phone  .screen{background-image:var(--shot-mobile),  linear-gradient(180deg,#0b1226,#0b1226)}
+    .phone-wrap{position:absolute;right:6%;bottom:-10%;width:min(140px,30vw)}
 
-    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:28px;color:var(--muted);font-size:14px}
+    /* ====== Sekce ====== */
+    .section{padding-block:42px}
+    h2{font-size:clamp(22px,4.8vw,32px);margin:0 0 10px}
+    .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
 
-    /* Mockup zařízení – zmenšené okraje a jemnější stín */
-    .mockup{position:relative;display:flex;align-items:flex-end;gap:18px;justify-content:center}
-    .frame{position:relative;background:linear-gradient(180deg,#0a0f1f,#0e152b);border:1px solid rgba(255,255,255,.06);box-shadow:0 6px 20px rgba(0,0,0,.25);border-radius:12px}
-    .frame.laptop{position:relative;width:min(480px,100%);padding:8px 8px 0 8px;border-radius:12px}
-    .frame.laptop .screen{position:relative;overflow:hidden;border-radius:10px;aspect-ratio:16/10;min-height:220px;background:#0b1226 center/cover no-repeat;background-image:var(--shot-desktop);display:grid;place-items:center;color:var(--muted);font-size:14px}
-    .frame.laptop .base{height:10px;background:linear-gradient(180deg,#1b2238,#0f172a);border:1px solid rgba(255,255,255,.06);border-top:none;border-radius:0 0 10px 10px;filter:drop-shadow(0 4px 14px rgba(0,0,0,.25))}
+    /* ====== Ceník ====== */
+    .price{display:flex;gap:10px;align-items:baseline}
+    .price .big{font-size:32px;font-weight:900}
 
-    .frame.phone{position:absolute;right:-2%;bottom:8px;width:min(120px,34vw);aspect-ratio:9/19;border-radius:22px}
-    .frame.phone .notch{position:absolute;top:8px;left:50%;transform:translateX(-50%);width:40%;height:12px;background:#0e152b;border-radius:0 0 10px 10px;border:1px solid rgba(255,255,255,.06);border-top:none;z-index:2}
-    .frame.phone .screen{position:absolute;inset:10px;overflow:hidden;border-radius:18px;background:#0b1226 center/cover no-repeat;background-image:var(--shot-mobile);display:grid;place-items:center}
+    /* ====== FAQ/Proces ====== */
+    details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:700}
 
-    /* Režim embed: náhledy neukazují hlavičku/patičku/mockup */
-    body.embed header, body.embed footer, body.embed .hide-in-embed{display:none !important}
-    body.embed main{padding-top:12px}
+    /* ====== Kontakt ====== */
+    input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1226;color:var(--text)}
 
-    @media (max-width: 720px){
-      .mockup{flex-direction:column;align-items:center}
-      .frame.phone{position:relative;right:auto;bottom:auto;width:200px;max-width:60vw;margin-top:12px}
+    /* ====== Footer ====== */
+    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px}
+
+    /* ====== Desktop rozšíření ====== */
+    @media (min-width: 860px){
+      .hero{grid-template-columns:1.05fr .95fr;align-items:center}
+      .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+      .hero-preview{position:relative;min-height:360px}
+      .laptop{height:100%}
     }
-      .frame.laptop{display:none}
-      .frame.phone{position:relative;right:0;margin:0 auto;width:min(280px,86vw)}
-      .mockup-list{display:none} /* na mobilu skryjeme body pod mockupem */
-    }
-      .grid{grid-template-columns:1fr}
-      .mockup{gap:18px}
-      .frame.phone{right:-2%;width:min(120px,30vw)}
-    }
-      /* mobilní hlavička */
-    .nav-toggle{display:none;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:20px;color:var(--text)}
-    .menu{display:flex;align-items:center;gap:10px}
 
-    @media (max-width: 720px){
-      header{backdrop-filter:saturate(1.2) blur(10px)}
-      .logo{gap:8px}
-      .logo-badge{width:30px;height:30px;border-radius:8px}
-      .menu{display:none;position:fixed;top:64px;left:12px;right:12px;padding:12px;background:rgba(11,16,32,.92);border:1px solid rgba(255,255,255,.08);border-radius:14px;flex-direction:column;gap:8px;box-shadow:0 12px 40px rgba(0,0,0,.45)}
+    /* ====== Mobilní navigace ====== */
+    @media (max-width: 860px){
+      .menu{display:none;position:fixed;inset:auto 16px 16px 16px;top:60px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;gap:8px}
       .menu.open{display:flex}
-      .nav-toggle{display:inline-flex}
-      .cta{width:100%;justify-content:center}
+      .burger{display:inline-grid;place-items:center}
+      .btn{width:100%}
     }
   </style>
 </head>
 <body>
+  <!-- ====== Header ====== -->
   <header>
     <div class="container nav">
-      <div class="logo">
-        <div class="logo-badge"><span>W</span></div>
-        <span>Tvorba webů</span>
-      </div>
-      <button class="nav-toggle" aria-expanded="false" aria-label="Otevřít menu">☰</button>
-      <nav class="menu">
-        <a class="cta ghost" href="#sluzba">Služba</a>
-        <a class="cta ghost" href="#cena">Cena</a>
-        <a class="cta ghost" href="#proces">Jak to probíhá</a>
-        <a class="cta" href="#kontakt">Nezávazně poptat</a>
+      <div class="brand"><div class="badge">W</div> <span>Tvorba webů</span></div>
+      <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
+      <nav class="menu" id="menu">
+        <a class="btn" href="#sluzba">Služba</a>
+        <a class="btn" href="#cena">Ceník</a>
+        <a class="btn" href="#proces">Jak to probíhá</a>
+        <a class="btn btn--primary" href="#kontakt">Nezávazně poptat</a>
       </nav>
     </div>
   </header>
 
-  <main class="container">
+  <main class="container stack">
+    <!-- ====== Hero ====== -->
     <section class="hero">
-      <div>
+      <div class="stack">
         <h1>Pěkný a rychlý web, který prodá vaši službu</h1>
-        <div style="display:flex; gap:12px; margin-top:12px; flex-wrap:wrap">
-          <a class="cta" href="#kontakt">Chci nezávaznou konzultaci</a>
+        <div class="hero-cta">
+          <a class="btn btn--primary" href="#kontakt">Chci nezávaznou konzultaci</a>
         </div>
       </div>
-      <div class=\"card hero-card hide-in-embed\" aria-label=\"Náhled webu\">
-        <div class="mockup">
-          <!-- Notebook s živým náhledem této stránky -->
-          <div class="frame laptop">
-            <div class="screen">
-              <div class="iframe-holder" id="desk-holder">Načítám náhled…</div>
-            </div>
-            <div class="base"></div>
-          </div>
-          <!-- Telefon s živým náhledem této stránky -->
-          <div class="frame phone">
-            <div class="notch"></div>
-            <div class="screen">
-              <div class="iframe-holder" id="mob-holder">Načítám náhled…</div>
+      <div class="hero-preview">
+        <div class="device laptop">
+          <div class="screen" role="img" aria-label="Ukázka webu na notebooku"></div>
+          <div class="phone-wrap">
+            <div class="device phone">
+              <div class="screen" role="img" aria-label="Ukázka webu na mobilu"></div>
             </div>
           </div>
         </div>
-        <ul class=\"mockup-list\" style=\"margin:12px 0 0 0; padding-left:18px; color:var(--muted)\">
-          <li>Responzivní vzhled: mobil, tablet, desktop (živý náhled)</li>
-          <li>Rychlé načítání a čistý design</li>
-          <li>Bezpečný provoz s HTTPS</li>
-        </ul>
       </div>
     </section>
 
+    <!-- ====== Služba ====== -->
     <section id="sluzba" class="section">
       <h2>Co pro vás udělám</h2>
-      <div class="grid">
+      <div class="grid cols-3">
         <div class="card">
           <h3>🎯 Jasná nabídka</h3>
-          <p class="muted">Vykomunikujeme cíle a připravím texty, které vaši službu srozumitelně prodají.</p>
+          <p class="muted">Krátká konzultace, srozumitelné texty a struktura, která prodává.</p>
         </div>
         <div class="card">
           <h3>🧱 Tvorba webu</h3>
-          <p class="muted">Jednoduchý prezentační web s moderním vzhledem a logickou strukturou obsahu.</p>
+          <p class="muted">Čistý moderní vzhled, přehledný obsah, rychlé načítání.</p>
         </div>
         <div class="card">
-          <h3>🚀 Nasazení a podpora</h3>
-          <p class="muted">Zařídím doménu i nasazení na spolehlivý hosting. Drobné úpravy a podpora dle dohody.</p>
+          <h3>🚀 Nasazení & podpora</h3>
+          <p class="muted">Zařídím nasazení na spolehlivý hosting a průběžné drobné úpravy.</p>
         </div>
       </div>
     </section>
 
-    
-
+    <!-- ====== Ceník ====== -->
     <section id="cena" class="section">
       <h2>Ceník</h2>
-      <div class="grid">
+      <div class="grid cols-3">
         <div class="card">
           <h3>Start</h3>
-          <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted">
-            <li>Jednostránkový web</li>
-            <li>Základní texty</li>
-            <li>Nasazení na hosting</li>
-          </ul>
+          <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
+          <ul class="muted"><li>Jednostránkový web</li><li>Základní texty</li><li>Nasazení</li></ul>
         </div>
-        <div class="card" style="border-color:rgba(34,211,238,.35)">
+        <div class="card" style="border-color:rgba(34,211,238,.4)">
           <h3>Pro</h3>
-          <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted">
-            <li>One‑page + 2 podstránky</li>
-            <li>Lehké SEO (základní metadata a struktura)</li>
-            <li>Kontaktní formulář a základní analytika</li>
-          </ul>
+          <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
+          <ul class="muted"><li>One‑page + 2 podstránky</li><li>Lehké SEO</li><li>Formulář + analytika</li></ul>
         </div>
         <div class="card">
           <h3>Custom</h3>
           <div class="price"><span class="big">na dotaz</span></div>
-          <ul class="muted">
-            <li>Více stránek, blog, vícejazyčnost</li>
-            <li>Grafický návrh na míru</li>
-            <li>Integrace dalších služeb</li>
-          </ul>
+          <ul class="muted"><li>Více stránek / blog</li><li>Vzhled na míru</li><li>Napojení služeb</li></ul>
         </div>
       </div>
     </section>
 
-    <section id="proces" class="section faq">
+    <!-- ====== Proces ====== -->
+    <section id="proces" class="section">
       <h2>Jak to probíhá</h2>
-      <details>
-        <summary>1) Rychlá konzultace</summary>
-        <p class="muted">Krátký call / zprávy – ujasníme cíle, podklady a termín.</p>
-      </details>
-      <details>
-        <summary>2) Návrh obsahu a vzhledu</summary>
-        <p class="muted">Pošlu návrh struktury a textů, doladíme tón a vizuál.</p>
-      </details>
-      <details>
-        <summary>3) Tvorba a nasazení</summary>
-        <p class="muted">Připravím web, nasadím na hosting a vše otestuji.</p>
-      </details>
-      <details>
-        <summary>4) Podpora</summary>
-        <p class="muted">Dle dohody zajišťuji drobné úpravy a průběžnou správu.</p>
-      </details>
+      <details><summary>1) Rychlá konzultace</summary><p class="muted">Krátký telefon/online, cíle, termíny, podklady.</p></details>
+      <details><summary>2) Návrh obsahu a vzhledu</summary><p class="muted">Navrhnu strukturu a texty, doladíme tón a styl.</p></details>
+      <details><summary>3) Tvorba a nasazení</summary><p class="muted">Připravím web, nasadím na hosting a otestuji.</p></details>
+      <details><summary>4) Podpora</summary><p class="muted">Drobné úpravy a správa dle dohody.</p></details>
     </section>
 
+    <!-- ====== Kontakt ====== -->
     <section id="kontakt" class="section">
       <div class="card">
-        <h2>Pojďme to rozjet</h2>
-        <p class="muted">Napište mi a pošlu vám krátký dotazník. Domluvíme si termín i rozsah.</p>
-        <form id="form" action="mailto:vas@email.cz" method="post" enctype="text/plain" style="display:grid; gap:12px; max-width:560px">
-          <label>Jméno<br><input required placeholder="Jan Novák" name="jmeno" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></label>
-          <label>E‑mail<br><input required type="email" placeholder="jan@example.com" name="email" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></label>
-          <label>Vaše zpráva<br><textarea placeholder="Stručně popište svůj záměr…" name="zprava" rows="4" style="width:100%; padding:12px; border-radius:12px; border:1px solid rgba(255,255,255,.12); background:#0b1226; color:var(--text)"></textarea></label>
-          <button class="cta" type="submit">Odeslat</button>
-          <small class="muted">Ozvu se do 24 hodin s návrhem dalšího postupu.</small>
+        <h2>Napište mi</h2>
+        <form action="mailto:vas@email.cz" method="post" enctype="text/plain" class="stack">
+          <label>Jméno<br><input required name="jmeno" placeholder="Jan Novák"></label>
+          <label>E‑mail<br><input required type="email" name="email" placeholder="jan@example.com"></label>
+          <label>Vaše zpráva<br><textarea name="zprava" rows="4" placeholder="Krátce popište svůj záměr…"></textarea></label>
+          <button class="btn btn--primary" type="submit">Odeslat</button>
+          <small class="muted">Ozvu se do 24 hodin.</small>
         </form>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="container">
-      © <span id="year"></span> Vaše značka · IČO 12345678 · <a href="#">Obchodní podmínky</a> · <a href="#">Zásady ochrany osobních údajů</a>
-    </div>
+    <div class="container">© <span id="year"></span> Vaše značka · IČO 12345678 · <a href="#">Obchodní podmínky</a> · <a href="#">Zásady ochrany osobních údajů</a></div>
   </footer>
 
   <script>
-    // rok ve footeru
+    // Rok ve footeru
     document.getElementById('year').textContent = new Date().getFullYear();
-    // plynulé skrolování pro interní odkazy
+    // Plynulé skrolování mezi sekcemi
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const id=a.getAttribute('href');
-        const el=document.querySelector(id);
-        if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});} 
-      });
+      a.addEventListener('click', e=>{ const el=document.querySelector(a.getAttribute('href')); if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'});} });
     });
-      </script>
-  <script>
-    // Režim embed: pokud je v URL ?embed=1, přidej class a zkrať stránku pro náhledy
-    (function(){
-      const params=new URLSearchParams(location.search);
-      if(params.get('embed')==='1') document.body.classList.add('embed');
-    })();
-
-    // Vytvoř iframy do mockupu se škálováním (desktop a mobil)
-    (function(){
-      const desk={ holder: document.getElementById('desk-holder'), cw:1280, ch:800 };
-      const mob ={ holder: document.getElementById('mob-holder') , cw:390,  ch:844 };
-      function mount(holder, cw, ch){
-        if(!holder) return;
-        const iframe=document.createElement('iframe');
-        const url=new URL(location.href);
-        url.searchParams.set('embed','1');
-        iframe.src=url.toString();
-        holder.style.setProperty('--cw', cw+'px');
-        holder.style.setProperty('--ch', ch+'px');
-        holder.appendChild(iframe);
-        const resize=()=>{
-          const w=holder.clientWidth||cw;
-          const scale=w/cw;
-          holder.style.setProperty('--scale', scale);
-          holder.style.setProperty('--vw', cw+'px');
-          holder.style.setProperty('--vh', ch+'px');
-          holder.style.height=(ch*scale)+'px';
-        };
-        resize();
-        addEventListener('resize', resize);
-      }
-      mount(desk.holder, desk.cw, desk.ch);
-      mount(mob.holder,  mob.cw,  mob.ch);
-    })();
-  </script>
-  <script>
-    // Toggle mobilního menu
-    const btn=document.querySelector('.nav-toggle');
-    const menu=document.querySelector('.menu');
-    if(btn && menu){
-      btn.addEventListener('click',()=>{
-        const open=menu.classList.toggle('open');
-        btn.setAttribute('aria-expanded',open?'true':'false');
-      });
-      // zavřít po kliku na položku
-      menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
-        menu.classList.remove('open');
-        btn.setAttribute('aria-expanded','false');
-      }));
-    }
+    // Mobilní menu
+    const burger=document.querySelector('.burger');
+    const menu=document.getElementById('menu');
+    if(burger && menu){ burger.addEventListener('click',()=>{ const open=menu.classList.toggle('open'); burger.setAttribute('aria-expanded',open?'true':'false'); }); }
   </script>
 </body>
 </html>
