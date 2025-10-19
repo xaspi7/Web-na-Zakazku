@@ -93,6 +93,11 @@
       .burger{display:inline-grid;place-items:center}
       .btn{width:100%}
     }
+      /* Live desktop preview box (responsive iframe with fallback) */
+    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226 center/cover no-repeat; background-image:var(--shot-desktop, none)}
+    .livebox.has-live{background-image:none}
+    .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226}
   </style>
 </head>
 <body>
@@ -120,13 +125,8 @@
         </div>
       </div>
       <div class="hero-preview">
-        <div class="device laptop">
-          <div class="screen" role="img" aria-label="Ukázka webu na notebooku"></div>
-          <div class="phone-wrap">
-            <div class="device phone">
-              <div class="screen" role="img" aria-label="Ukázka webu na mobilu"></div>
-            </div>
-          </div>
+        <div class="livebox">
+          <div class="iframe-holder" id="live-desktop">Načítám náhled…</div>
         </div>
       </div>
     </section>
@@ -211,6 +211,38 @@
     const burger=document.querySelector('.burger');
     const menu=document.getElementById('menu');
     if(burger && menu){ burger.addEventListener('click',()=>{ const open=menu.classList.toggle('open'); burger.setAttribute('aria-expanded',open?'true':'false'); }); }
+
+    // Pokud jsme v iframu s ?embed=1, můžeme schovat header/footer (volitelně)
+    (function(){
+      const p=new URLSearchParams(location.search);
+      if(p.get('embed')==='1'){
+        document.body.classList.add('embed');
+      }
+    })();
+
+    // Mount responsive iframe preview with fallback
+    (function(){
+      const holder = document.getElementById('live-desktop');
+      const box = holder && holder.closest('.livebox');
+      if(!holder || !box) return; // fallback zůstává (screenshot v background-image)
+      const iframe = document.createElement('iframe');
+      // Načti stejnou stránku s parametrem embed=1, aby v náhledu nebyly zbytečnosti
+      const url = new URL(location.href);
+      url.searchParams.set('embed','1');
+      iframe.src = url.toString();
+      iframe.setAttribute('loading','lazy');
+      holder.innerHTML='';
+      holder.appendChild(iframe);
+      function resize(){
+        const w = box.clientWidth || 1280;
+        const scale = w / 1280;
+        holder.style.transform = 'scale('+scale+')';
+        holder.style.height = (800*scale)+'px';
+      }
+      iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
+      resize();
+      addEventListener('resize', resize);
+    })();
   </script>
 </body>
 </html>
