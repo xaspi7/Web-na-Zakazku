@@ -26,7 +26,8 @@
     img{max-width:100%;display:block}
     a{color:var(--brand);text-decoration:none}
 
-    .container{max-width:1080px;margin-inline:auto;padding:20px}
+    .container{max-width:1080px;margin-inline:auto;padding:clamp(12px,4vw,20px)}
+    .stack{display:grid;gap:16px}
     .stack{display:grid;gap:20px}
 
     /* ====== Header ====== */
@@ -40,7 +41,10 @@
     .burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:18px;color:var(--text)}
 
     /* ====== Hero ====== */
-    .hero{display:grid;grid-template-columns:1fr;gap:18px;padding-block:30px}
+    .hero{display:grid;grid-template-columns:1fr;gap:14px;padding-block:24px}
+    .hero h1{font-size:clamp(28px,6.5vw,48px);line-height:1.12;margin:0}
+    .hero .lead{color:var(--muted)}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
     .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
     .hero .lead{color:var(--muted)}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
@@ -88,13 +92,16 @@
 
     /* ====== Mobilní navigace ====== */
     @media (max-width: 860px){
-      .menu{display:none;position:fixed;inset:auto 16px 16px 16px;top:60px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:12px;gap:8px}
+      .menu{display:none;position:fixed;inset:auto 12px 12px 12px;top:60px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;gap:8px}
       .menu.open{display:flex}
       .burger{display:inline-grid;place-items:center}
       .btn{width:100%}
+      .hero-preview{order:2}
     }
-      /* Live desktop preview box (responsive iframe with fallback) */
-    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226 center/cover no-repeat; background-image:var(--shot-desktop, none)}
+    @media (max-width: 520px){
+      h1{word-break:break-word}
+      .section{padding-block:28px}
+      .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
     .livebox.has-live{background-image:none}
     .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
     .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226}
@@ -227,9 +234,8 @@
       if(!holder || !box) return; // fallback zůstává (screenshot v background-image)
       const iframe = document.createElement('iframe');
       // Načti stejnou stránku s parametrem embed=1, aby v náhledu nebyly zbytečnosti
-      const url = new URL(location.href);
-      url.searchParams.set('embed','1');
-      iframe.src = url.toString();
+      const PREVIEW_URL = 'https://xaspi7.github.io/losmotos';
+      iframe.src = PREVIEW_URL;
       iframe.setAttribute('loading','lazy');
       holder.innerHTML='';
       holder.appendChild(iframe);
