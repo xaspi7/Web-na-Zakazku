@@ -42,7 +42,7 @@
 
     /* ====== Hero ====== */
     .hero{display:grid;grid-template-columns:1fr;gap:14px;padding-block:24px}
-    .hero h1{font-size:clamp(28px,6.5vw,48px);line-height:1.12;margin:0}
+    .hero h1{font-size:clamp(26px,6vw,40px);line-height:1.12;margin:0}
     .hero .lead{color:var(--muted)}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
     .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
@@ -95,16 +95,30 @@
       .menu{display:none;position:fixed;inset:auto 12px 12px 12px;top:60px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;gap:8px}
       .menu.open{display:flex}
       .burger{display:inline-grid;place-items:center}
+      .btn{width:100%;padding:10px 14px;border-radius:10px}
+      .hero-preview{order:2}
+      .grid.cols-3{grid-template-columns:1fr}
+      .section{padding-block:28px}
+      .card{padding:14px;border-radius:12px}
+      .price .big{font-size:28px}
+      .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+    }
+      .menu.open{display:flex}
+      .burger{display:inline-grid;place-items:center}
       .btn{width:100%}
       .hero-preview{order:2}
     }
     @media (max-width: 520px){
       h1{word-break:break-word}
+      .container{padding:12px}
+      .livebox{border-radius:10px; max-height:260px}
+      .btn{padding:10px 12px}
+    }
       .section{padding-block:28px}
       .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
     .livebox.has-live{background-image:none}
     .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226; pointer-events:none}
   </style>
 </head>
 <body>
