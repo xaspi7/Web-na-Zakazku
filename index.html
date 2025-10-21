@@ -28,28 +28,73 @@
 
     .container{max-width:1080px;margin-inline:auto;padding:clamp(12px,4vw,20px)}
     .stack{display:grid;gap:16px}
+    .stack{display:grid;gap:20px}
 
     /* ====== Header ====== */
     header{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.6);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
     .nav{display:flex;align-items:center;justify-content:space-between}
     .brand{display:flex;align-items:center;gap:10px;font-weight:800}
     .badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 8px 24px rgba(14,165,233,.35)}
-    .menu{display:flex;gap:10px;align-items:center}
+    .menu{display:flex;gap:10px}
     .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600}
     .btn--primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#041017;border:none;box-shadow:0 10px 24px rgba(14,165,233,.35)}
     .burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:18px;color:var(--text)}
-@media (min-width: 861px){ .menu{display:flex} .burger{display:none} }
-@media (max-width: 860px){
-  .menu{display:none;position:fixed;left:12px;right:12px;top:64px;border-radius:14px;padding:12px;gap:10px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);box-shadow:0 12px 40px rgba(0,0,0,.45)}
-  .menu.open{display:flex}
-  .btn{width:100%;padding:12px 14px;border-radius:10px}
-  .hero-preview{order:2}
-  .grid.cols-3{grid-template-columns:1fr}
-  .section{padding-block:28px}
-  .card{padding:14px;border-radius:12px}
-  .price .big{font-size:28px}
-  .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
-}
+
+    /* ====== Hero ====== */
+    .hero{display:grid;grid-template-columns:1fr;gap:14px;padding-block:24px}
+    .hero h1{font-size:clamp(26px,6vw,40px);line-height:1.12;margin:0}
+    .hero .lead{color:var(--muted)}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
+    .hero .lead{color:var(--muted)}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+
+    /* Kompaktní mockup (SVG + screenshot proměnné) */
+    .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+    .device{position:relative;isolation:isolate}
+    .device.laptop{aspect-ratio:16/10;border-radius:12px;background:#0b1226;overflow:hidden}
+    .device.phone{aspect-ratio:9/19;border-radius:22px;background:#0b1226;overflow:hidden}
+    .screen{position:absolute;inset:0;background:center/cover no-repeat;filter:contrast(1.02)}
+    :root{ --shot-desktop:url('obrazky/nahled-desktop.jpg'); --shot-mobile:url('obrazky/nahled-mobil.jpg'); }
+    .laptop .screen{background-image:var(--shot-desktop), linear-gradient(180deg,#0b1226,#0b1226)}
+    .phone  .screen{background-image:var(--shot-mobile),  linear-gradient(180deg,#0b1226,#0b1226)}
+    .phone-wrap{position:absolute;right:6%;bottom:-10%;width:min(140px,30vw)}
+
+    /* ====== Sekce ====== */
+    .section{padding-block:42px}
+    h2{font-size:clamp(22px,4.8vw,32px);margin:0 0 10px}
+    .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
+    .grid{display:grid;gap:14px}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+
+    /* ====== Ceník ====== */
+    .price{display:flex;gap:10px;align-items:baseline}
+    .price .big{font-size:32px;font-weight:900}
+
+    /* ====== FAQ/Proces ====== */
+    details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px}
+    details+details{margin-top:10px}
+    summary{cursor:pointer;font-weight:700}
+
+    /* ====== Kontakt ====== */
+    input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1226;color:var(--text)}
+
+    /* ====== Footer ====== */
+    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px}
+
+    /* ====== Desktop rozšíření ====== */
+    @media (min-width: 860px){
+      .hero{grid-template-columns:1.05fr .95fr;align-items:center}
+      .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+      .hero-preview{position:relative;min-height:360px}
+      .laptop{height:100%}
+    }
+
+    /* ====== Mobilní navigace ====== */
+    @media (max-width: 860px){
+      .menu{display:none;position:fixed;inset:auto 12px 12px 12px;top:60px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;gap:8px}
+      .menu.open{display:flex}
+      .burger{display:inline-grid;place-items:center}
       .btn{width:100%;padding:10px 14px;border-radius:10px}
       .hero-preview{order:2}
       .grid.cols-3{grid-template-columns:1fr}
@@ -57,6 +102,11 @@
       .card{padding:14px;border-radius:12px}
       .price .big{font-size:28px}
       .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+    }
+      .menu.open{display:flex}
+      .burger{display:inline-grid;place-items:center}
+      .btn{width:100%}
+      .hero-preview{order:2}
     }
     @media (max-width: 520px){
       h1{word-break:break-word}
@@ -68,7 +118,7 @@
       .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
     .livebox.has-live{background-image:none}
     .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226; pointer-events:none}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226; pointer-events:auto}
   </style>
 </head>
 <body>
@@ -90,7 +140,7 @@
     <!-- ====== Hero ====== -->
     <section class="hero">
       <div class="stack">
-        <h1>Pěkný a rychlý web, který prodá vaši službu</h1>
+        <h1>Pěkný a rychlý web, který prodá vaši službu/produkt</h1>
         <div class="hero-cta">
           <a class="btn btn--primary" href="#kontakt">Chci nezávaznou konzultaci</a>
         </div>
