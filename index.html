@@ -258,8 +258,14 @@
       const box = holder && holder.closest('.livebox');
       if(!holder || !box) return;
       const iframe = document.createElement('iframe');
-      const PREVIEW_URL = 'https://xaspi7.github.io/losmotos';
+      // Náhodný výběr ukázkového webu
+      const PREVIEW_SITES = [
+        'https://xaspi7.github.io/losmotos',
+        'https://tariflevne.cz'
+      ];
+      const PREVIEW_URL = PREVIEW_SITES[Math.floor(Math.random() * PREVIEW_SITES.length)];
       iframe.src = PREVIEW_URL;
+      
       iframe.setAttribute('loading','lazy');
       holder.innerHTML='';
       holder.appendChild(iframe);
