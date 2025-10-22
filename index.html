@@ -9,12 +9,12 @@
   <style>
     /* ====== Design tokens ====== */
     :root{
-      --bg:#0b1020;           /* pozadí */
-      --panel:#0f172a;        /* panely */
-      --muted:#94a3b8;        /* sekundární text */
-      --text:#e2e8f0;         /* primární text */
-      --brand:#0ea5e9;        /* hlavní akcent */
-      --brand2:#22d3ee;       /* přechod akcentu */
+      --bg:#0b1020;
+      --panel:#0f172a;
+      --muted:#94a3b8;
+      --text:#e2e8f0;
+      --brand:#0ea5e9;
+      --brand2:#22d3ee;
       --ring:rgba(14,165,233,.4);
       --radius:16px;
       --shadow:0 6px 24px rgba(0,0,0,.25);
@@ -27,7 +27,6 @@
     a{color:var(--brand);text-decoration:none}
 
     .container{max-width:1080px;margin-inline:auto;padding:clamp(12px,4vw,20px)}
-    .stack{display:grid;gap:16px}
     .stack{display:grid;gap:20px}
 
     /* ====== Header ====== */
@@ -42,9 +41,6 @@
 
     /* ====== Hero ====== */
     .hero{display:grid;grid-template-columns:1fr;gap:14px;padding-block:24px}
-    .hero h1{font-size:clamp(26px,6vw,40px);line-height:1.12;margin:0}
-    .hero .lead{color:var(--muted)}
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
     .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
     .hero .lead{color:var(--muted)}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
@@ -103,22 +99,20 @@
       .price .big{font-size:28px}
       .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
     }
-      .menu.open{display:flex}
-      .burger{display:inline-grid;place-items:center}
-      .btn{width:100%}
-      .hero-preview{order:2}
-    }
+
+    /* ====== Livebox (PC náhled) ====== */
+    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
+    .livebox.has-live{background-image:none}
+    .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226; pointer-events:auto}
+
+    /* ====== Extra mobilní doladění ====== */
     @media (max-width: 520px){
       h1{word-break:break-word}
       .container{padding:12px}
       .livebox{border-radius:10px; max-height:260px}
       .btn{padding:10px 12px}
     }
-      .section{padding-block:28px}
-      .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
-    .livebox.has-live{background-image:none}
-    .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226; pointer-events:auto}
   </style>
 </head>
 <body>
@@ -177,13 +171,13 @@
       <div class="grid cols-3">
         <div class="card">
           <h3>Start</h3>
-          <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
+          <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
           <ul class="muted"><li>Jednostránkový web</li><li>Základní texty</li><li>Nasazení</li></ul>
         </div>
         <div class="card" style="border-color:rgba(34,211,238,.4)">
           <h3>Pro</h3>
-          <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted"><li>One‑page + 2 podstránky</li><li>Lehké SEO</li><li>Formulář + analytika</li></ul>
+          <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
+          <ul class="muted"><li>One-page + 2 podstránky</li><li>Lehké SEO</li><li>Formulář + analytika</li></ul>
         </div>
         <div class="card">
           <h3>Custom</h3>
@@ -208,7 +202,7 @@
         <h2>Napište mi</h2>
         <form action="mailto:vas@email.cz" method="post" enctype="text/plain" class="stack">
           <label>Jméno<br><input required name="jmeno" placeholder="Jan Novák"></label>
-          <label>E‑mail<br><input required type="email" name="email" placeholder="jan@example.com"></label>
+          <label>E-mail<br><input required type="email" name="email" placeholder="jan@example.com"></label>
           <label>Vaše zpráva<br><textarea name="zprava" rows="4" placeholder="Krátce popište svůj záměr…"></textarea></label>
           <button class="btn btn--primary" type="submit">Odeslat</button>
           <small class="muted">Ozvu se do 24 hodin.</small>
@@ -241,13 +235,12 @@
       }
     })();
 
-    // Mount responsive iframe preview with fallback
+    // Mount responsive iframe preview with fallback (LosMotos)
     (function(){
       const holder = document.getElementById('live-desktop');
       const box = holder && holder.closest('.livebox');
-      if(!holder || !box) return; // fallback zůstává (screenshot v background-image)
+      if(!holder || !box) return;
       const iframe = document.createElement('iframe');
-      // Načti stejnou stránku s parametrem embed=1, aby v náhledu nebyly zbytečnosti
       const PREVIEW_URL = 'https://xaspi7.github.io/losmotos';
       iframe.src = PREVIEW_URL;
       iframe.setAttribute('loading','lazy');
