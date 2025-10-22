@@ -88,17 +88,29 @@
 
     /* ====== Mobilní navigace ====== */
     @media (max-width: 860px){
-      .menu{display:none;position:fixed;inset:auto 12px 12px 12px;top:60px;flex-direction:column;background:rgba(11,16,32,.96);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:10px;gap:8px}
-      .menu.open{display:flex}
-      .burger{display:inline-grid;place-items:center}
-      .btn{width:100%;padding:10px 14px;border-radius:10px}
-      .hero-preview{order:2}
-      .grid.cols-3{grid-template-columns:1fr}
-      .section{padding-block:28px}
-      .card{padding:14px;border-radius:12px}
-      .price .big{font-size:28px}
-      .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
-    }
+  .menu{
+    display:none;
+    position:fixed;
+    inset:auto 12px 12px 12px;
+    top:60px;
+    flex-direction:column;
+    background:#0b1226; /* ← nové, neprůhledné pozadí */
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:14px;
+    padding:10px;
+    gap:8px;
+    box-shadow:0 8px 24px rgba(0,0,0,.4); /* malý stín pro oddělení */
+  }
+  .menu.open{display:flex}
+  .burger{display:inline-grid;place-items:center}
+  .btn{width:100%;padding:10px 14px;border-radius:10px}
+  .hero-preview{order:2}
+  .grid.cols-3{grid-template-columns:1fr}
+  .section{padding-block:28px}
+  .card{padding:14px;border-radius:12px}
+  .price .big{font-size:28px}
+  .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+}
 
     /* ====== Livebox (PC náhled) ====== */
     .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
