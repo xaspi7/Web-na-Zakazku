@@ -45,16 +45,12 @@
     .hero .lead{color:var(--muted)}
     .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
 
-    /* Kompaktní mockup (SVG + screenshot proměnné) */
+    /* ====== Náhled (livebox) ====== */
     .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
-    .device{position:relative;isolation:isolate}
-    .device.laptop{aspect-ratio:16/10;border-radius:12px;background:#0b1226;overflow:hidden}
-    .device.phone{aspect-ratio:9/19;border-radius:22px;background:#0b1226;overflow:hidden}
-    .screen{position:absolute;inset:0;background:center/cover no-repeat;filter:contrast(1.02)}
-    :root{ --shot-desktop:url('obrazky/nahled-desktop.jpg'); --shot-mobile:url('obrazky/nahled-mobil.jpg'); }
-    .laptop .screen{background-image:var(--shot-desktop), linear-gradient(180deg,#0b1226,#0b1226)}
-    .phone  .screen{background-image:var(--shot-mobile),  linear-gradient(180deg,#0b1226,#0b1226)}
-    .phone-wrap{position:absolute;right:6%;bottom:-10%;width:min(140px,30vw)}
+    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
+    .livebox.has-live{background-image:none}
+    .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226}
 
     /* ====== Sekce ====== */
     .section{padding-block:42px}
@@ -83,45 +79,34 @@
       .hero{grid-template-columns:1.05fr .95fr;align-items:center}
       .grid.cols-3{grid-template-columns:repeat(3,1fr)}
       .hero-preview{position:relative;min-height:360px}
-      .laptop{height:100%}
     }
 
-    /* ====== Mobilní navigace ====== */
+    /* ====== Mobilní navigace (neprůhledné menu + overlay styl) ====== */
     @media (max-width: 860px){
-  .menu{
-    display:none;
-    position:fixed;
-    top:60px;
-    left:0;
-    right:0;
-    z-index:1000; /* aby menu překrylo vše pod ním */
-    flex-direction:column;
-    background:#0b1226; /* neprůhledné pozadí */
-    border-top:1px solid rgba(255,255,255,.08);
-    box-shadow:0 8px 32px rgba(0,0,0,.5);
-    border-radius:0 0 16px 16px;
-    padding:16px 12px;
-    gap:10px;
-    max-height:90vh;
-    overflow-y:auto; /* pro případ, že je menu delší než obrazovka */
-  }
-  .menu.open{display:flex;}
-  .burger{display:inline-grid;place-items:center;}
-  .btn{width:100%;padding:12px 16px;border-radius:10px;}
-  .hero-preview{order:2;}
-  .grid.cols-3{grid-template-columns:1fr;}
-  .section{padding-block:28px;}
-  .card{padding:14px;border-radius:12px;}
-  .price .big{font-size:28px;}
-  .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden;}
-}
-
-
-    /* ====== Livebox (PC náhled) ====== */
-    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
-    .livebox.has-live{background-image:none}
-    .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226; pointer-events:auto}
+      .menu{
+        display:none;
+        position:fixed;
+        top:60px; left:0; right:0;
+        z-index:1000;
+        flex-direction:column;
+        background:#0b1226; /* neprůhledné */
+        border-top:1px solid rgba(255,255,255,.08);
+        box-shadow:0 8px 32px rgba(0,0,0,.5);
+        border-radius:0 0 16px 16px;
+        padding:16px 12px;
+        gap:10px;
+        max-height:90vh; overflow-y:auto;
+      }
+      .menu.open{display:flex}
+      .burger{display:inline-grid;place-items:center}
+      .btn{width:100%;padding:12px 16px;border-radius:10px}
+      .hero-preview{order:2}
+      .grid.cols-3{grid-template-columns:1fr}
+      .section{padding-block:28px}
+      .card{padding:14px;border-radius:12px}
+      .price .big{font-size:28px}
+      .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+    }
 
     /* ====== Extra mobilní doladění ====== */
     @media (max-width: 520px){
@@ -235,69 +220,69 @@
   <script>
     // Rok ve footeru
     document.getElementById('year').textContent = new Date().getFullYear();
+
     // Plynulé skrolování mezi sekcemi
     document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{ const el=document.querySelector(a.getAttribute('href')); if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'});} });
+      a.addEventListener('click', e=>{
+        const el=document.querySelector(a.getAttribute('href'));
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
+      });
     });
-    // Mobilní menu
+
+    // Mobilní menu toggle
     const burger=document.querySelector('.burger');
     const menu=document.getElementById('menu');
-    if(burger && menu){ burger.addEventListener('click',()=>{ const open=menu.classList.toggle('open'); burger.setAttribute('aria-expanded',open?'true':'false'); }); }
-
-    // Pokud jsme v iframu s ?embed=1, můžeme schovat header/footer (volitelně)
-    (function(){
-      const p=new URLSearchParams(location.search);
-      if(p.get('embed')==='1'){
-        document.body.classList.add('embed');
-      }
-    })();
-
-  <script>
-  // Mount responsive iframe preview – mobil = jen tariflevne, desktop = náhodně
-  (function(){
-    const holder = document.getElementById('live-desktop');
-    const box = holder && holder.closest('.livebox');
-    if(!holder || !box) return;
-
-    // Zjisti, jestli jde o mobilní zařízení (iOS nebo Android)
-    const ua = navigator.userAgent || navigator.vendor || window.opera;
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
-
-    const SITES = [
-      'https://xaspi7.github.io/losmotos',
-      'https://tariflevne.cz'
-    ];
-
-    // Na mobilu vždy tariflevne, jinak náhodně
-    const PREVIEW_URL = isMobile
-      ? 'https://tariflevne.cz'
-      : SITES[Math.floor(Math.random() * SITES.length)];
-
-    const iframe = document.createElement('iframe');
-    iframe.src = PREVIEW_URL;
-    iframe.setAttribute('loading','lazy');
-    iframe.style.position = 'absolute';
-    iframe.style.inset = '0';
-    iframe.style.width = '1280px';
-    iframe.style.height = '800px';
-    iframe.style.border = '0';
-    iframe.style.background = '#0b1226';
-
-    holder.innerHTML = '';
-    holder.appendChild(iframe);
-
-    function resize(){
-      const w = box.clientWidth || 1280;
-      const scale = w / 1280;
-      holder.style.transform = 'scale('+scale+')';
-      holder.style.height = (800*scale)+'px';
-      holder.style.transformOrigin = 'top left';
+    if(burger && menu){
+      burger.addEventListener('click',()=>{
+        const open=menu.classList.toggle('open');
+        burger.setAttribute('aria-expanded',open?'true':'false');
+      });
     }
 
-    iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
-    resize();
-    addEventListener('resize', resize);
-  })();
-</script>
+    // Mount responsive iframe preview – mobil = jen tariflevne, desktop = náhodně
+    (function(){
+      const holder = document.getElementById('live-desktop');
+      const box = holder && holder.closest('.livebox');
+      if(!holder || !box) return;
+
+      // Mobilní detekce (iOS i Android)
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+
+      const SITES = [
+        'https://xaspi7.github.io/losmotos',
+        'https://tariflevne.cz'
+      ];
+
+      // Na mobilu vždy tariflevne, jinak náhodně
+      const PREVIEW_URL = isMobile
+        ? 'https://tariflevne.cz'
+        : SITES[Math.floor(Math.random() * SITES.length)];
+
+      const iframe = document.createElement('iframe');
+      iframe.src = PREVIEW_URL;
+      iframe.setAttribute('loading','lazy');
+      iframe.style.position = 'absolute';
+      iframe.style.inset = '0';
+      iframe.style.width = '1280px';
+      iframe.style.height = '800px';
+      iframe.style.border = '0';
+      iframe.style.background = '#0b1226';
+
+      holder.innerHTML = '';
+      holder.appendChild(iframe);
+
+      function resize(){
+        const w = box.clientWidth || 1280;
+        const scale = w / 1280;
+        holder.style.transform = 'scale('+scale+')';
+        holder.style.height = (800*scale)+'px';
+        holder.style.transformOrigin = 'top left';
+      }
+      iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
+      resize();
+      addEventListener('resize', resize);
+    })();
+  </script>
 </body>
 </html>
