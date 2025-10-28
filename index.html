@@ -18,7 +18,6 @@
       --ring:rgba(14,165,233,.4);
       --radius:16px;
       --shadow:0 6px 24px rgba(0,0,0,.25);
-      --ok:#22c55e; --err:#ef4444;
     }
 
     /* ====== Reset + základ ====== */
@@ -36,8 +35,16 @@
     .brand{display:flex;align-items:center;gap:10px;font-weight:800}
     .badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 8px 24px rgba(14,165,233,.35)}
     .menu{display:flex;gap:10px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600;transition:transform .08s ease}
     .btn--primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#041017;border:none;box-shadow:0 10px 24px rgba(14,165,233,.35)}
+    .btn:active{transform:translateY(1px)}
+    .btn:disabled{opacity:.6;cursor:not-allowed}
+    .btn.loading{position:relative}
+    .btn.loading::after{
+      content:""; width:16px; height:16px; border:2px solid currentColor; border-top-color:transparent;
+      border-radius:50%; display:inline-block; margin-left:8px; vertical-align:-3px; animation:spin 1s linear infinite;
+    }
+    @keyframes spin{to{transform:rotate(360deg)}}
     .burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:18px;color:var(--text)}
 
     /* ====== Hero ====== */
@@ -108,11 +115,6 @@
       .livebox{border-radius:10px; max-height:260px}
       .btn{padding:10px 12px}
     }
-
-    /* ====== Alerty formuláře ====== */
-    .alert{display:none;padding:10px 12px;border-radius:10px;font-weight:600}
-    .alert.ok{display:block;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#bbf7d0}
-    .alert.err{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);color:#fecaca}
   </style>
 </head>
 <body>
@@ -198,18 +200,14 @@
 
     <!-- ====== Kontakt ====== -->
     <section id="kontakt" class="section">
-      <div class="card">
+      <div class="card" id="contact-card">
         <h2>Napište mi</h2>
 
         <!-- ✅ Web3Forms integrace -->
-        <div id="form-alert" class="alert" role="status" aria-live="polite"></div>
         <form id="contact-form" class="stack" method="POST">
-          <!-- povinný access key -->
           <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a">
-          <!-- pár užitečných polí navíc -->
           <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů">
           <input type="hidden" name="from_name" value="Tvorba webů – formulář">
-          <!-- honeypot -->
           <input type="checkbox" name="botcheck" style="display:none">
 
           <label>Jméno<br>
@@ -222,7 +220,7 @@
             <textarea name="message" rows="4" placeholder="Krátce popište svůj záměr…"></textarea>
           </label>
 
-          <button class="btn btn--primary" type="submit">Odeslat</button>
+          <button id="submit-btn" class="btn btn--primary" type="submit">Odeslat</button>
           <small class="muted">Ozvu se do 24 hodin.</small>
         </form>
       </div>
@@ -298,30 +296,44 @@
       addEventListener('resize', resize);
     })();
 
-    // ✅ Web3Forms submit přes fetch (bez přesměrování)
+    // ✅ Web3Forms submit – po úspěchu zobrazit JEN "Děkuji, zpráva odeslána."
     (function(){
       const form = document.getElementById('contact-form');
-      const alertBox = document.getElementById('form-alert');
-      if(!form) return;
+      const card = document.getElementById('contact-card');
+      const btn  = document.getElementById('submit-btn');
+      if(!form || !btn || !card) return;
+
+      let isSubmitting = false;
 
       form.addEventListener('submit', async (e)=>{
         e.preventDefault();
-        alertBox.className='alert'; alertBox.textContent='';
-        const data = new FormData(form);
+        if(isSubmitting) return; // brání dvojkliku
+        isSubmitting = true;
+
+        // vizuální stav tlačítka
+        btn.disabled = true;
+        btn.classList.add('loading');
+        const originalText = btn.textContent;
+        btn.textContent = 'Odesílám…';
 
         try{
-          const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+          const data = new FormData(form);
+          const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
           const json = await res.json();
+
           if(json.success){
-            alertBox.className='alert ok';
-            alertBox.textContent='Děkuji, zpráva odeslána. Ozvu se co nejdřív.';
-            form.reset();
+            // nahraď obsah karty čistou zprávou
+            card.innerHTML = '<p style="margin:0;font-size:clamp(18px,4.5vw,22px);font-weight:800;text-align:center;padding:24px 8px;">Děkuji, zpráva odeslána.</p>';
           }else{
             throw new Error(json.message || 'Odeslání se nezdařilo');
           }
         }catch(err){
-          alertBox.className='alert err';
-          alertBox.textContent='Nepodařilo se odeslat formulář. Zkuste to prosím znovu nebo mi napište na e-mail.';
+          // návrat do původního stavu při chybě
+          isSubmitting = false;
+          btn.disabled = false;
+          btn.classList.remove('loading');
+          btn.textContent = originalText;
+          alert('Nepodařilo se odeslat formulář. Zkuste to prosím znovu.');
           console.error(err);
         }
       });
