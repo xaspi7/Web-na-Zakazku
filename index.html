@@ -252,33 +252,52 @@
       }
     })();
 
-    // Mount responsive iframe preview with fallback (LosMotos)
-    (function(){
-      const holder = document.getElementById('live-desktop');
-      const box = holder && holder.closest('.livebox');
-      if(!holder || !box) return;
-      const iframe = document.createElement('iframe');
-      // Náhodný výběr ukázkového webu
-      const PREVIEW_SITES = [
-        'https://xaspi7.github.io/losmotos',
-        'https://tariflevne.cz'
-      ];
-      const PREVIEW_URL = PREVIEW_SITES[Math.floor(Math.random() * PREVIEW_SITES.length)];
-      iframe.src = PREVIEW_URL;
-      
-      iframe.setAttribute('loading','lazy');
-      holder.innerHTML='';
-      holder.appendChild(iframe);
-      function resize(){
-        const w = box.clientWidth || 1280;
-        const scale = w / 1280;
-        holder.style.transform = 'scale('+scale+')';
-        holder.style.height = (800*scale)+'px';
-      }
-      iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
-      resize();
-      addEventListener('resize', resize);
-    })();
-  </script>
+  <script>
+  // Mount responsive iframe preview – mobil = jen tariflevne, desktop = náhodně
+  (function(){
+    const holder = document.getElementById('live-desktop');
+    const box = holder && holder.closest('.livebox');
+    if(!holder || !box) return;
+
+    // Zjisti, jestli jde o mobilní zařízení (iOS nebo Android)
+    const ua = navigator.userAgent || navigator.vendor || window.opera;
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+
+    const SITES = [
+      'https://xaspi7.github.io/losmotos',
+      'https://tariflevne.cz'
+    ];
+
+    // Na mobilu vždy tariflevne, jinak náhodně
+    const PREVIEW_URL = isMobile
+      ? 'https://tariflevne.cz'
+      : SITES[Math.floor(Math.random() * SITES.length)];
+
+    const iframe = document.createElement('iframe');
+    iframe.src = PREVIEW_URL;
+    iframe.setAttribute('loading','lazy');
+    iframe.style.position = 'absolute';
+    iframe.style.inset = '0';
+    iframe.style.width = '1280px';
+    iframe.style.height = '800px';
+    iframe.style.border = '0';
+    iframe.style.background = '#0b1226';
+
+    holder.innerHTML = '';
+    holder.appendChild(iframe);
+
+    function resize(){
+      const w = box.clientWidth || 1280;
+      const scale = w / 1280;
+      holder.style.transform = 'scale('+scale+')';
+      holder.style.height = (800*scale)+'px';
+      holder.style.transformOrigin = 'top left';
+    }
+
+    iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
+    resize();
+    addEventListener('resize', resize);
+  })();
+</script>
 </body>
 </html>
