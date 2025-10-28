@@ -18,6 +18,7 @@
       --ring:rgba(14,165,233,.4);
       --radius:16px;
       --shadow:0 6px 24px rgba(0,0,0,.25);
+      --ok:#22c55e; --err:#ef4444;
     }
 
     /* ====== Reset + základ ====== */
@@ -81,21 +82,13 @@
       .hero-preview{position:relative;min-height:360px}
     }
 
-    /* ====== Mobilní navigace (neprůhledné menu + overlay styl) ====== */
+    /* ====== Mobilní navigace ====== */
     @media (max-width: 860px){
       .menu{
-        display:none;
-        position:fixed;
-        top:60px; left:0; right:0;
-        z-index:1000;
-        flex-direction:column;
-        background:#0b1226; /* neprůhledné */
-        border-top:1px solid rgba(255,255,255,.08);
-        box-shadow:0 8px 32px rgba(0,0,0,.5);
-        border-radius:0 0 16px 16px;
-        padding:16px 12px;
-        gap:10px;
-        max-height:90vh; overflow-y:auto;
+        display:none; position:fixed; top:60px; left:0; right:0; z-index:1000;
+        flex-direction:column; background:#0b1226; border-top:1px solid rgba(255,255,255,.08);
+        box-shadow:0 8px 32px rgba(0,0,0,.5); border-radius:0 0 16px 16px;
+        padding:16px 12px; gap:10px; max-height:90vh; overflow-y:auto;
       }
       .menu.open{display:flex}
       .burger{display:inline-grid;place-items:center}
@@ -115,6 +108,11 @@
       .livebox{border-radius:10px; max-height:260px}
       .btn{padding:10px 12px}
     }
+
+    /* ====== Alerty formuláře ====== */
+    .alert{display:none;padding:10px 12px;border-radius:10px;font-weight:600}
+    .alert.ok{display:block;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.35);color:#bbf7d0}
+    .alert.err{display:block;background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.35);color:#fecaca}
   </style>
 </head>
 <body>
@@ -202,10 +200,28 @@
     <section id="kontakt" class="section">
       <div class="card">
         <h2>Napište mi</h2>
-        <form action="mailto:vas@email.cz" method="post" enctype="text/plain" class="stack">
-          <label>Jméno<br><input required name="jmeno" placeholder="Jan Novák"></label>
-          <label>E-mail<br><input required type="email" name="email" placeholder="jan@example.com"></label>
-          <label>Vaše zpráva<br><textarea name="zprava" rows="4" placeholder="Krátce popište svůj záměr…"></textarea></label>
+
+        <!-- ✅ Web3Forms integrace -->
+        <div id="form-alert" class="alert" role="status" aria-live="polite"></div>
+        <form id="contact-form" class="stack" method="POST">
+          <!-- povinný access key -->
+          <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a">
+          <!-- pár užitečných polí navíc -->
+          <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů">
+          <input type="hidden" name="from_name" value="Tvorba webů – formulář">
+          <!-- honeypot -->
+          <input type="checkbox" name="botcheck" style="display:none">
+
+          <label>Jméno<br>
+            <input required name="name" placeholder="Jan Novák">
+          </label>
+          <label>E-mail<br>
+            <input required type="email" name="email" placeholder="jan@example.com">
+          </label>
+          <label>Vaše zpráva<br>
+            <textarea name="message" rows="4" placeholder="Krátce popište svůj záměr…"></textarea>
+          </label>
+
           <button class="btn btn--primary" type="submit">Odeslat</button>
           <small class="muted">Ozvu se do 24 hodin.</small>
         </form>
@@ -239,13 +255,12 @@
       });
     }
 
-    // Mount responsive iframe preview – mobil = jen tariflevne, desktop = náhodně
+    // Live preview – mobil = jen tariflevne, desktop = náhodně
     (function(){
       const holder = document.getElementById('live-desktop');
       const box = holder && holder.closest('.livebox');
       if(!holder || !box) return;
 
-      // Mobilní detekce (iOS i Android)
       const ua = navigator.userAgent || navigator.vendor || window.opera;
       const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
 
@@ -254,7 +269,6 @@
         'https://tariflevne.cz'
       ];
 
-      // Na mobilu vždy tariflevne, jinak náhodně
       const PREVIEW_URL = isMobile
         ? 'https://tariflevne.cz'
         : SITES[Math.floor(Math.random() * SITES.length)];
@@ -282,6 +296,35 @@
       iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
       resize();
       addEventListener('resize', resize);
+    })();
+
+    // ✅ Web3Forms submit přes fetch (bez přesměrování)
+    (function(){
+      const form = document.getElementById('contact-form');
+      const alertBox = document.getElementById('form-alert');
+      if(!form) return;
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        alertBox.className='alert'; alertBox.textContent='';
+        const data = new FormData(form);
+
+        try{
+          const res = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+          const json = await res.json();
+          if(json.success){
+            alertBox.className='alert ok';
+            alertBox.textContent='Děkuji, zpráva odeslána. Ozvu se co nejdřív.';
+            form.reset();
+          }else{
+            throw new Error(json.message || 'Odeslání se nezdařilo');
+          }
+        }catch(err){
+          alertBox.className='alert err';
+          alertBox.textContent='Nepodařilo se odeslat formulář. Zkuste to prosím znovu nebo mi napište na e-mail.';
+          console.error(err);
+        }
+      });
     })();
   </script>
 </body>
