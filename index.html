@@ -115,6 +115,9 @@
       .livebox{border-radius:10px; max-height:260px}
       .btn{padding:10px 12px}
     }
+
+    /* Když je otevřené menu, zablokuj posouvání podkladu */
+    body.nav-open{overflow:hidden}
   </style>
 </head>
 <body>
@@ -156,7 +159,7 @@
           <h3>🎯 Jasná nabídka</h3>
           <p class="muted">Krátká konzultace, srozumitelné texty a struktura, která prodává.</p>
         </div>
-        <div class="card">
+        <div class="card>
           <h3>🧱 Tvorba webu</h3>
           <p class="muted">Čistý moderní vzhled, přehledný obsah, rychlé načítání.</p>
         </div>
@@ -174,7 +177,7 @@
         <div class="card">
           <h3>Start</h3>
           <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted"><li>Jednostránkový web</li><li>Základní texty</li><li>Nasazení</li></ul>
+          <ul class="muted"><li>Jednostránkový web</li><li>Žákladní texty</li><li>Nasazení</li></ul>
         </div>
         <div class="card" style="border-color:rgba(34,211,238,.4)">
           <h3>Pro</h3>
@@ -221,7 +224,7 @@
           </label>
 
           <button id="submit-btn" class="btn btn--primary" type="submit">Odeslat</button>
-          <small class="muted">Ozvu se do 24 hodin.</small>
+          <small class="muted">Ozvu se do dvou pracovních dnů.</small>
         </form>
       </div>
     </section>
@@ -243,13 +246,28 @@
       });
     });
 
-    // Mobilní menu toggle
+    // Mobilní menu: otevřít/zavřít + auto-zavření po kliknutí na položku/mimo/ESC
     const burger=document.querySelector('.burger');
     const menu=document.getElementById('menu');
-    if(burger && menu){
-      burger.addEventListener('click',()=>{
-        const open=menu.classList.toggle('open');
-        burger.setAttribute('aria-expanded',open?'true':'false');
+    function setMenu(open){
+      if(!burger || !menu) return;
+      menu.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      document.body.classList.toggle('nav-open', open);
+    }
+    if (burger && menu) {
+      burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
+      // zavřít po kliknutí na položku
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
+      // zavřít po změně #hash
+      window.addEventListener('hashchange', () => setMenu(false));
+      // zavřít klávesou ESC
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
+      // zavřít kliknutím mimo
+      document.addEventListener('click', e => {
+        if (!menu.classList.contains('open')) return;
+        const inside = menu.contains(e.target) || burger.contains(e.target);
+        if (!inside) setMenu(false);
       });
     }
 
@@ -296,7 +314,7 @@
       addEventListener('resize', resize);
     })();
 
-    // ✅ Web3Forms submit – po úspěchu zobrazit JEN "Děkuji, zpráva odeslána."
+    // ✅ Web3Forms submit – po úspěchu zobrazit JEN "Děkuji, zpráva odeslána." + anti-spam
     (function(){
       const form = document.getElementById('contact-form');
       const card = document.getElementById('contact-card');
