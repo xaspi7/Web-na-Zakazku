@@ -6,6 +6,14 @@
   <title>Tvorba webů — čistý, rychlý a profesionální web</title>
   <meta name="description" content="Navrhnu a dodám přehledný prezentační web. Krátké texty, moderní vzhled, nasazení na spolehlivý hosting a průběžná podpora." />
   <meta name="theme-color" content="#0ea5e9" />
+  
+  <!-- OG Meta tagy pro sdílení -->
+  <meta property="og:title" content="Jednoduchý web za 3 500 Kč – Bez zbytečností" />
+  <meta property="og:description" content="Web pro živnostníky a malé firmy za pár tisíc. Hotovo za 1-2 týdny. Bez WordPressu, bez komplikací." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://xaspi7.github.io/Web-na-Zakazku" />
+  <meta property="og:image" content="https://xaspi7.github.io/Web-na-Zakazku/og-image.jpg" />
+  
   <style>
     /* ====== Design tokens ====== */
     :root{
@@ -15,6 +23,9 @@
       --text:#e2e8f0;
       --brand:#0ea5e9;
       --brand2:#22d3ee;
+      --success:#10b981;
+      --warning:#f59e0b;
+      --danger:#ef4444;
       --ring:rgba(14,165,233,.4);
       --radius:16px;
       --shadow:0 6px 24px rgba(0,0,0,.25);
@@ -22,6 +33,7 @@
 
     /* ====== Reset + základ ====== */
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b1020 0%,#0b1226 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,"Noto Sans",sans-serif;line-height:1.55}
     img{max-width:100%;display:block}
     a{color:var(--brand);text-decoration:none}
@@ -35,8 +47,10 @@
     .brand{display:flex;align-items:center;gap:10px;font-weight:800}
     .badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 8px 24px rgba(14,165,233,.35)}
     .menu{display:flex;gap:10px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600;transition:transform .08s ease}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600;transition:transform .08s ease;cursor:pointer}
     .btn--primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#041017;border:none;box-shadow:0 10px 24px rgba(14,165,233,.35)}
+    .btn--success{background:linear-gradient(135deg,var(--success),#34d399);color:#041017;border:none;box-shadow:0 10px 24px rgba(16,185,129,.35)}
+    .btn--whatsapp{background:#25d366;color:#fff;border:none;box-shadow:0 10px 24px rgba(37,211,102,.35)}
     .btn:active{transform:translateY(1px)}
     .btn:disabled{opacity:.6;cursor:not-allowed}
     .btn.loading{position:relative}
@@ -55,20 +69,49 @@
     .badge-pill{display:inline-block;padding:6px 12px;border-radius:20px;background:rgba(34,211,238,.15);color:var(--brand2);font-size:14px;font-weight:700;margin-top:4px}
 
     /* ====== Náhled (livebox) ====== */
-    .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+    .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow);position:relative}
     .preview-label{text-align:center;color:var(--muted);font-size:13px;margin-bottom:8px}
-    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
+    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226;cursor:pointer;transition:transform .2s ease}
+    .livebox:hover{transform:translateY(-2px)}
     .livebox.has-live{background-image:none}
     .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226;pointer-events:none}
+    .preview-tooltip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}
+    .livebox:hover .preview-tooltip{opacity:1}
 
     /* ====== Sekce ====== */
     .section{padding-block:42px}
     h2{font-size:clamp(22px,4.8vw,32px);margin:0 0 10px}
+    h3{font-size:clamp(18px,3vw,20px);margin:0 0 8px}
     .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
     .grid{display:grid;gap:14px}
     .grid.cols-3{grid-template-columns:repeat(3,1fr)}
     .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+
+    /* ====== Srovnání (před/po) ====== */
+    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .comparison-card{padding:20px;border-radius:14px;position:relative}
+    .comparison-card.bad{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
+    .comparison-card.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)}
+    .comparison-card h3{display:flex;align-items:center;gap:8px;font-size:18px}
+    .comparison-card ul{margin:12px 0 0;padding-left:20px;color:var(--muted);list-style:none}
+    .comparison-card ul li{margin:8px 0;padding-left:24px;position:relative}
+    .comparison-card.bad ul li::before{content:"❌";position:absolute;left:0}
+    .comparison-card.good ul li::before{content:"✅";position:absolute;left:0}
+
+    /* ====== Pro koho to je ====== */
+    .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .audience-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;text-align:center;transition:transform .2s ease,border-color .2s ease}
+    .audience-card:hover{transform:translateY(-4px);border-color:rgba(14,165,233,.4)}
+    .audience-icon{font-size:48px;margin-bottom:12px}
+    .audience-card h3{font-size:18px;margin:0 0 8px}
+    .audience-card p{color:var(--muted);font-size:14px;margin:0}
+
+    /* ====== Promo banner (sleva) ====== */
+    .promo-banner{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(251,191,36,.15));border:2px solid rgba(245,158,11,.4);border-radius:14px;padding:20px;margin-top:20px;text-align:center}
+    .promo-banner h3{color:#fbbf24;font-size:clamp(20px,4vw,24px);margin:0 0 8px}
+    .promo-banner p{color:var(--text);font-size:clamp(14px,2.5vw,16px);margin:0}
+    .promo-banner .countdown{font-weight:900;color:#fbbf24;font-size:20px;margin-top:8px}
 
     /* ====== Ceník ====== */
     .price{display:flex;gap:10px;align-items:baseline}
@@ -81,9 +124,15 @@
 
     /* ====== Kontakt ====== */
     input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1226;color:var(--text)}
+    .contact-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
 
     /* ====== Footer ====== */
-    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px}
+    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px;position:relative}
+    
+    /* ====== Scroll to top button ====== */
+    .scroll-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,var(--brand),var(--brand2));border-radius:50%;display:grid;place-items:center;font-size:24px;color:#041017;box-shadow:0 8px 24px rgba(14,165,233,.4);cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease,transform .2s ease;z-index:100}
+    .scroll-top.visible{opacity:1;visibility:visible}
+    .scroll-top:hover{transform:translateY(-4px)}
 
     /* ====== Co není součástí ====== */
     .exclusions{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:16px;margin-top:16px}
@@ -97,6 +146,9 @@
       .grid.cols-3{grid-template-columns:repeat(3,1fr)}
       .grid.cols-2{grid-template-columns:repeat(2,1fr)}
       .hero-preview{position:relative;min-height:360px}
+      .audience-grid{grid-template-columns:repeat(3,1fr)}
+      .comparison{grid-template-columns:1fr 1fr}
+      .contact-options{grid-template-columns:1fr 1fr}
     }
 
     /* ====== Mobilní navigace ====== */
@@ -118,6 +170,10 @@
       .price .big{font-size:28px}
       .livebox{aspect-ratio:3/2; max-height:280px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
       .preview-label{font-size:12px}
+      .audience-grid{grid-template-columns:1fr}
+      .comparison{grid-template-columns:1fr}
+      .contact-options{grid-template-columns:1fr}
+      .scroll-top{bottom:20px;right:20px;width:45px;height:45px}
     }
 
     /* ====== Extra mobilní doladění ====== */
@@ -127,6 +183,7 @@
       .livebox{border-radius:10px; max-height:220px}
       .btn{padding:10px 12px}
       .hero .lead{font-size:15px}
+      .preview-tooltip{font-size:12px;padding:8px 12px}
     }
 
     /* Když je otevřené menu, zablokuj posouvání podkladu */
@@ -161,9 +218,68 @@
       </div>
       <div class="hero-preview">
         <div class="preview-label">↓ Ukázka mých prací – web se načítá živě</div>
-        <div class="livebox">
+        <div class="livebox" id="preview-box">
           <div class="iframe-holder" id="live-desktop">Načítám náhled…</div>
+          <div class="preview-tooltip">Klikněte pro otevření v nové kartě</div>
         </div>
+      </div>
+    </section>
+
+    <!-- ====== Srovnání (před/po) ====== -->
+    <section class="section">
+      <h2>Proč jednoduše?</h2>
+      <div class="comparison">
+        <div class="comparison-card bad">
+          <h3>Složitý web</h3>
+          <ul>
+            <li>10-50 tisíc a více</li>
+            <li>Měsíce čekání</li>
+            <li>Nekonečné schůzky</li>
+            <li>WordPress = pomalý a hacknutelný</li>
+            <li>Drahý hosting (500+ Kč/měs)</li>
+          </ul>
+        </div>
+        <div class="comparison-card good">
+          <h3>Můj přístup</h3>
+          <ul>
+            <li>3-7 tisíc hotovo</li>
+            <li>Za 1-2 týdny online</li>
+            <li>Komunikace přes mail/telefon</li>
+            <li>Čistý kód = rychlý a bezpečný</li>
+            <li>Levný hosting (100-300 Kč/měs)</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== Pro koho to je ====== -->
+    <section class="section">
+      <h2>Pro koho to je</h2>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <div class="audience-icon">🔧</div>
+          <h3>Řemeslníci</h3>
+          <p>Elektrikář, instalatér, truhlář, zámečník...</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">💼</div>
+          <h3>Služby</h3>
+          <p>Účetnictví, poradenství, marketing, coaching...</p>
+        </div>
+        <div class="audience-card">
+          <div class="audience-icon">🏪</div>
+          <h3>Malé firmy</h3>
+          <p>Kavárna, salon, studio, půjčovna...</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====== Promo banner (sleva) ====== -->
+    <section class="section">
+      <div class="promo-banner">
+        <h3>🎉 První 3 klienti –10% sleva</h3>
+        <p>Start balíček jen za <strong>3 150 Kč</strong> místo 3 500 Kč + DPH</p>
+        <div class="countdown" id="promo-countdown">Zbývají 3 místa</div>
       </div>
     </section>
 
@@ -228,12 +344,25 @@
       <details><summary>Můžu si pak web sám upravovat?</summary><p class="muted">Ano, pokud máte základní znalosti HTML/CSS. Případně vám ukážu, jak upravit jednoduché věci, nebo můžete využít moji podporu.</p></details>
       <details><summary>Co když budu potřebovat něco přidat?</summary><p class="muted">Drobné úpravy řeším průběžně. Větší změny (nové stránky, funkce) oceníme individuálně.</p></details>
       <details><summary>Platím hosting zvlášť?</summary><p class="muted">Ano, hosting si zajistíte sám (cca 100-300 Kč/měsíc) nebo vám pomůžu s výběrem a nastavením.</p></details>
+      <details><summary>Na čem to běží?</summary><p class="muted">Čistý HTML/CSS/JavaScript, bez WordPressu. Díky tomu je web rychlý, bezpečný a potřebuje levný hosting.</p></details>
     </section>
 
     <!-- ====== Kontakt ====== -->
     <section id="kontakt" class="section">
       <div class="card" id="contact-card">
         <h2>Napište mi</h2>
+
+        <!-- Možnosti kontaktu -->
+        <div class="contact-options">
+          <a href="https://wa.me/420123456789?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web" class="btn btn--whatsapp" target="_blank" rel="noopener">
+            💬 WhatsApp
+          </a>
+          <a href="mailto:info@example.com?subject=Poptávka webu" class="btn btn--success">
+            📧 E-mail
+          </a>
+        </div>
+
+        <p style="text-align:center;color:var(--muted);margin:0 0 20px">nebo použijte formulář:</p>
 
         <!-- ✅ Web3Forms integrace -->
         <form id="contact-form" class="stack" method="POST">
@@ -266,6 +395,9 @@
     </div>
   </footer>
 
+  <!-- Scroll to top button -->
+  <div class="scroll-top" id="scroll-top" aria-label="Zpět nahoru">↑</div>
+
   <script>
     // Rok ve footeru
     document.getElementById('year').textContent = new Date().getFullYear();
@@ -289,13 +421,9 @@
     }
     if (burger && menu) {
       burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
-      // zavřít po kliknutí na položku
       menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-      // zavřít po změně #hash
       window.addEventListener('hashchange', () => setMenu(false));
-      // zavřít klávesou ESC
       document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-      // zavřít kliknutím mimo
       document.addEventListener('click', e => {
         if (!menu.classList.contains('open')) return;
         const inside = menu.contains(e.target) || burger.contains(e.target);
@@ -303,91 +431,4 @@
       });
     }
 
-    // Live preview – mobil = jen tariflevne, desktop = náhodně
-    (function(){
-      const holder = document.getElementById('live-desktop');
-      const box = holder && holder.closest('.livebox');
-      if(!holder || !box) return;
-
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
-
-      const SITES = [
-        'https://xaspi7.github.io/losmotos',
-        'https://tariflevne.cz'
-      ];
-
-      const PREVIEW_URL = isMobile
-        ? 'https://tariflevne.cz'
-        : SITES[Math.floor(Math.random() * SITES.length)];
-
-      const iframe = document.createElement('iframe');
-      iframe.src = PREVIEW_URL;
-      iframe.setAttribute('loading','lazy');
-      iframe.style.position = 'absolute';
-      iframe.style.inset = '0';
-      iframe.style.width = '1280px';
-      iframe.style.height = '800px';
-      iframe.style.border = '0';
-      iframe.style.background = '#0b1226';
-
-      holder.innerHTML = '';
-      holder.appendChild(iframe);
-
-      function resize(){
-        const w = box.clientWidth || 1280;
-        const scale = w / 1280;
-        holder.style.transform = 'scale('+scale+')';
-        holder.style.height = (800*scale)+'px';
-        holder.style.transformOrigin = 'top left';
-      }
-      iframe.addEventListener('load',()=>{ box.classList.add('has-live'); });
-      resize();
-      addEventListener('resize', resize);
-    })();
-
-    // ✅ Web3Forms submit – po úspěchu zobrazit JEN "Děkuji, zpráva odeslána." + anti-spam
-    (function(){
-      const form = document.getElementById('contact-form');
-      const card = document.getElementById('contact-card');
-      const btn  = document.getElementById('submit-btn');
-      if(!form || !btn || !card) return;
-
-      let isSubmitting = false;
-
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        if(isSubmitting) return; // brání dvojkliku
-        isSubmitting = true;
-
-        // vizuální stav tlačítka
-        btn.disabled = true;
-        btn.classList.add('loading');
-        const originalText = btn.textContent;
-        btn.textContent = 'Odesílám…';
-
-        try{
-          const data = new FormData(form);
-          const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
-          const json = await res.json();
-
-          if(json.success){
-            // nahraď obsah karty čistou zprávou
-            card.innerHTML = '<p style="margin:0;font-size:clamp(18px,4.5vw,22px);font-weight:800;text-align:center;padding:24px 8px;">Děkuji, zpráva odeslána.</p>';
-          }else{
-            throw new Error(json.message || 'Odeslání se nezdařilo');
-          }
-        }catch(err){
-          // návrat do původního stavu při chybě
-          isSubmitting = false;
-          btn.disabled = false;
-          btn.classList.remove('loading');
-          btn.textContent = originalText;
-          alert('Nepodařilo se odeslat formulář. Zkuste to prosím znovu.');
-          console.error(err);
-        }
-      });
-    })();
-  </script>
-</body>
-</html>
+    // Live preview – mobil = jen tariflevne, desktop = náho
