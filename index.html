@@ -71,12 +71,12 @@
     /* ====== Náhled (livebox) ====== */
     .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow);position:relative}
     .preview-label{text-align:center;color:var(--muted);font-size:13px;margin-bottom:8px}
-    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226;cursor:pointer;transition:transform .2s ease}
+    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226;cursor:pointer;transition:transform .2s ease;overflow:hidden}
     .livebox:hover{transform:translateY(-2px)}
     .livebox.has-live{background-image:none}
-    .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226;pointer-events:none}
-    .preview-tooltip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap}
+    .iframe-holder{position:absolute; top:0; left:0; width:100%; height:100%; transform-origin:top left}
+    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226;pointer-events:none;transform-origin:top left}
+    .preview-tooltip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap;z-index:10}
     .livebox:hover .preview-tooltip{opacity:1}
 
     /* ====== Sekce ====== */
@@ -118,9 +118,10 @@
     .price .big{font-size:32px;font-weight:900}
 
     /* ====== FAQ/Proces ====== */
-    details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px}
+    details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;cursor:pointer}
     details+details{margin-top:10px}
-    summary{cursor:pointer;font-weight:700}
+    summary{cursor:pointer;font-weight:700;user-select:none}
+    details[open] summary{margin-bottom:8px}
 
     /* ====== Kontakt ====== */
     input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1226;color:var(--text)}
@@ -168,7 +169,7 @@
       .section{padding-block:28px}
       .card{padding:14px;border-radius:12px}
       .price .big{font-size:28px}
-      .livebox{aspect-ratio:3/2; max-height:280px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+      .livebox{aspect-ratio:3/2; max-height:280px; box-shadow:0 4px 16px rgba(0,0,0,.2)}
       .preview-label{font-size:12px}
       .audience-grid{grid-template-columns:1fr}
       .comparison{grid-template-columns:1fr}
@@ -199,7 +200,7 @@
       <nav class="menu" id="menu">
         <a class="btn" href="#sluzba">Služba</a>
         <a class="btn" href="#cena">Ceník</a>
-        <a class="btn" href="#proces">Jak to probíhá</a>
+        <a class="btn" href="#faq">FAQ</a>
         <a class="btn btn--primary" href="#kontakt">Chci web za 3 500 Kč</a>
       </nav>
     </div>
@@ -334,17 +335,29 @@
       </div>
     </section>
 
-    <!-- ====== Proces ====== -->
-    <section id="proces" class="section">
-      <h2>Jak to probíhá</h2>
-      <details><summary>1) Rychlá konzultace</summary><p class="muted">Krátký telefon/online, cíle, termíny, podklady.</p></details>
-      <details><summary>2) Návrh obsahu a vzhledu</summary><p class="muted">Navrhnu strukturu a texty, doladíme tón a styl.</p></details>
-      <details><summary>3) Tvorba a nasazení</summary><p class="muted">Připravím web, nasadím na hosting a otestuji.</p></details>
-      <details><summary>4) Podpora</summary><p class="muted">Drobné úpravy a správa dle dohody.</p></details>
-      <details><summary>Můžu si pak web sám upravovat?</summary><p class="muted">Ano, pokud máte základní znalosti HTML/CSS. Případně vám ukážu, jak upravit jednoduché věci, nebo můžete využít moji podporu.</p></details>
-      <details><summary>Co když budu potřebovat něco přidat?</summary><p class="muted">Drobné úpravy řeším průběžně. Větší změny (nové stránky, funkce) oceníme individuálně.</p></details>
-      <details><summary>Platím hosting zvlášť?</summary><p class="muted">Ano, hosting si zajistíte sám (cca 100-300 Kč/měsíc) nebo vám pomůžu s výběrem a nastavením.</p></details>
-      <details><summary>Na čem to běží?</summary><p class="muted">Čistý HTML/CSS/JavaScript, bez WordPressu. Díky tomu je web rychlý, bezpečný a potřebuje levný hosting.</p></details>
+    <!-- ====== FAQ ====== -->
+    <section id="faq" class="section">
+      <h2>Časté otázky</h2>
+      <details>
+        <summary>Můžu si pak web sám upravovat?</summary>
+        <p class="muted">Ano, pokud máte základní znalosti HTML/CSS. Případně vám ukážu, jak upravit jednoduché věci, nebo můžete využít moji podporu.</p>
+      </details>
+      <details>
+        <summary>Co když budu potřebovat něco přidat?</summary>
+        <p class="muted">Drobné úpravy řeším průběžně. Větší změny (nové stránky, funkce) oceníme individuálně.</p>
+      </details>
+      <details>
+        <summary>Platím hosting zvlášť?</summary>
+        <p class="muted">Ano, hosting si zajistíte sám (cca 100-300 Kč/měsíc) nebo vám pomůžu s výběrem a nastavením.</p>
+      </details>
+      <details>
+        <summary>Na čem to běží?</summary>
+        <p class="muted">Čistý HTML/CSS/JavaScript, bez WordPressu. Díky tomu je web rychlý, bezpečný a potřebuje levný hosting.</p>
+      </details>
+      <details>
+        <summary>Jak dlouho to trvá?</summary>
+        <p class="muted">Obvykle 1-2 týdny od konzultace po spuštění. Záleží na rozsahu a rychlosti dodání podkladů.</p>
+      </details>
     </section>
 
     <!-- ====== Kontakt ====== -->
@@ -354,7 +367,7 @@
 
         <!-- Možnosti kontaktu -->
         <div class="contact-options">
-          <a href="https://wa.me/420123456789?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web" class="btn btn--whatsapp" target="_blank" rel="noopener">
+          <a href="https://wa.me/420605997843?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web" class="btn btn--whatsapp" target="_blank" rel="noopener">
             💬 WhatsApp
           </a>
           <a href="mailto:info@example.com?subject=Poptávka webu" class="btn btn--success">
@@ -431,4 +444,115 @@
       });
     }
 
-    // Live preview – mobil = jen tariflevne, desktop = náho
+    // Live preview – mobil = jen tariflevne, desktop = náhodně
+    (function(){
+      const holder = document.getElementById('live-desktop');
+      const box = document.getElementById('preview-box');
+      if(!holder || !box) return;
+
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
+
+      const SITES = [
+        'https://xaspi7.github.io/losmotos',
+        'https://tariflevne.cz'
+      ];
+
+      const PREVIEW_URL = isMobile
+        ? 'https://tariflevne.cz'
+        : SITES[Math.floor(Math.random() * SITES.length)];
+
+      const iframe = document.createElement('iframe');
+      iframe.src = PREVIEW_URL;
+      iframe.setAttribute('loading','lazy');
+      iframe.style.position = 'absolute';
+      iframe.style.inset = '0';
+      iframe.style.width = '1280px';
+      iframe.style.height = '800px';
+      iframe.style.border = '0';
+      iframe.style.background = '#0b1226';
+
+      holder.innerHTML = '';
+      holder.appendChild(iframe);
+
+      function resize(){
+        const w = box.clientWidth || 1280;
+        const scale = w / 1280;
+        iframe.style.transform = 'scale('+scale+')';
+        holder.style.height = (800*scale)+'px';
+      }
+      
+      iframe.addEventListener('load',()=>{ 
+        box.classList.add('has-live');
+      });
+      
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Kliknutí na preview box otevře web v nové kartě
+      box.addEventListener('click', (e) => {
+        if (e.target.closest('.preview-tooltip')) return;
+        window.open(PREVIEW_URL, '_blank', 'noopener,noreferrer');
+      });
+    })();
+
+    // Web3Forms submit – po úspěchu zobrazit JEN "Děkuji, zpráva odeslána."
+    (function(){
+      const form = document.getElementById('contact-form');
+      const card = document.getElementById('contact-card');
+      const btn  = document.getElementById('submit-btn');
+      if(!form || !btn || !card) return;
+
+      let isSubmitting = false;
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        if(isSubmitting) return;
+        isSubmitting = true;
+
+        btn.disabled = true;
+        btn.classList.add('loading');
+        const originalText = btn.textContent;
+        btn.textContent = 'Odesílám…';
+
+        try{
+          const data = new FormData(form);
+          const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
+          const json = await res.json();
+
+          if(json.success){
+            card.innerHTML = '<p style="margin:0;font-size:clamp(18px,4.5vw,22px);font-weight:800;text-align:center;padding:24px 8px;">Děkuji, zpráva odeslána.</p>';
+          }else{
+            throw new Error(json.message || 'Odeslání se nezdařilo');
+          }
+        }catch(err){
+          isSubmitting = false;
+          btn.disabled = false;
+          btn.classList.remove('loading');
+          btn.textContent = originalText;
+          alert('Nepodařilo se odeslat formulář. Zkuste to prosím znovu.');
+          console.error(err);
+        }
+      });
+    })();
+
+    // Scroll to top button
+    (function(){
+      const scrollBtn = document.getElementById('scroll-top');
+      if(!scrollBtn) return;
+
+      window.addEventListener('scroll', () => {
+        if(window.scrollY > 300){
+          scrollBtn.classList.add('visible');
+        }else{
+          scrollBtn.classList.remove('visible');
+        }
+      });
+
+      scrollBtn.addEventListener('click', () => {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    })();
+  </script>
+</body>
+</html>
