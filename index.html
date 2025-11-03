@@ -189,6 +189,21 @@
 
     /* Když je otevřené menu, zablokuj posouvání podkladu */
     body.nav-open{overflow:hidden}
+
+    /* ====== Scroll animace ====== */
+    .fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
+    .fade-in.visible{opacity:1;transform:translateY(0)}
+    .fade-in-left{opacity:0;transform:translateX(-30px);transition:opacity .6s ease,transform .6s ease}
+    .fade-in-left.visible{opacity:1;transform:translateX(0)}
+    .fade-in-right{opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .6s ease}
+    .fade-in-right.visible{opacity:1;transform:translateX(0)}
+    
+    /* Delay pro postupné zjíždění */
+    .fade-in:nth-child(1){transition-delay:.1s}
+    .fade-in:nth-child(2){transition-delay:.2s}
+    .fade-in:nth-child(3){transition-delay:.3s}
+    .fade-in:nth-child(4){transition-delay:.4s}
+    .fade-in:nth-child(5){transition-delay:.5s}
   </style>
 </head>
 <body>
@@ -230,7 +245,7 @@
     <section class="section">
       <h2>Proč jednoduše?</h2>
       <div class="comparison">
-        <div class="comparison-card bad">
+        <div class="comparison-card bad fade-in-left">
           <h3>Složitý web</h3>
           <ul>
             <li>10-50 tisíc a více</li>
@@ -240,7 +255,7 @@
             <li>Drahý hosting (500+ Kč/měs)</li>
           </ul>
         </div>
-        <div class="comparison-card good">
+        <div class="comparison-card good fade-in-right">
           <h3>Můj přístup</h3>
           <ul>
             <li>3-7 tisíc hotovo</li>
@@ -257,17 +272,17 @@
     <section class="section">
       <h2>Pro koho to je</h2>
       <div class="audience-grid">
-        <div class="audience-card">
+        <div class="audience-card fade-in">
           <div class="audience-icon">🔧</div>
           <h3>Řemeslníci</h3>
           <p>Elektrikář, instalatér, truhlář, zámečník...</p>
         </div>
-        <div class="audience-card">
+        <div class="audience-card fade-in">
           <div class="audience-icon">💼</div>
           <h3>Služby</h3>
           <p>Účetnictví, poradenství, marketing, coaching...</p>
         </div>
-        <div class="audience-card">
+        <div class="audience-card fade-in">
           <div class="audience-icon">🏪</div>
           <h3>Malé firmy</h3>
           <p>Kavárna, salon, studio, půjčovna...</p>
@@ -277,7 +292,7 @@
 
     <!-- ====== Promo banner (sleva) ====== -->
     <section class="section">
-      <div class="promo-banner">
+      <div class="promo-banner fade-in">
         <h3>🎉 První 3 klienti –10% sleva</h3>
         <p>Start balíček jen za <strong>3 150 Kč</strong> místo 3 500 Kč + DPH</p>
         <div class="countdown" id="promo-countdown">Zbývají 3 místa</div>
@@ -288,21 +303,21 @@
     <section id="sluzba" class="section">
       <h2>Co pro vás udělám</h2>
       <div class="grid cols-3">
-        <div class="card">
+        <div class="card fade-in">
           <h3>🎯 Jasná nabídka</h3>
           <p class="muted">Krátká konzultace, srozumitelné texty a struktura, která prodává.</p>
         </div>
-        <div class="card">
+        <div class="card fade-in">
           <h3>🧱 Tvorba webu</h3>
           <p class="muted">Čistý moderní vzhled, přehledný obsah, rychlé načítání.</p>
         </div>
-        <div class="card">
+        <div class="card fade-in">
           <h3>🚀 Nasazení & podpora</h3>
           <p class="muted">Zařídím nasazení na spolehlivý hosting a průběžné drobné úpravy.</p>
         </div>
       </div>
 
-      <div class="exclusions">
+      <div class="exclusions fade-in">
         <h3>❌ Co NENÍ součástí</h3>
         <ul>
           <li>Eshop s košíkem a platební bránou</li>
@@ -317,17 +332,17 @@
     <section id="cena" class="section">
       <h2>Ceník</h2>
       <div class="grid cols-3">
-        <div class="card">
+        <div class="card fade-in">
           <h3>Start</h3>
           <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
           <ul class="muted"><li>Jednostránkový web</li><li>Základní texty</li><li>Nasazení</li></ul>
         </div>
-        <div class="card" style="border-color:rgba(34,211,238,.4)">
+        <div class="card fade-in" style="border-color:rgba(34,211,238,.4)">
           <h3>Pro</h3>
           <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
           <ul class="muted"><li>One-page + 2 podstránky</li><li>Lehké SEO</li><li>Formulář + analytika</li></ul>
         </div>
-        <div class="card">
+        <div class="card fade-in">
           <h3>Custom</h3>
           <div class="price"><span class="big">na dotaz</span></div>
           <ul class="muted"><li>Více stránek / blog</li><li>Vzhled na míru</li><li>Napojení služeb</li></ul>
@@ -338,23 +353,23 @@
     <!-- ====== FAQ ====== -->
     <section id="faq" class="section">
       <h2>Časté otázky</h2>
-      <details>
+      <details class="fade-in">
         <summary>Můžu si pak web sám upravovat?</summary>
         <p class="muted">Ano, pokud máte základní znalosti HTML/CSS. Případně vám ukážu, jak upravit jednoduché věci, nebo můžete využít moji podporu.</p>
       </details>
-      <details>
+      <details class="fade-in">
         <summary>Co když budu potřebovat něco přidat?</summary>
         <p class="muted">Drobné úpravy řeším průběžně. Větší změny (nové stránky, funkce) oceníme individuálně.</p>
       </details>
-      <details>
+      <details class="fade-in">
         <summary>Platím hosting zvlášť?</summary>
         <p class="muted">Ano, hosting si zajistíte sám (cca 100-300 Kč/měsíc) nebo vám pomůžu s výběrem a nastavením.</p>
       </details>
-      <details>
+      <details class="fade-in">
         <summary>Na čem to běží?</summary>
         <p class="muted">Čistý HTML/CSS/JavaScript, bez WordPressu. Díky tomu je web rychlý, bezpečný a potřebuje levný hosting.</p>
       </details>
-      <details>
+      <details class="fade-in">
         <summary>Jak dlouho to trvá?</summary>
         <p class="muted">Obvykle 1-2 týdny od konzultace po spuštění. Záleží na rozsahu a rychlosti dodání podkladů.</p>
       </details>
@@ -551,6 +566,24 @@
 
       scrollBtn.addEventListener('click', () => {
         window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    })();
+
+    // Scroll animace - Intersection Observer
+    (function(){
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if(entry.isIntersecting){
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      });
+
+      document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+        observer.observe(el);
       });
     })();
   </script>
