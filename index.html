@@ -50,11 +50,13 @@
     /* ====== Hero ====== */
     .hero{display:grid;grid-template-columns:1fr;gap:14px;padding-block:24px}
     .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
-    .hero .lead{color:var(--muted)}
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+    .hero .lead{color:var(--muted);font-size:clamp(16px,3vw,18px);line-height:1.6;margin:8px 0 0}
+    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+    .badge-pill{display:inline-block;padding:6px 12px;border-radius:20px;background:rgba(34,211,238,.15);color:var(--brand2);font-size:14px;font-weight:700;margin-top:4px}
 
     /* ====== Náhled (livebox) ====== */
     .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow)}
+    .preview-label{text-align:center;color:var(--muted);font-size:13px;margin-bottom:8px}
     .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226}
     .livebox.has-live{background-image:none}
     .iframe-holder{position:absolute; top:0; left:0; width:1280px; height:800px; transform-origin:top left}
@@ -66,6 +68,7 @@
     .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
     .grid{display:grid;gap:14px}
     .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
 
     /* ====== Ceník ====== */
     .price{display:flex;gap:10px;align-items:baseline}
@@ -82,10 +85,17 @@
     /* ====== Footer ====== */
     footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px}
 
+    /* ====== Co není součástí ====== */
+    .exclusions{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:16px;margin-top:16px}
+    .exclusions h3{margin:0 0 8px;font-size:16px;color:#fca5a5}
+    .exclusions ul{margin:8px 0 0;padding-left:20px;color:var(--muted)}
+    .exclusions li{margin:4px 0}
+
     /* ====== Desktop rozšíření ====== */
     @media (min-width: 860px){
       .hero{grid-template-columns:1.05fr .95fr;align-items:center}
       .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+      .grid.cols-2{grid-template-columns:repeat(2,1fr)}
       .hero-preview{position:relative;min-height:360px}
     }
 
@@ -102,18 +112,21 @@
       .btn{width:100%;padding:12px 16px;border-radius:10px}
       .hero-preview{order:2}
       .grid.cols-3{grid-template-columns:1fr}
+      .grid.cols-2{grid-template-columns:1fr}
       .section{padding-block:28px}
       .card{padding:14px;border-radius:12px}
       .price .big{font-size:28px}
-      .livebox{aspect-ratio:3/2; max-height:320px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+      .livebox{aspect-ratio:3/2; max-height:280px; box-shadow:0 4px 16px rgba(0,0,0,.2); overflow:hidden}
+      .preview-label{font-size:12px}
     }
 
     /* ====== Extra mobilní doladění ====== */
     @media (max-width: 520px){
       h1{word-break:break-word}
       .container{padding:12px}
-      .livebox{border-radius:10px; max-height:260px}
+      .livebox{border-radius:10px; max-height:220px}
       .btn{padding:10px 12px}
+      .hero .lead{font-size:15px}
     }
 
     /* Když je otevřené menu, zablokuj posouvání podkladu */
@@ -130,7 +143,7 @@
         <a class="btn" href="#sluzba">Služba</a>
         <a class="btn" href="#cena">Ceník</a>
         <a class="btn" href="#proces">Jak to probíhá</a>
-        <a class="btn btn--primary" href="#kontakt">Nezávazně poptat</a>
+        <a class="btn btn--primary" href="#kontakt">Chci web za 3 500 Kč</a>
       </nav>
     </div>
   </header>
@@ -139,12 +152,15 @@
     <!-- ====== Hero ====== -->
     <section class="hero">
       <div class="stack">
-        <h1>Pěkný a rychlý web, který prodá vaši službu/produkt</h1>
+        <h1>Jednoduchý web za pár tisíc. Bez zbytečností.</h1>
+        <p class="lead">Pro živnostníky a malé firmy, co potřebují jen základní prezentaci online – rychle a levně.</p>
+        <div class="badge-pill">⚡ Hotovo za 1-2 týdny</div>
         <div class="hero-cta">
-          <a class="btn btn--primary" href="#kontakt">Chci nezávaznou konzultaci</a>
+          <a class="btn btn--primary" href="#kontakt">Chci web za 3 500 Kč</a>
         </div>
       </div>
       <div class="hero-preview">
+        <div class="preview-label">↓ Ukázka mých prací – web se načítá živě</div>
         <div class="livebox">
           <div class="iframe-holder" id="live-desktop">Načítám náhled…</div>
         </div>
@@ -159,7 +175,7 @@
           <h3>🎯 Jasná nabídka</h3>
           <p class="muted">Krátká konzultace, srozumitelné texty a struktura, která prodává.</p>
         </div>
-        <div class="card>
+        <div class="card">
           <h3>🧱 Tvorba webu</h3>
           <p class="muted">Čistý moderní vzhled, přehledný obsah, rychlé načítání.</p>
         </div>
@@ -167,6 +183,16 @@
           <h3>🚀 Nasazení & podpora</h3>
           <p class="muted">Zařídím nasazení na spolehlivý hosting a průběžné drobné úpravy.</p>
         </div>
+      </div>
+
+      <div class="exclusions">
+        <h3>❌ Co NENÍ součástí</h3>
+        <ul>
+          <li>Eshop s košíkem a platební bránou</li>
+          <li>Propojení s databázemi a složitými systémy</li>
+          <li>Grafický manuál nebo kompletní brand identity</li>
+          <li>Copywriting na míru (rozsáhlé texty si připravte)</li>
+        </ul>
       </div>
     </section>
 
@@ -177,7 +203,7 @@
         <div class="card">
           <h3>Start</h3>
           <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted"><li>Jednostránkový web</li><li>Žákladní texty</li><li>Nasazení</li></ul>
+          <ul class="muted"><li>Jednostránkový web</li><li>Základní texty</li><li>Nasazení</li></ul>
         </div>
         <div class="card" style="border-color:rgba(34,211,238,.4)">
           <h3>Pro</h3>
@@ -199,6 +225,9 @@
       <details><summary>2) Návrh obsahu a vzhledu</summary><p class="muted">Navrhnu strukturu a texty, doladíme tón a styl.</p></details>
       <details><summary>3) Tvorba a nasazení</summary><p class="muted">Připravím web, nasadím na hosting a otestuji.</p></details>
       <details><summary>4) Podpora</summary><p class="muted">Drobné úpravy a správa dle dohody.</p></details>
+      <details><summary>Můžu si pak web sám upravovat?</summary><p class="muted">Ano, pokud máte základní znalosti HTML/CSS. Případně vám ukážu, jak upravit jednoduché věci, nebo můžete využít moji podporu.</p></details>
+      <details><summary>Co když budu potřebovat něco přidat?</summary><p class="muted">Drobné úpravy řeším průběžně. Větší změny (nové stránky, funkce) oceníme individuálně.</p></details>
+      <details><summary>Platím hosting zvlášť?</summary><p class="muted">Ano, hosting si zajistíte sám (cca 100-300 Kč/měsíc) nebo vám pomůžu s výběrem a nastavením.</p></details>
     </section>
 
     <!-- ====== Kontakt ====== -->
@@ -231,7 +260,10 @@
   </main>
 
   <footer>
-    <div class="container">© <span id="year"></span> Vaše značka · IČO 12345678 · <a href="#">Obchodní podmínky</a> · <a href="#">Zásady ochrany osobních údajů</a></div>
+    <div class="container" style="text-align:center">
+      © <span id="year"></span> Tvorba webů · Brno · 
+      <a href="mailto:info@example.com">info@example.com</a>
+    </div>
   </footer>
 
   <script>
