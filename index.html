@@ -126,6 +126,13 @@
     /* ====== Kontakt ====== */
     input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1226;color:var(--text)}
     .contact-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+    .contact-caption{
+      color:var(--muted);
+      margin:6px 0 20px 0;
+      display:block;
+      text-align:right;
+      width:50%;
+    }
 
     /* ====== Footer ====== */
     footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px;position:relative}
@@ -174,6 +181,7 @@
       .audience-grid{grid-template-columns:1fr}
       .comparison{grid-template-columns:1fr}
       .contact-options{grid-template-columns:1fr}
+      .contact-caption{width:100%}
       .scroll-top{bottom:20px;right:20px;width:45px;height:45px}
     }
 
@@ -224,23 +232,22 @@
   <main class="container stack">
     <!-- ====== Hero ====== -->
     <section class="hero">
-  <div class="stack">
-    <h1>Jednoduchý web za pár tisíc. Bez zbytečností.</h1>
-    <div class="badge-pill">⚡ Hotovo za 1-2 týdny</div>
-    <div class="hero-cta">
-      <a class="btn btn--primary" href="#kontakt">Nezávazně poptat web</a>
-    </div>
-  </div>
+      <div class="stack">
+        <h1>Jednoduchý web za pár tisíc. Bez zbytečností.</h1>
+        <div class="badge-pill">⚡ Hotovo za 1-2 týdny</div>
+        <div class="hero-cta">
+          <a class="btn btn--primary" href="#kontakt">Nezávazně poptat web</a>
+        </div>
+      </div>
 
-  <div class="hero-preview">
-    <div class="preview-label">↓ Ukázka mých prací – web se načítá živě</div>
-    <div class="livebox" id="preview-box">
-      <div class="iframe-holder" id="live-desktop">Načítám náhled…</div>
-      <div class="preview-tooltip">Klikněte pro otevření v nové kartě</div>
-    </div>
-  </div>
-</section>
-
+      <div class="hero-preview">
+        <div class="preview-label">↓ Ukázka mých prací – web se načítá živě</div>
+        <div class="livebox" id="preview-box">
+          <div class="iframe-holder" id="live-desktop">Načítám náhled…</div>
+          <div class="preview-tooltip">Klikněte pro otevření v nové kartě</div>
+        </div>
+      </div>
+    </section>
 
     <!-- ====== Srovnání (před/po) ====== -->
     <section class="section">
@@ -388,7 +395,7 @@
           </a>
         </div>
 
-        <p style="text-align:center;color:var(--muted);margin:0 0 20px">nebo použijte formulář:</p>
+        <p class="contact-caption">nebo použijte formulář:</p>
 
         <!-- ✅ Web3Forms integrace -->
         <form id="contact-form" class="stack" method="POST">
