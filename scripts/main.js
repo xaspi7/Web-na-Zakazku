@@ -1,8 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   const year = document.getElementById("year");
-  if (year) {
-    year.textContent = new Date().getFullYear();
-  }
+  if (year) year.textContent = new Date().getFullYear();
 
   const navToggle = document.getElementById("nav-toggle");
   const navMenu = document.getElementById("nav-menu");
@@ -16,8 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (navToggle && navMenu) {
     navToggle.addEventListener("click", () => {
-      const isOpen = navMenu.classList.contains("open");
-      setMenu(!isOpen);
+      setMenu(!navMenu.classList.contains("open"));
     });
 
     navMenu.querySelectorAll("a").forEach((link) => {
@@ -35,25 +32,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    anchor.addEventListener("click", (e) => {
-      const href = anchor.getAttribute("href");
-      if (!href || href === "#") return;
-      const target = document.querySelector(href);
-      if (!target) return;
-      e.preventDefault();
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  });
-
   const scrollTopBtn = document.getElementById("scroll-top");
   if (scrollTopBtn) {
     const toggleScrollButton = () => {
-      if (window.scrollY > 320) {
-        scrollTopBtn.classList.add("visible");
-      } else {
-        scrollTopBtn.classList.remove("visible");
-      }
+      scrollTopBtn.classList.toggle("visible", window.scrollY > 320);
     };
 
     toggleScrollButton();
