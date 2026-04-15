@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tvorba webů — rychlý a moderní web bez zbytečností</title>
-  <meta name="description" content="Tvořím jednoduché a profesionální weby pro živnostníky a malé firmy. Rychlé načítání, čistý kód a nasazení bez složitostí." />
-  <meta name="theme-color" content="#0ea5e9" />
+  <title>Tvorba webů — moderní web bez zbytečností</title>
+  <meta name="description" content="Tvořím přehledné a rychlé weby pro živnostníky a malé firmy. Moderní vzhled, jasná struktura a jednoduchá spolupráce." />
+  <meta name="theme-color" content="#38bdf8" />
 
-  <meta property="og:title" content="Jednoduchý web pro živnostníky a malé firmy" />
-  <meta property="og:description" content="Přehledný web, rychlé načítání, čistý kód a jednoduchá spolupráce. Bez zbytečností." />
+  <meta property="og:title" content="Tvorba webů — moderní web bez zbytečností" />
+  <meta property="og:description" content="Rychlé a profesionální weby pro malé podnikání. Přehledně, bez zbytečných komplikací." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://xaspi7.github.io/Web-na-Zakazku/" />
   <meta property="og:image" content="https://xaspi7.github.io/Web-na-Zakazku/og-image.jpg" />
@@ -16,27 +16,23 @@
   <link rel="stylesheet" href="./styles/main.css" />
 </head>
 <body>
-  <div class="site-bg"></div>
-
   <header class="site-header">
     <div class="container nav">
-      <a href="#" class="brand" aria-label="Tvorba webů">
+      <a href="./index.html" class="brand" aria-label="Domů">
         <span class="brand-mark">W</span>
-        <span class="brand-text">Tvorba webů</span>
+        <span>Tvorba webů</span>
       </a>
 
       <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </button>
 
       <nav class="nav-menu" id="nav-menu">
+        <a href="./index.html" class="is-active">Domů</a>
+        <a href="./ukazky-praci.html">Ukázky prací</a>
         <a href="#sluzby">Služby</a>
-        <a href="#proces">Proces</a>
         <a href="#cenik">Ceník</a>
-        <a href="#faq">FAQ</a>
-        <a href="#kontakt" class="btn btn-primary nav-cta">Nezávazně poptat web</a>
+        <a href="#kontakt" class="btn btn-primary nav-btn">Poptat web</a>
       </nav>
     </div>
   </header>
@@ -45,60 +41,47 @@
     <section class="hero section">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            Web pro živnostníky a malé firmy
-          </div>
-
-          <h1>Moderní web, který působí profesionálně a nezdržuje.</h1>
-
+          <div class="eyebrow">Web pro živnostníky a malé firmy</div>
+          <h1>Web, který vypadá profesionálně a dává smysl i v praxi.</h1>
           <p class="hero-lead">
-            Navrhnu a postavím přehledný prezentační web, který se rychle načítá,
-            dobře vypadá na mobilu a jasně vysvětlí, co nabízíte.
+            Tvořím moderní prezentační weby, které se rychle načítají, dobře fungují na mobilu
+            a působí důvěryhodněji než obyčejná onepage šablona.
           </p>
 
           <div class="hero-actions">
             <a class="btn btn-primary" href="#kontakt">Nezávazně poptat web</a>
-            <a class="btn btn-secondary" href="#cenik">Zobrazit ceník</a>
+            <a class="btn btn-secondary" href="./ukazky-praci.html">Zobrazit ukázky prací</a>
           </div>
 
-          <div class="hero-points">
-            <div class="hero-point">⚡ Typicky hotovo za 1–2 týdny</div>
-            <div class="hero-point">🛡️ Čistý kód bez WordPressu</div>
-            <div class="hero-point">📱 Vyladěné i pro mobil</div>
+          <div class="hero-pills">
+            <span>⚡ Hotovo typicky za 1–2 týdny</span>
+            <span>📱 Připravené pro mobil</span>
+            <span>🧼 Čistý kód bez zbytečností</span>
           </div>
         </div>
 
-        <div class="hero-card">
-          <div class="hero-card-top">
-            <span class="window-dot red"></span>
-            <span class="window-dot yellow"></span>
-            <span class="window-dot green"></span>
+        <div class="hero-preview-card reveal">
+          <div class="browser-top">
+            <span></span><span></span><span></span>
           </div>
-
-          <div class="hero-preview">
-            <div class="preview-badge">Ukázka přístupu</div>
-
-            <div class="preview-layout">
-              <div class="preview-sidebar">
-                <div class="preview-line lg"></div>
-                <div class="preview-line"></div>
-                <div class="preview-line sm"></div>
-                <div class="preview-chip"></div>
+          <div class="hero-preview-mock">
+            <div class="mock-badge">Ukázky prací</div>
+            <div class="mock-layout">
+              <div class="mock-sidebar">
+                <div class="mock-line lg"></div>
+                <div class="mock-line"></div>
+                <div class="mock-line sm"></div>
               </div>
-
-              <div class="preview-content">
-                <div class="preview-heading"></div>
-                <div class="preview-text"></div>
-                <div class="preview-text short"></div>
-
-                <div class="preview-cards">
-                  <div class="preview-card"></div>
-                  <div class="preview-card"></div>
-                  <div class="preview-card"></div>
+              <div class="mock-main">
+                <div class="mock-title"></div>
+                <div class="mock-text"></div>
+                <div class="mock-text short"></div>
+                <div class="mock-grid">
+                  <div class="mock-card"></div>
+                  <div class="mock-card"></div>
+                  <div class="mock-card"></div>
                 </div>
-
-                <div class="preview-button"></div>
+                <div class="mock-button"></div>
               </div>
             </div>
           </div>
@@ -108,10 +91,10 @@
 
     <section class="section trust-strip">
       <div class="container trust-grid">
-        <div class="trust-item">Bez zbytečně složité správy</div>
         <div class="trust-item">Jasná komunikace</div>
-        <div class="trust-item">Rychlý provoz a levný hosting</div>
-        <div class="trust-item">Web připravený pro reálné zákazníky</div>
+        <div class="trust-item">Rychlý provoz</div>
+        <div class="trust-item">Moderní vzhled</div>
+        <div class="trust-item">Jednoduché nasazení</div>
       </div>
     </section>
 
@@ -121,8 +104,8 @@
           <div class="section-kicker">Služby</div>
           <h2>Co pro vás web vyřeší</h2>
           <p>
-            Cílem není jen “mít web”, ale mít web, který návštěvník rychle pochopí,
-            důvěřuje mu a ví, co má udělat dál.
+            Smyslem není jen “mít web”, ale mít web, který návštěvník pochopí rychle,
+            bude mu věřit a jednoduše vás kontaktuje.
           </p>
         </div>
 
@@ -130,122 +113,70 @@
           <article class="feature-card reveal">
             <div class="feature-icon">🎯</div>
             <h3>Jasná nabídka</h3>
-            <p>
-              Pomůžu poskládat obsah tak, aby bylo na první pohled jasné, co děláte,
-              pro koho to je a proč vás kontaktovat.
-            </p>
+            <p>Pomůžu poskládat obsah tak, aby bylo hned jasné, co děláte, pro koho to je a proč se ozvat.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="feature-icon">⚡</div>
-            <h3>Rychlý web</h3>
-            <p>
-              Bez zbytečných pluginů a nafouknutého systému. Výsledkem je rychlejší načítání,
-              lepší dojem a jednodušší provoz.
-            </p>
+            <h3>Rychlé načítání</h3>
+            <p>Bez zbytečně těžkého systému. Výsledkem je svižnější web a lepší první dojem.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="feature-icon">📱</div>
-            <h3>Mobil na prvním místě</h3>
-            <p>
-              Většina lidí přijde z telefonu. Web proto stavím tak, aby byl čitelný,
-              přehledný a pohodlný i na menším displeji.
-            </p>
+            <h3>Mobilní použitelnost</h3>
+            <p>Většina návštěvníků přijde z telefonu, proto je web navržený tak, aby fungoval i na menších displejích.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="feature-icon">🧩</div>
-            <h3>Jednoduchá spolupráce</h3>
-            <p>
-              Bez složitého procesu. Domluvíme rozsah, pošlete podklady a já připravím řešení,
-              které dává smysl.
-            </p>
+            <h3>Jednoduchý proces</h3>
+            <p>Bez zbytečných schůzek a chaosu. Domluvíme rozsah, pošlete podklady a já připravím řešení.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="feature-icon">🚀</div>
-            <h3>Nasazení a spuštění</h3>
-            <p>
-              Pomůžu vám web dostat online a doladit poslední detaily, aby mohl co nejdřív
-              začít fungovat.
-            </p>
+            <h3>Nasazení online</h3>
+            <p>Pomůžu s uvedením webu do provozu, ať co nejdřív začne fungovat pro reálné zákazníky.</p>
           </article>
 
           <article class="feature-card reveal">
             <div class="feature-icon">🤝</div>
-            <h3>Drobné úpravy i potom</h3>
-            <p>
-              Když bude potřeba něco přepsat, doplnit nebo upravit, nemusíte hned řešit
-              složitý nový projekt.
-            </p>
+            <h3>Drobné úpravy dál</h3>
+            <p>Když bude potřeba něco doplnit nebo upravit, navážeme bez toho, aby z toho byl nový velký projekt.</p>
           </article>
         </div>
       </div>
     </section>
 
-    <section class="section contrast-section">
+    <section class="section section-soft">
       <div class="container">
         <div class="section-head">
-          <div class="section-kicker">Pro koho</div>
-          <h2>Hodí se hlavně tam, kde má web rychle a srozumitelně prodávat službu</h2>
-        </div>
-
-        <div class="audience-grid">
-          <article class="audience-card reveal">
-            <div class="audience-icon">🔧</div>
-            <h3>Řemeslníci</h3>
-            <p>Elektrikář, instalatér, truhlář, zámečník, podlahář, malíř a další profese.</p>
-          </article>
-
-          <article class="audience-card reveal">
-            <div class="audience-icon">💼</div>
-            <h3>Služby</h3>
-            <p>Účetnictví, poradenství, freelancing, marketing, konzultace nebo lokální služby.</p>
-          </article>
-
-          <article class="audience-card reveal">
-            <div class="audience-icon">🏪</div>
-            <h3>Menší firmy</h3>
-            <p>Kavárny, salony, studia, provozovny, půjčovny a menší podnikání všeho druhu.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="proces">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">Proces</div>
-          <h2>Jak probíhá spolupráce</h2>
+          <div class="section-kicker">Ukázky</div>
+          <h2>Ne jen hezký text. Reálné ukázky webů.</h2>
           <p>
-            Snažím se držet jednoduchý a rychlý postup, bez zbytečných schůzek a chaosu.
+            Místo dlouhé onepage prezentace může návštěvník rovnou přejít na samostatnou stránku
+            s ukázkami a otevřít si živé náhledy projektů.
           </p>
         </div>
 
-        <div class="steps-grid">
-          <article class="step-card reveal">
-            <div class="step-number">1</div>
-            <h3>Krátká domluva</h3>
-            <p>Napíšete mi, co potřebujete. Ujasníme si rozsah, styl a základní cíle webu.</p>
+        <div class="portfolio-teaser-grid">
+          <article class="portfolio-teaser reveal">
+            <div class="portfolio-teaser-head">
+              <h3>Los Motos</h3>
+              <span>prezentační web</span>
+            </div>
+            <p>Ukázka vizuálně výraznějšího webu s jasnou prezentací služby a moderním layoutem.</p>
+            <a href="./ukazky-praci.html" class="text-link">Zobrazit ukázky prací</a>
           </article>
 
-          <article class="step-card reveal">
-            <div class="step-number">2</div>
-            <h3>Podklady a obsah</h3>
-            <p>Pošlete texty, kontakty, fotky nebo jen základní informace, ze kterých vyjdeme.</p>
-          </article>
-
-          <article class="step-card reveal">
-            <div class="step-number">3</div>
-            <h3>Návrh a zpracování</h3>
-            <p>Připravím podobu webu, doladíme detaily a zapracujeme připomínky.</p>
-          </article>
-
-          <article class="step-card reveal">
-            <div class="step-number">4</div>
-            <h3>Spuštění</h3>
-            <p>Web nasadíme online, zkontrolujeme fungování a může začít sloužit zákazníkům.</p>
+          <article class="portfolio-teaser reveal">
+            <div class="portfolio-teaser-head">
+              <h3>Tarif Levně</h3>
+              <span>službový web</span>
+            </div>
+            <p>Ukázka praktičtějšího projektu, kde je důležitá přehlednost, důvěryhodnost a práce s obsahem.</p>
+            <a href="./ukazky-praci.html" class="text-link">Přejít na živé náhledy</a>
           </article>
         </div>
       </div>
@@ -257,7 +188,7 @@
           <div class="section-kicker">Ceník</div>
           <h2>Jednoduché balíčky bez zbytečného balastu</h2>
           <p>
-            Přehledně, srozumitelně a bez agenturních cen za věci, které malé podnikání často vůbec nepotřebuje.
+            Přehledně a srozumitelně. Menší web často nepotřebuje agenturní rozsah ani agenturní cenu.
           </p>
         </div>
 
@@ -268,8 +199,8 @@
             <div class="pricing-note">+ DPH</div>
             <ul class="pricing-list">
               <li>Jednostránkový web</li>
-              <li>Základní obsahová struktura</li>
-              <li>Responzivní zobrazení</li>
+              <li>Základní struktura obsahu</li>
+              <li>Mobilní verze</li>
               <li>Nasazení online</li>
             </ul>
             <a href="#kontakt" class="btn btn-secondary">Poptat Start</a>
@@ -281,10 +212,10 @@
             <div class="pricing-price">6 900 Kč</div>
             <div class="pricing-note">+ DPH</div>
             <ul class="pricing-list">
-              <li>One-page + 2 podstránky</li>
+              <li>Homepage + podstránky</li>
               <li>Lepší struktura obsahu</li>
               <li>Formulář a základní měření</li>
-              <li>Lehké SEO základy</li>
+              <li>Více prostoru pro důvěru</li>
             </ul>
             <a href="#kontakt" class="btn btn-primary">Poptat Pro</a>
           </article>
@@ -297,115 +228,67 @@
               <li>Více stránek</li>
               <li>Specifický vzhled</li>
               <li>Pokročilejší funkce</li>
-              <li>Řešení podle zadání</li>
+              <li>Řešení na míru</li>
             </ul>
             <a href="#kontakt" class="btn btn-secondary">Poptat řešení</a>
           </article>
-        </div>
-
-        <div class="info-panel reveal">
-          <h3>Co obvykle není součástí</h3>
-          <ul>
-            <li>E-shop s košíkem a platební bránou</li>
-            <li>Propojení na složité interní systémy</li>
-            <li>Rozsáhlý copywriting na míru</li>
-            <li>Kompletní branding nebo grafický manuál</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="faq">
-      <div class="container">
-        <div class="section-head">
-          <div class="section-kicker">FAQ</div>
-          <h2>Časté otázky</h2>
-        </div>
-
-        <div class="faq-list">
-          <details class="faq-item reveal">
-            <summary>Můžu si pak web sám upravovat?</summary>
-            <p>Ano. U jednodušších úprav vám můžu ukázat, co a kde změnit, případně se dá řešit průběžná podpora.</p>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Jak dlouho tvorba obvykle trvá?</summary>
-            <p>Typicky 1 až 2 týdny podle rozsahu a podle toho, jak rychle jsou k dispozici podklady.</p>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Platí se hosting zvlášť?</summary>
-            <p>Ano. Hosting je samostatná položka, ale u jednoduchých webů bývá cenově velmi dostupný.</p>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Je to vhodné i pro malé lokální podnikání?</summary>
-            <p>Ano, právě pro menší firmy, živnostníky a lokální služby dává tento typ webu často největší smysl.</p>
-          </details>
-
-          <details class="faq-item reveal">
-            <summary>Co když budu chtít web časem rozšířit?</summary>
-            <p>To není problém. Dá se navázat dalšími stránkami, novými sekcemi nebo rozšířením podle potřeby.</p>
-          </details>
         </div>
       </div>
     </section>
 
     <section class="section contact-section" id="kontakt">
-      <div class="container">
-        <div class="contact-wrap">
-          <div class="contact-copy">
-            <div class="section-kicker">Kontakt</div>
-            <h2>Pojďme se podívat, co by pro vás dávalo smysl</h2>
-            <p>
-              Stačí krátce popsat, co děláte a jaký web potřebujete.
-              Ozvu se a navrhneme rozumné řešení.
-            </p>
+      <div class="container contact-wrap">
+        <div class="contact-copy">
+          <div class="section-kicker">Kontakt</div>
+          <h2>Pojďme se podívat, co by pro vás dávalo smysl</h2>
+          <p>
+            Stačí stručně napsat, co děláte a jaký typ webu potřebujete.
+            Ozvu se zpět a navrhneme rozumný postup.
+          </p>
 
-            <div class="contact-points">
-              <div>✔ Nezávazná poptávka</div>
-              <div>✔ Rychlá domluva</div>
-              <div>✔ Odpověď do 2 pracovních dnů</div>
-            </div>
-
-            <a
-              href="https://wa.me/420605997843?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web"
-              class="btn btn-whatsapp"
-              target="_blank"
-              rel="noopener"
-            >
-              💬 Napsat na WhatsApp
-            </a>
+          <div class="contact-points">
+            <div>✔ Nezávazná poptávka</div>
+            <div>✔ Rychlá domluva</div>
+            <div>✔ Odpověď do 2 pracovních dnů</div>
           </div>
 
-          <div class="contact-card" id="contact-card">
-            <h3>Nezávazná poptávka</h3>
+          <a
+            href="https://wa.me/420605997843?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web"
+            class="btn btn-whatsapp"
+            target="_blank"
+            rel="noopener"
+          >
+            💬 Napsat na WhatsApp
+          </a>
+        </div>
 
-            <form id="contact-form" class="contact-form" method="POST">
-              <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a" />
-              <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů" />
-              <input type="hidden" name="from_name" value="Tvorba webů – formulář" />
-              <input type="checkbox" name="botcheck" style="display:none" />
+        <div class="contact-card" id="contact-card">
+          <h3>Nezávazná poptávka</h3>
 
-              <label>
-                <span>Jméno</span>
-                <input required name="name" placeholder="Jan Novák" />
-              </label>
+          <form id="contact-form" class="contact-form" method="POST">
+            <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a" />
+            <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů" />
+            <input type="hidden" name="from_name" value="Tvorba webů – formulář" />
+            <input type="checkbox" name="botcheck" style="display:none" />
 
-              <label>
-                <span>E-mail</span>
-                <input required type="email" name="email" placeholder="jan@example.com" />
-              </label>
+            <label>
+              <span>Jméno</span>
+              <input required name="name" placeholder="Jan Novák" />
+            </label>
 
-              <label>
-                <span>Vaše zpráva</span>
-                <textarea name="message" rows="5" placeholder="Krátce popište, co potřebujete – například jestli chcete jednoduchý prezentační web, kolik má mít sekcí a co má být jeho cílem."></textarea>
-              </label>
+            <label>
+              <span>E-mail</span>
+              <input required type="email" name="email" placeholder="jan@example.com" />
+            </label>
 
-              <button id="submit-btn" class="btn btn-primary" type="submit">Odeslat poptávku</button>
-              <small>Ozvu se do dvou pracovních dnů.</small>
-            </form>
-          </div>
+            <label>
+              <span>Vaše zpráva</span>
+              <textarea name="message" rows="5" placeholder="Krátce popište, co potřebujete – jaký typ webu chcete a co má být jeho cílem."></textarea>
+            </label>
+
+            <button id="submit-btn" class="btn btn-primary" type="submit">Odeslat poptávku</button>
+            <small>Ozvu se do dvou pracovních dnů.</small>
+          </form>
         </div>
       </div>
     </section>
@@ -414,7 +297,10 @@
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>© <span id="year"></span> Tvorba webů · Brno</div>
-      <a href="#top" class="footer-link">Nahoru</a>
+      <div class="footer-links">
+        <a href="./index.html">Domů</a>
+        <a href="./ukazky-praci.html">Ukázky prací</a>
+      </div>
     </div>
   </footer>
 
