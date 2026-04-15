@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ceník — Tvorba webů</title>
+  <meta name="description" content="Přehled balíčků a rozsahu webu. Jednoduše, srozumitelně a bez zbytečného balastu." />
+  <meta name="theme-color" content="#38bdf8" />
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="./index.html" class="brand" aria-label="Domů">
+        <span class="brand-mark">W</span>
+        <span>Tvorba webů</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="./index.html">Domů</a>
+        <a href="./ukazky-praci.html">Ukázky prací</a>
+        <a href="./sluzby.html">Služby</a>
+        <a href="./cenik.html" class="is-active">Ceník</a>
+        <a href="./kontakt.html" class="btn btn-primary nav-btn">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section page-hero">
+      <div class="container page-hero-inner">
+        <div>
+          <div class="section-kicker">Ceník</div>
+          <h1>Přehledně a bez agenturního balastu</h1>
+          <p class="page-lead">
+            Menší web často nepotřebuje obří rozsah ani složitý proces.
+            Tady je základní orientace v tom, co dělám nejčastěji.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="pricing-grid">
+          <article class="pricing-card reveal">
+            <div class="pricing-label">Start</div>
+            <div class="pricing-price">3 500 Kč</div>
+            <div class="pricing-note">+ DPH</div>
+            <ul class="pricing-list">
+              <li>Jednostránkový web</li>
+              <li>Základní struktura obsahu</li>
+              <li>Mobilní verze</li>
+              <li>Nasazení online</li>
+            </ul>
+            <a href="./kontakt.html" class="btn btn-secondary">Poptat Start</a>
+          </article>
+
+          <article class="pricing-card pricing-card-featured reveal">
+            <div class="pricing-badge">Nejčastější volba</div>
+            <div class="pricing-label">Pro</div>
+            <div class="pricing-price">6 900 Kč</div>
+            <div class="pricing-note">+ DPH</div>
+            <ul class="pricing-list">
+              <li>Homepage + podstránky</li>
+              <li>Lepší struktura obsahu</li>
+              <li>Formulář a základní měření</li>
+              <li>Více prostoru pro důvěru</li>
+            </ul>
+            <a href="./kontakt.html" class="btn btn-primary">Poptat Pro</a>
+          </article>
+
+          <article class="pricing-card reveal">
+            <div class="pricing-label">Individuál</div>
+            <div class="pricing-price">Na dotaz</div>
+            <div class="pricing-note">podle rozsahu</div>
+            <ul class="pricing-list">
+              <li>Více stránek</li>
+              <li>Specifický vzhled</li>
+              <li>Pokročilejší funkce</li>
+              <li>Řešení na míru</li>
+            </ul>
+            <a href="./kontakt.html" class="btn btn-secondary">Poptat řešení</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Co je dobré vědět</div>
+          <h2>Jak nad cenou přemýšlet</h2>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">📄</div>
+            <h3>Menší web</h3>
+            <p>Stačí tam, kde je hlavní cíl představit službu, dodat důvěru a přivést poptávku.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧭</div>
+            <h3>Více stránek</h3>
+            <p>Dává smysl tam, kde je potřeba oddělit ukázky, služby, ceník a kontakt do vlastních sekcí.</p>
+          </article>
+          <article class="feature-card reveal">
+            <div class="feature-icon">🛠️</div>
+            <h3>Individuální řešení</h3>
+            <p>Vhodné tam, kde je potřeba něco specifičtějšího než klasický prezentační web.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container info-panel reveal">
+        <h3>Co obvykle není součástí základních balíčků</h3>
+        <ul>
+          <li>E-shop s košíkem a platební bránou</li>
+          <li>Propojení s databázemi a složitými systémy</li>
+          <li>Rozsáhlé texty psané kompletně na míru</li>
+          <li>Kompletní brand identity nebo grafický manuál</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container cta-panel">
+        <div>
+          <div class="section-kicker">Další krok</div>
+          <h2>Nejste si jistý, který rozsah je pro vás správný?</h2>
+          <p>To je v pohodě. Stačí napsat, co děláte a co od webu čekáte.</p>
+        </div>
+        <div class="cta-panel-actions">
+          <a class="btn btn-primary" href="./kontakt.html">Kontakt</a>
+          <a class="btn btn-secondary" href="./ukazky-praci.html">Ukázky prací</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Tvorba webů · Brno</div>
+      <div class="footer-links">
+        <a href="./index.html">Domů</a>
+        <a href="./ukazky-praci.html">Ukázky prací</a>
+        <a href="./sluzby.html">Služby</a>
+        <a href="./kontakt.html">Kontakt</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Zpět nahoru">↑</button>
+  <script src="./scripts/main.js"></script>
+</body>
+</html>
