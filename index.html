@@ -3,593 +3,423 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tvorba webů — čistý, rychlý a profesionální web</title>
-  <meta name="description" content="Navrhnu a dodám přehledný prezentační web. Krátké texty, moderní vzhled, nasazení na spolehlivý hosting a průběžná podpora." />
+  <title>Tvorba webů — rychlý a moderní web bez zbytečností</title>
+  <meta name="description" content="Tvořím jednoduché a profesionální weby pro živnostníky a malé firmy. Rychlé načítání, čistý kód a nasazení bez složitostí." />
   <meta name="theme-color" content="#0ea5e9" />
-  
-  <!-- OG Meta tagy pro sdílení -->
-  <meta property="og:title" content="Jednoduchý web za 3 500 Kč – Bez zbytečností" />
-  <meta property="og:description" content="Web pro živnostníky a malé firmy za pár tisíc. Hotovo za 1-2 týdny. Bez WordPressu, bez komplikací." />
+
+  <meta property="og:title" content="Jednoduchý web pro živnostníky a malé firmy" />
+  <meta property="og:description" content="Přehledný web, rychlé načítání, čistý kód a jednoduchá spolupráce. Bez zbytečností." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://xaspi7.github.io/Web-na-Zakazku" />
+  <meta property="og:url" content="https://xaspi7.github.io/Web-na-Zakazku/" />
   <meta property="og:image" content="https://xaspi7.github.io/Web-na-Zakazku/og-image.jpg" />
-  
-  <style>
-    /* ====== Design tokens ====== */
-    :root{
-      --bg:#0b1020;
-      --panel:#0f172a;
-      --muted:#94a3b8;
-      --text:#e2e8f0;
-      --brand:#0ea5e9;
-      --brand2:#22d3ee;
-      --success:#10b981;
-      --warning:#f59e0b;
-      --danger:#ef4444;
-      --ring:rgba(14,165,233,.4);
-      --radius:16px;
-      --shadow:0 6px 24px rgba(0,0,0,.25);
-    }
 
-    /* ====== Reset + základ ====== */
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    html,body{margin:0;padding:0;background:linear-gradient(180deg,#0b1020 0%,#0b1226 100%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Inter,Roboto,Arial,"Noto Sans",sans-serif;line-height:1.55}
-    img{max-width:100%;display:block}
-    a{color:var(--brand);text-decoration:none}
-
-    .container{max-width:1080px;margin-inline:auto;padding:clamp(12px,4vw,20px)}
-    .stack{display:grid;gap:20px}
-
-    /* ====== Header ====== */
-    header{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.6);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .nav{display:flex;align-items:center;justify-content:space-between}
-    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
-    .badge{width:32px;height:32px;border-radius:10px;background:linear-gradient(135deg,var(--brand),var(--brand2));display:grid;place-items:center;box-shadow:0 8px 24px rgba(14,165,233,.35)}
-    .menu{display:flex;gap:10px}
-    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);color:var(--text);font-weight:600;transition:transform .08s ease;cursor:pointer}
-    .btn--primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#041017;border:none;box-shadow:0 10px 24px rgba(14,165,233,.35)}
-    .btn--success{background:linear-gradient(135deg,var(--success),#34d399);color:#041017;border:none;box-shadow:0 10px 24px rgba(16,185,129,.35)}
-    .btn--whatsapp{background:#25d366;color:#fff;border:none;box-shadow:0 10px 24px rgba(37,211,102,.35)}
-    .btn:active{transform:translateY(1px)}
-    .btn:disabled{opacity:.6;cursor:not-allowed}
-    .btn.loading{position:relative}
-    .btn.loading::after{
-      content:""; width:16px; height:16px; border:2px solid currentColor; border-top-color:transparent;
-      border-radius:50%; display:inline-block; margin-left:8px; vertical-align:-3px; animation:spin 1s linear infinite;
-    }
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .burger{display:none;width:40px;height:40px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.04);font-size:18px;color:var(--text)}
-
-    /* ====== Hero ====== */
-    .hero{display:grid;grid-template-columns:1fr;gap:14px;padding-block:24px}
-    .hero h1{font-size:clamp(28px,7vw,56px);line-height:1.1;margin:0}
-    .hero .lead{color:var(--muted);font-size:clamp(16px,3vw,18px);line-height:1.6;margin:8px 0 0}
-    .hero-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
-    .badge-pill{display:inline-block;padding:6px 12px;border-radius:20px;background:rgba(34,211,238,.15);color:var(--brand2);font-size:14px;font-weight:700;margin-top:4px}
-
-    /* ====== Náhled (livebox) ====== */
-    .hero-preview{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:10px;box-shadow:var(--shadow);position:relative}
-    .preview-label{text-align:center;color:var(--muted);font-size:13px;margin-bottom:8px}
-    .livebox{position:relative; width:100%; aspect-ratio:16/10; border-radius:14px; border:1px solid rgba(255,255,255,.08); box-shadow:0 6px 24px rgba(0,0,0,.25); background:#0b1226;cursor:pointer;transition:transform .2s ease;overflow:hidden}
-    .livebox:hover{transform:translateY(-2px)}
-    .livebox.has-live{background-image:none}
-    .iframe-holder{position:absolute; top:0; left:0; width:100%; height:100%; transform-origin:top left}
-    .iframe-holder iframe{position:absolute; inset:0; width:1280px; height:800px; border:0; background:#0b1226;pointer-events:none;transform-origin:top left}
-    .preview-tooltip{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(14,165,233,.95);color:#fff;padding:12px 20px;border-radius:10px;font-size:14px;font-weight:700;opacity:0;transition:opacity .2s ease;pointer-events:none;white-space:nowrap;z-index:10}
-    .livebox:hover .preview-tooltip{opacity:1}
-
-    /* ====== Sekce ====== */
-    .section{padding-block:42px}
-    h2{font-size:clamp(22px,4.8vw,32px);margin:0 0 10px}
-    h3{font-size:clamp(18px,3vw,20px);margin:0 0 8px}
-    .card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px}
-    .grid{display:grid;gap:14px}
-    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-
-    /* ====== Srovnání (před/po) ====== */
-    .comparison{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
-    .comparison-card{padding:20px;border-radius:14px;position:relative}
-    .comparison-card.bad{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2)}
-    .comparison-card.good{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2)}
-    .comparison-card h3{display:flex;align-items:center;gap:8px;font-size:18px}
-    .comparison-card ul{margin:12px 0 0;padding-left:20px;color:var(--muted);list-style:none}
-    .comparison-card ul li{margin:8px 0;padding-left:24px;position:relative}
-    .comparison-card.bad ul li::before{content:"❌";position:absolute;left:0}
-    .comparison-card.good ul li::before{content:"✅";position:absolute;left:0}
-
-    /* ====== Pro koho to je ====== */
-    .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
-    .audience-card{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;text-align:center;transition:transform .2s ease,border-color .2s ease}
-    .audience-card:hover{transform:translateY(-4px);border-color:rgba(14,165,233,.4)}
-    .audience-icon{font-size:48px;margin-bottom:12px}
-    .audience-card h3{font-size:18px;margin:0 0 8px}
-    .audience-card p{color:var(--muted);font-size:14px;margin:0}
-
-    /* ====== Promo banner (sleva) ====== */
-    .promo-banner{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(251,191,36,.15));border:2px solid rgba(245,158,11,.4);border-radius:14px;padding:20px;margin-top:20px;text-align:center}
-    .promo-banner h3{color:#fbbf24;font-size:clamp(20px,4vw,24px);margin:0 0 8px}
-    .promo-banner p{color:var(--text);font-size:clamp(14px,2.5vw,16px);margin:0}
-    .promo-banner .countdown{font-weight:900;color:#fbbf24;font-size:20px;margin-top:8px}
-
-    /* ====== Ceník ====== */
-    .price{display:flex;gap:10px;align-items:baseline}
-    .price .big{font-size:32px;font-weight:900}
-
-    /* ====== FAQ/Proces ====== */
-    details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:12px;cursor:pointer}
-    details+details{margin-top:10px}
-    summary{cursor:pointer;font-weight:700;user-select:none}
-    details[open] summary{margin-bottom:8px}
-
-    /* ====== Kontakt ====== */
-    input,textarea{width:100%;padding:12px;border-radius:10px;border:1px solid rgba(255,255,255,.12);background:#0b1226;color:var(--text)}
-    .contact-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
-    .contact-caption{
-      color:var(--muted);
-      margin:6px 0 20px 0;
-      display:block;
-      text-align:right;
-      width:50%;
-    }
-
-    /* ====== Footer ====== */
-    footer{border-top:1px solid rgba(255,255,255,.08);padding-block:22px;color:var(--muted);font-size:14px;position:relative}
-    
-    /* ====== Scroll to top button ====== */
-    .scroll-top{position:fixed;bottom:30px;right:30px;width:50px;height:50px;background:linear-gradient(135deg,var(--brand),var(--brand2));border-radius:50%;display:grid;place-items:center;font-size:24px;color:#041017;box-shadow:0 8px 24px rgba(14,165,233,.4);cursor:pointer;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility .3s ease,transform .2s ease;z-index:100}
-    .scroll-top.visible{opacity:1;visibility:visible}
-    .scroll-top:hover{transform:translateY(-4px)}
-
-    /* ====== Co není součástí ====== */
-    .exclusions{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:16px;margin-top:16px}
-    .exclusions h3{margin:0 0 8px;font-size:16px;color:#fca5a5}
-    .exclusions ul{margin:8px 0 0;padding-left:20px;color:var(--muted)}
-    .exclusions li{margin:4px 0}
-
-    /* ====== Desktop rozšíření ====== */
-    @media (min-width: 860px){
-      .hero{grid-template-columns:1.05fr .95fr;align-items:center}
-      .grid.cols-3{grid-template-columns:repeat(3,1fr)}
-      .grid.cols-2{grid-template-columns:repeat(2,1fr)}
-      .hero-preview{position:relative;min-height:360px}
-      .audience-grid{grid-template-columns:repeat(3,1fr)}
-      .comparison{grid-template-columns:1fr 1fr}
-      .contact-options{grid-template-columns:1fr 1fr}
-    }
-
-    /* ====== Mobilní navigace ====== */
-    @media (max-width: 860px){
-      .menu{
-        display:none; position:fixed; top:60px; left:0; right:0; z-index:1000;
-        flex-direction:column; background:#0b1226; border-top:1px solid rgba(255,255,255,.08);
-        box-shadow:0 8px 32px rgba(0,0,0,.5); border-radius:0 0 16px 16px;
-        padding:16px 12px; gap:10px; max-height:90vh; overflow-y:auto;
-      }
-      .menu.open{display:flex}
-      .burger{display:inline-grid;place-items:center}
-      .btn{width:100%;padding:12px 16px;border-radius:10px}
-      .hero-preview{order:2}
-      .grid.cols-3{grid-template-columns:1fr}
-      .grid.cols-2{grid-template-columns:1fr}
-      .section{padding-block:28px}
-      .card{padding:14px;border-radius:12px}
-      .price .big{font-size:28px}
-      .livebox{aspect-ratio:3/2; max-height:280px; box-shadow:0 4px 16px rgba(0,0,0,.2)}
-      .preview-label{font-size:12px}
-      .audience-grid{grid-template-columns:1fr}
-      .comparison{grid-template-columns:1fr}
-      .contact-options{grid-template-columns:1fr}
-      .contact-caption{width:100%}
-      .scroll-top{bottom:20px;right:20px;width:45px;height:45px}
-    }
-
-    /* ====== Extra mobilní doladění ====== */
-    @media (max-width: 520px){
-      h1{word-break:break-word}
-      .container{padding:12px}
-      .livebox{border-radius:10px; max-height:220px}
-      .btn{padding:10px 12px}
-      .hero .lead{font-size:15px}
-      .preview-tooltip{font-size:12px;padding:8px 12px}
-    }
-
-    /* Když je otevřené menu, zablokuj posouvání podkladu */
-    body.nav-open{overflow:hidden}
-
-    /* ====== Scroll animace ====== */
-    .fade-in{opacity:0;transform:translateY(30px);transition:opacity .6s ease,transform .6s ease}
-    .fade-in.visible{opacity:1;transform:translateY(0)}
-    .fade-in-left{opacity:0;transform:translateX(-30px);transition:opacity .6s ease,transform .6s ease}
-    .fade-in-left.visible{opacity:1;transform:translateX(0)}
-    .fade-in-right{opacity:0;transform:translateX(30px);transition:opacity .6s ease,transform .6s ease}
-    .fade-in-right.visible{opacity:1;transform:translateX(0)}
-    
-    /* Delay pro postupné zjíždění */
-    .fade-in:nth-child(1){transition-delay:.1s}
-    .fade-in:nth-child(2){transition-delay:.2s}
-    .fade-in:nth-child(3){transition-delay:.3s}
-    .fade-in:nth-child(4){transition-delay:.4s}
-    .fade-in:nth-child(5){transition-delay:.5s}
-  </style>
+  <link rel="stylesheet" href="./styles/main.css" />
 </head>
 <body>
-  <!-- ====== Header ====== -->
-  <header>
+  <div class="site-bg"></div>
+
+  <header class="site-header">
     <div class="container nav">
-      <div class="brand"><div class="badge">W</div> <span>Tvorba webů</span></div>
-      <button class="burger" aria-label="Menu" aria-expanded="false">☰</button>
-      <nav class="menu" id="menu">
-        <a class="btn" href="#sluzba">Služba</a>
-        <a class="btn" href="#cena">Ceník</a>
-        <a class="btn" href="#faq">FAQ</a>
-        <a class="btn btn--primary" href="#kontakt">Nezávazně poptat web</a>
+      <a href="#" class="brand" aria-label="Tvorba webů">
+        <span class="brand-mark">W</span>
+        <span class="brand-text">Tvorba webů</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="#sluzby">Služby</a>
+        <a href="#proces">Proces</a>
+        <a href="#cenik">Ceník</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt" class="btn btn-primary nav-cta">Nezávazně poptat web</a>
       </nav>
     </div>
   </header>
 
-  <main class="container stack">
-    <!-- ====== Hero ====== -->
-    <section class="hero">
-      <div class="stack">
-        <h1>Jednoduchý web za pár tisíc. Bez zbytečností.</h1>
-        <div class="badge-pill">⚡ Hotovo za 1-2 týdny</div>
-        <div class="hero-cta">
-          <a class="btn btn--primary" href="#kontakt">Nezávazně poptat web</a>
-        </div>
-      </div>
+  <main>
+    <section class="hero section">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Web pro živnostníky a malé firmy
+          </div>
 
-      <div class="hero-preview">
-        <div class="preview-label">↓ Ukázka mých prací – web se načítá živě</div>
-        <div class="livebox" id="preview-box">
-          <div class="iframe-holder" id="live-desktop">Načítám náhled…</div>
-          <div class="preview-tooltip">Klikněte pro otevření v nové kartě</div>
+          <h1>Moderní web, který působí profesionálně a nezdržuje.</h1>
+
+          <p class="hero-lead">
+            Navrhnu a postavím přehledný prezentační web, který se rychle načítá,
+            dobře vypadá na mobilu a jasně vysvětlí, co nabízíte.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#kontakt">Nezávazně poptat web</a>
+            <a class="btn btn-secondary" href="#cenik">Zobrazit ceník</a>
+          </div>
+
+          <div class="hero-points">
+            <div class="hero-point">⚡ Typicky hotovo za 1–2 týdny</div>
+            <div class="hero-point">🛡️ Čistý kód bez WordPressu</div>
+            <div class="hero-point">📱 Vyladěné i pro mobil</div>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <span class="window-dot red"></span>
+            <span class="window-dot yellow"></span>
+            <span class="window-dot green"></span>
+          </div>
+
+          <div class="hero-preview">
+            <div class="preview-badge">Ukázka přístupu</div>
+
+            <div class="preview-layout">
+              <div class="preview-sidebar">
+                <div class="preview-line lg"></div>
+                <div class="preview-line"></div>
+                <div class="preview-line sm"></div>
+                <div class="preview-chip"></div>
+              </div>
+
+              <div class="preview-content">
+                <div class="preview-heading"></div>
+                <div class="preview-text"></div>
+                <div class="preview-text short"></div>
+
+                <div class="preview-cards">
+                  <div class="preview-card"></div>
+                  <div class="preview-card"></div>
+                  <div class="preview-card"></div>
+                </div>
+
+                <div class="preview-button"></div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ====== Srovnání (před/po) ====== -->
-    <section class="section">
-      <h2>Proč jednoduše?</h2>
-      <div class="comparison">
-        <div class="comparison-card bad fade-in-left">
-          <h3>Složitý web</h3>
+    <section class="section trust-strip">
+      <div class="container trust-grid">
+        <div class="trust-item">Bez zbytečně složité správy</div>
+        <div class="trust-item">Jasná komunikace</div>
+        <div class="trust-item">Rychlý provoz a levný hosting</div>
+        <div class="trust-item">Web připravený pro reálné zákazníky</div>
+      </div>
+    </section>
+
+    <section class="section" id="sluzby">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Služby</div>
+          <h2>Co pro vás web vyřeší</h2>
+          <p>
+            Cílem není jen “mít web”, ale mít web, který návštěvník rychle pochopí,
+            důvěřuje mu a ví, co má udělat dál.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal">
+            <div class="feature-icon">🎯</div>
+            <h3>Jasná nabídka</h3>
+            <p>
+              Pomůžu poskládat obsah tak, aby bylo na první pohled jasné, co děláte,
+              pro koho to je a proč vás kontaktovat.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">⚡</div>
+            <h3>Rychlý web</h3>
+            <p>
+              Bez zbytečných pluginů a nafouknutého systému. Výsledkem je rychlejší načítání,
+              lepší dojem a jednodušší provoz.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">📱</div>
+            <h3>Mobil na prvním místě</h3>
+            <p>
+              Většina lidí přijde z telefonu. Web proto stavím tak, aby byl čitelný,
+              přehledný a pohodlný i na menším displeji.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🧩</div>
+            <h3>Jednoduchá spolupráce</h3>
+            <p>
+              Bez složitého procesu. Domluvíme rozsah, pošlete podklady a já připravím řešení,
+              které dává smysl.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🚀</div>
+            <h3>Nasazení a spuštění</h3>
+            <p>
+              Pomůžu vám web dostat online a doladit poslední detaily, aby mohl co nejdřív
+              začít fungovat.
+            </p>
+          </article>
+
+          <article class="feature-card reveal">
+            <div class="feature-icon">🤝</div>
+            <h3>Drobné úpravy i potom</h3>
+            <p>
+              Když bude potřeba něco přepsat, doplnit nebo upravit, nemusíte hned řešit
+              složitý nový projekt.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contrast-section">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Pro koho</div>
+          <h2>Hodí se hlavně tam, kde má web rychle a srozumitelně prodávat službu</h2>
+        </div>
+
+        <div class="audience-grid">
+          <article class="audience-card reveal">
+            <div class="audience-icon">🔧</div>
+            <h3>Řemeslníci</h3>
+            <p>Elektrikář, instalatér, truhlář, zámečník, podlahář, malíř a další profese.</p>
+          </article>
+
+          <article class="audience-card reveal">
+            <div class="audience-icon">💼</div>
+            <h3>Služby</h3>
+            <p>Účetnictví, poradenství, freelancing, marketing, konzultace nebo lokální služby.</p>
+          </article>
+
+          <article class="audience-card reveal">
+            <div class="audience-icon">🏪</div>
+            <h3>Menší firmy</h3>
+            <p>Kavárny, salony, studia, provozovny, půjčovny a menší podnikání všeho druhu.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="proces">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Proces</div>
+          <h2>Jak probíhá spolupráce</h2>
+          <p>
+            Snažím se držet jednoduchý a rychlý postup, bez zbytečných schůzek a chaosu.
+          </p>
+        </div>
+
+        <div class="steps-grid">
+          <article class="step-card reveal">
+            <div class="step-number">1</div>
+            <h3>Krátká domluva</h3>
+            <p>Napíšete mi, co potřebujete. Ujasníme si rozsah, styl a základní cíle webu.</p>
+          </article>
+
+          <article class="step-card reveal">
+            <div class="step-number">2</div>
+            <h3>Podklady a obsah</h3>
+            <p>Pošlete texty, kontakty, fotky nebo jen základní informace, ze kterých vyjdeme.</p>
+          </article>
+
+          <article class="step-card reveal">
+            <div class="step-number">3</div>
+            <h3>Návrh a zpracování</h3>
+            <p>Připravím podobu webu, doladíme detaily a zapracujeme připomínky.</p>
+          </article>
+
+          <article class="step-card reveal">
+            <div class="step-number">4</div>
+            <h3>Spuštění</h3>
+            <p>Web nasadíme online, zkontrolujeme fungování a může začít sloužit zákazníkům.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cenik">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Ceník</div>
+          <h2>Jednoduché balíčky bez zbytečného balastu</h2>
+          <p>
+            Přehledně, srozumitelně a bez agenturních cen za věci, které malé podnikání často vůbec nepotřebuje.
+          </p>
+        </div>
+
+        <div class="pricing-grid">
+          <article class="pricing-card reveal">
+            <div class="pricing-label">Start</div>
+            <div class="pricing-price">3 500 Kč</div>
+            <div class="pricing-note">+ DPH</div>
+            <ul class="pricing-list">
+              <li>Jednostránkový web</li>
+              <li>Základní obsahová struktura</li>
+              <li>Responzivní zobrazení</li>
+              <li>Nasazení online</li>
+            </ul>
+            <a href="#kontakt" class="btn btn-secondary">Poptat Start</a>
+          </article>
+
+          <article class="pricing-card pricing-card-featured reveal">
+            <div class="pricing-badge">Nejčastější volba</div>
+            <div class="pricing-label">Pro</div>
+            <div class="pricing-price">6 900 Kč</div>
+            <div class="pricing-note">+ DPH</div>
+            <ul class="pricing-list">
+              <li>One-page + 2 podstránky</li>
+              <li>Lepší struktura obsahu</li>
+              <li>Formulář a základní měření</li>
+              <li>Lehké SEO základy</li>
+            </ul>
+            <a href="#kontakt" class="btn btn-primary">Poptat Pro</a>
+          </article>
+
+          <article class="pricing-card reveal">
+            <div class="pricing-label">Individuál</div>
+            <div class="pricing-price">Na dotaz</div>
+            <div class="pricing-note">podle rozsahu</div>
+            <ul class="pricing-list">
+              <li>Více stránek</li>
+              <li>Specifický vzhled</li>
+              <li>Pokročilejší funkce</li>
+              <li>Řešení podle zadání</li>
+            </ul>
+            <a href="#kontakt" class="btn btn-secondary">Poptat řešení</a>
+          </article>
+        </div>
+
+        <div class="info-panel reveal">
+          <h3>Co obvykle není součástí</h3>
           <ul>
-            <li>10-50 tisíc a více</li>
-            <li>Měsíce čekání</li>
-            <li>Nekonečné schůzky</li>
-            <li>WordPress = pomalý a hacknutelný</li>
-            <li>Drahý hosting (500+ Kč/měs)</li>
+            <li>E-shop s košíkem a platební bránou</li>
+            <li>Propojení na složité interní systémy</li>
+            <li>Rozsáhlý copywriting na míru</li>
+            <li>Kompletní branding nebo grafický manuál</li>
           </ul>
         </div>
-        <div class="comparison-card good fade-in-right">
-          <h3>Můj přístup</h3>
-          <ul>
-            <li>3-7 tisíc hotovo</li>
-            <li>Za 1-2 týdny online</li>
-            <li>Komunikace přes mail/telefon</li>
-            <li>Čistý kód = rychlý a bezpečný</li>
-            <li>Levný hosting (100-300 Kč/měs)</li>
-          </ul>
+      </div>
+    </section>
+
+    <section class="section" id="faq">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">FAQ</div>
+          <h2>Časté otázky</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item reveal">
+            <summary>Můžu si pak web sám upravovat?</summary>
+            <p>Ano. U jednodušších úprav vám můžu ukázat, co a kde změnit, případně se dá řešit průběžná podpora.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Jak dlouho tvorba obvykle trvá?</summary>
+            <p>Typicky 1 až 2 týdny podle rozsahu a podle toho, jak rychle jsou k dispozici podklady.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Platí se hosting zvlášť?</summary>
+            <p>Ano. Hosting je samostatná položka, ale u jednoduchých webů bývá cenově velmi dostupný.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Je to vhodné i pro malé lokální podnikání?</summary>
+            <p>Ano, právě pro menší firmy, živnostníky a lokální služby dává tento typ webu často největší smysl.</p>
+          </details>
+
+          <details class="faq-item reveal">
+            <summary>Co když budu chtít web časem rozšířit?</summary>
+            <p>To není problém. Dá se navázat dalšími stránkami, novými sekcemi nebo rozšířením podle potřeby.</p>
+          </details>
         </div>
       </div>
     </section>
 
-    <!-- ====== Pro koho to je ====== -->
-    <section class="section">
-      <h2>Pro koho to je</h2>
-      <div class="audience-grid">
-        <div class="audience-card fade-in">
-          <div class="audience-icon">🔧</div>
-          <h3>Řemeslníci</h3>
-          <p>Elektrikář, instalatér, truhlář, zámečník...</p>
+    <section class="section contact-section" id="kontakt">
+      <div class="container">
+        <div class="contact-wrap">
+          <div class="contact-copy">
+            <div class="section-kicker">Kontakt</div>
+            <h2>Pojďme se podívat, co by pro vás dávalo smysl</h2>
+            <p>
+              Stačí krátce popsat, co děláte a jaký web potřebujete.
+              Ozvu se a navrhneme rozumné řešení.
+            </p>
+
+            <div class="contact-points">
+              <div>✔ Nezávazná poptávka</div>
+              <div>✔ Rychlá domluva</div>
+              <div>✔ Odpověď do 2 pracovních dnů</div>
+            </div>
+
+            <a
+              href="https://wa.me/420605997843?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web"
+              class="btn btn-whatsapp"
+              target="_blank"
+              rel="noopener"
+            >
+              💬 Napsat na WhatsApp
+            </a>
+          </div>
+
+          <div class="contact-card" id="contact-card">
+            <h3>Nezávazná poptávka</h3>
+
+            <form id="contact-form" class="contact-form" method="POST">
+              <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a" />
+              <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů" />
+              <input type="hidden" name="from_name" value="Tvorba webů – formulář" />
+              <input type="checkbox" name="botcheck" style="display:none" />
+
+              <label>
+                <span>Jméno</span>
+                <input required name="name" placeholder="Jan Novák" />
+              </label>
+
+              <label>
+                <span>E-mail</span>
+                <input required type="email" name="email" placeholder="jan@example.com" />
+              </label>
+
+              <label>
+                <span>Vaše zpráva</span>
+                <textarea name="message" rows="5" placeholder="Krátce popište, co potřebujete – například jestli chcete jednoduchý prezentační web, kolik má mít sekcí a co má být jeho cílem."></textarea>
+              </label>
+
+              <button id="submit-btn" class="btn btn-primary" type="submit">Odeslat poptávku</button>
+              <small>Ozvu se do dvou pracovních dnů.</small>
+            </form>
+          </div>
         </div>
-        <div class="audience-card fade-in">
-          <div class="audience-icon">💼</div>
-          <h3>Služby</h3>
-          <p>Účetnictví, poradenství, marketing, coaching...</p>
-        </div>
-        <div class="audience-card fade-in">
-          <div class="audience-icon">🏪</div>
-          <h3>Malé firmy</h3>
-          <p>Kavárna, salon, studio, půjčovna...</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====== Promo banner (sleva) ====== -->
-    <section class="section">
-      <div class="promo-banner fade-in">
-        <h3>🎉 První 3 klienti –10% sleva</h3>
-        <p>Start balíček jen za <strong>3 150 Kč + DPH</strong> místo 3 500 Kč + DPH</p>
-        <div class="countdown" id="promo-countdown">Zbývají 3 místa</div>
-      </div>
-    </section>
-
-    <!-- ====== Služba ====== -->
-    <section id="sluzba" class="section">
-      <h2>Co pro vás udělám</h2>
-      <div class="grid cols-3">
-        <div class="card fade-in">
-          <h3>🎯 Jasná nabídka</h3>
-          <p class="muted">Krátká konzultace, srozumitelné texty a struktura, která prodává.</p>
-        </div>
-        <div class="card fade-in">
-          <h3>🧱 Tvorba webu</h3>
-          <p class="muted">Čistý moderní vzhled, přehledný obsah, rychlé načítání.</p>
-        </div>
-        <div class="card fade-in">
-          <h3>🚀 Nasazení & podpora</h3>
-          <p class="muted">Zařídím nasazení na spolehlivý hosting a průběžné drobné úpravy.</p>
-        </div>
-      </div>
-
-      <div class="exclusions fade-in">
-        <h3>❌ Co NENÍ součástí</h3>
-        <ul>
-          <li>Eshop s košíkem a platební bránou</li>
-          <li>Propojení s databázemi a složitými systémy</li>
-          <li>Grafický manuál nebo kompletní brand identity</li>
-          <li>Copywriting na míru (rozsáhlé texty si připravte)</li>
-        </ul>
-      </div>
-    </section>
-
-    <!-- ====== Ceník ====== -->
-    <section id="cena" class="section">
-      <h2>Ceník</h2>
-      <div class="grid cols-3">
-        <div class="card fade-in">
-          <h3>Start</h3>
-          <div class="price"><span class="big">3 500 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted"><li>Jednostránkový web</li><li>Základní texty</li><li>Nasazení</li></ul>
-        </div>
-        <div class="card fade-in" style="border-color:rgba(34,211,238,.4)">
-          <h3>Pro</h3>
-          <div class="price"><span class="big">6 900 Kč</span><span class="muted">+ DPH</span></div>
-          <ul class="muted"><li>One-page + 2 podstránky</li><li>Lehké SEO</li><li>Formulář + analytika</li></ul>
-        </div>
-        <div class="card fade-in">
-          <h3>Custom</h3>
-          <div class="price"><span class="big">na dotaz</span></div>
-          <ul class="muted"><li>Více stránek / blog</li><li>Vzhled na míru</li><li>Napojení služeb</li></ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ====== FAQ ====== -->
-    <section id="faq" class="section">
-      <h2>Časté otázky</h2>
-      <details class="fade-in">
-        <summary>Můžu si pak web sám upravovat?</summary>
-        <p class="muted">Ano, pokud máte základní znalosti HTML/CSS. Případně vám ukážu, jak upravit jednoduché věci, nebo můžete využít moji podporu.</p>
-      </details>
-      <details class="fade-in">
-        <summary>Co když budu potřebovat něco přidat?</summary>
-        <p class="muted">Drobné úpravy řeším průběžně. Větší změny (nové stránky, funkce) oceníme individuálně.</p>
-      </details>
-      <details class="fade-in">
-        <summary>Platím hosting zvlášť?</summary>
-        <p class="muted">Ano, hosting si zajistíte sám (cca 100-300 Kč/měsíc) nebo vám pomůžu s výběrem a nastavením.</p>
-      </details>
-      <details class="fade-in">
-        <summary>Na čem to běží?</summary>
-        <p class="muted">Čistý HTML/CSS/JavaScript, bez WordPressu. Díky tomu je web rychlý, bezpečný a potřebuje levný hosting.</p>
-      </details>
-      <details class="fade-in">
-        <summary>Jak dlouho to trvá?</summary>
-        <p class="muted">Obvykle 1-2 týdny od konzultace po spuštění. Záleží na rozsahu a rychlosti dodání podkladů.</p>
-      </details>
-    </section>
-
-    <!-- ====== Kontakt ====== -->
-    <section id="kontakt" class="section">
-      <div class="card" id="contact-card">
-        <h2>Napište mi</h2>
-
-        <!-- Možnosti kontaktu -->
-        <div class="contact-options">
-          <a href="https://wa.me/420605997843?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web" class="btn btn--whatsapp" target="_blank" rel="noopener">
-            💬 WhatsApp
-          </a>
-        </div>
-
-        <p class="contact-caption">nebo použijte formulář:</p>
-
-        <!-- ✅ Web3Forms integrace -->
-        <form id="contact-form" class="stack" method="POST">
-          <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a">
-          <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů">
-          <input type="hidden" name="from_name" value="Tvorba webů – formulář">
-          <input type="checkbox" name="botcheck" style="display:none">
-
-          <label>Jméno<br>
-            <input required name="name" placeholder="Jan Novák">
-          </label>
-          <label>E-mail<br>
-            <input required type="email" name="email" placeholder="jan@example.com">
-          </label>
-          <label>Vaše zpráva<br>
-            <textarea name="message" rows="4" placeholder="Krátce popište, co potřebujete – např. jednoduchý web se 2–3 sekcemi…"></textarea>
-          </label>
-
-          <button id="submit-btn" class="btn btn--primary" type="submit">Odeslat</button>
-          <small class="muted">Ozvu se do dvou pracovních dnů.</small>
-        </form>
       </div>
     </section>
   </main>
 
-  <footer>
-    <div class="container" style="text-align:center">
-      © <span id="year"></span> Tvorba webů · Brno
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Tvorba webů · Brno</div>
+      <a href="#top" class="footer-link">Nahoru</a>
     </div>
   </footer>
 
-  <!-- Scroll to top button -->
-  <div class="scroll-top" id="scroll-top" aria-label="Zpět nahoru">↑</div>
+  <button class="scroll-top" id="scroll-top" aria-label="Zpět nahoru">↑</button>
 
-  <script>
-    // Rok ve footeru
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Plynulé skrolování mezi sekcemi
-    document.querySelectorAll('a[href^="#"]').forEach(a=>{
-      a.addEventListener('click', e=>{
-        const el=document.querySelector(a.getAttribute('href'));
-        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth'}); }
-      });
-    });
-
-    // Mobilní menu: otevřít/zavřít + auto-zavření po kliknutí na položku/mimo/ESC
-    const burger=document.querySelector('.burger');
-    const menu=document.getElementById('menu');
-    function setMenu(open){
-      if(!burger || !menu) return;
-      menu.classList.toggle('open', open);
-      burger.setAttribute('aria-expanded', open ? 'true' : 'false');
-      document.body.classList.toggle('nav-open', open);
-    }
-    if (burger && menu) {
-      burger.addEventListener('click', () => setMenu(!menu.classList.contains('open')));
-      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => setMenu(false)));
-      window.addEventListener('hashchange', () => setMenu(false));
-      document.addEventListener('keydown', e => { if (e.key === 'Escape') setMenu(false); });
-      document.addEventListener('click', e => {
-        if (!menu.classList.contains('open')) return;
-        const inside = menu.contains(e.target) || burger.contains(e.target);
-        if (!inside) setMenu(false);
-      });
-    }
-
-    // Live preview – mobil = jen tariflevne, desktop = náhodně
-    (function(){
-      const holder = document.getElementById('live-desktop');
-      const box = document.getElementById('preview-box');
-      if(!holder || !box) return;
-
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      const isMobile = /iPhone|iPad|iPod|Android/i.test(ua);
-
-      const SITES = [
-        'https://xaspi7.github.io/losmotos',
-        'https://tariflevne.cz'
-      ];
-
-      const PREVIEW_URL = isMobile
-        ? 'https://tariflevne.cz'
-        : SITES[Math.floor(Math.random() * SITES.length)];
-
-      const iframe = document.createElement('iframe');
-      iframe.src = PREVIEW_URL;
-      iframe.setAttribute('loading','lazy');
-      iframe.style.position = 'absolute';
-      iframe.style.inset = '0';
-      iframe.style.width = '1280px';
-      iframe.style.height = '800px';
-      iframe.style.border = '0';
-      iframe.style.background = '#0b1226';
-
-      holder.innerHTML = '';
-      holder.appendChild(iframe);
-
-      function resize(){
-        const w = box.clientWidth || 1280;
-        const scale = w / 1280;
-        iframe.style.transform = 'scale('+scale+')';
-        holder.style.height = (800*scale)+'px';
-      }
-      
-      iframe.addEventListener('load',()=>{ 
-        box.classList.add('has-live');
-      });
-      
-      resize();
-      window.addEventListener('resize', resize);
-
-      // Kliknutí na preview box otevře web v nové kartě
-      box.addEventListener('click', (e) => {
-        if (e.target.closest('.preview-tooltip')) return;
-        window.open(PREVIEW_URL, '_blank', 'noopener,noreferrer');
-      });
-    })();
-
-    // Web3Forms submit – po úspěchu zobrazit JEN "Děkuji, zpráva odeslána."
-    (function(){
-      const form = document.getElementById('contact-form');
-      const card = document.getElementById('contact-card');
-      const btn  = document.getElementById('submit-btn');
-      if(!form || !btn || !card) return;
-
-      let isSubmitting = false;
-
-      form.addEventListener('submit', async (e)=>{
-        e.preventDefault();
-        if(isSubmitting) return;
-        isSubmitting = true;
-
-        btn.disabled = true;
-        btn.classList.add('loading');
-        const originalText = btn.textContent;
-        btn.textContent = 'Odesílám…';
-
-        try{
-          const data = new FormData(form);
-          const res  = await fetch('https://api.web3forms.com/submit', { method:'POST', body:data });
-          const json = await res.json();
-
-          if(json.success){
-            card.innerHTML = '<p style="margin:0;font-size:clamp(18px,4.5vw,22px);font-weight:800;text-align:center;padding:24px 8px;">Děkuji, zpráva odeslána.</p>';
-          }else{
-            throw new Error(json.message || 'Odeslání se nezdařilo');
-          }
-        }catch(err){
-          isSubmitting = false;
-          btn.disabled = false;
-          btn.classList.remove('loading');
-          btn.textContent = originalText;
-          alert('Nepodařilo se odeslat formulář. Zkuste to prosím znovu.');
-          console.error(err);
-        }
-      });
-    })();
-
-    // Scroll to top button
-    (function(){
-      const scrollBtn = document.getElementById('scroll-top');
-      if(!scrollBtn) return;
-
-      window.addEventListener('scroll', () => {
-        if(window.scrollY > 300){
-          scrollBtn.classList.add('visible');
-        }else{
-          scrollBtn.classList.remove('visible');
-        }
-      });
-
-      scrollBtn.addEventListener('click', () => {
-        window.scrollTo({top: 0, behavior: 'smooth'});
-      });
-    })();
-
-    // Scroll animace - Intersection Observer
-    (function(){
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if(entry.isIntersecting){
-            entry.target.classList.add('visible');
-          }
-        });
-      }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
-      });
-
-      document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
-        observer.observe(el);
-      });
-    })();
-  </script>
+  <script src="./scripts/main.js"></script>
 </body>
 </html>
