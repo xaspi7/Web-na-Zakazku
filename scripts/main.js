@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
       setMenu(!isOpen);
     });
 
-    navMenu.querySelectorAll("a[href^='#']").forEach((link) => {
+    navMenu.querySelectorAll("a").forEach((link) => {
       link.addEventListener("click", () => setMenu(false));
     });
 
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
           card.innerHTML = `
             <div class="form-success">
               <h3>Děkuji, zpráva byla odeslána.</h3>
-              <p style="margin:10px 0 0;color:#97a8c0;">
+              <p style="margin:10px 0 0;color:#95a7c2;">
                 Ozvu se co nejdříve, obvykle do dvou pracovních dnů.
               </p>
             </div>
