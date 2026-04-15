@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kontakt — Tvorba webů</title>
+  <meta name="description" content="Nezávazná poptávka webu. Napište mi stručně, co potřebujete, a ozvu se zpět." />
+  <meta name="theme-color" content="#38bdf8" />
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="./index.html" class="brand" aria-label="Domů">
+        <span class="brand-mark">W</span>
+        <span>Tvorba webů</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" aria-label="Menu" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav-menu" id="nav-menu">
+        <a href="./index.html">Domů</a>
+        <a href="./ukazky-praci.html">Ukázky prací</a>
+        <a href="./sluzby.html">Služby</a>
+        <a href="./cenik.html">Ceník</a>
+        <a href="./kontakt.html" class="btn btn-primary nav-btn is-active">Kontakt</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section page-hero">
+      <div class="container page-hero-inner">
+        <div>
+          <div class="section-kicker">Kontakt</div>
+          <h1>Nezávazná poptávka</h1>
+          <p class="page-lead">
+            Stačí stručně popsat, co děláte a jaký web potřebujete.
+            Ozvu se a navrhneme rozumné řešení.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact-section">
+      <div class="container contact-wrap">
+        <div class="contact-copy">
+          <h2>Pojďme se podívat, co by pro vás dávalo smysl</h2>
+          <p>
+            Nemusíte mít přesné zadání. Úplně stačí stručně popsat obor, představu a cíl webu.
+          </p>
+
+          <div class="contact-points">
+            <div>✔ Nezávazná poptávka</div>
+            <div>✔ Rychlá domluva</div>
+            <div>✔ Odpověď do 2 pracovních dnů</div>
+          </div>
+
+          <a
+            href="https://wa.me/420605997843?text=Ahoj%2C%20m%C3%A1m%20z%C3%A1jem%20o%20web"
+            class="btn btn-whatsapp"
+            target="_blank"
+            rel="noopener"
+          >
+            💬 Napsat na WhatsApp
+          </a>
+        </div>
+
+        <div class="contact-card" id="contact-card">
+          <h3>Formulář</h3>
+
+          <form id="contact-form" class="contact-form" method="POST">
+            <input type="hidden" name="access_key" value="e9fa988d-3071-483d-b41d-33971235366a" />
+            <input type="hidden" name="subject" value="Nová poptávka z webu Tvorba webů" />
+            <input type="hidden" name="from_name" value="Tvorba webů – formulář" />
+            <input type="checkbox" name="botcheck" style="display:none" />
+
+            <label>
+              <span>Jméno</span>
+              <input required name="name" placeholder="Jan Novák" />
+            </label>
+
+            <label>
+              <span>E-mail</span>
+              <input required type="email" name="email" placeholder="jan@example.com" />
+            </label>
+
+            <label>
+              <span>Vaše zpráva</span>
+              <textarea name="message" rows="6" placeholder="Krátce popište, co děláte, jaký typ webu chcete a co má být jeho cílem."></textarea>
+            </label>
+
+            <button id="submit-btn" class="btn btn-primary" type="submit">Odeslat poptávku</button>
+            <small>Ozvu se do dvou pracovních dnů.</small>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© <span id="year"></span> Tvorba webů · Brno</div>
+      <div class="footer-links">
+        <a href="./index.html">Domů</a>
+        <a href="./ukazky-praci.html">Ukázky prací</a>
+        <a href="./sluzby.html">Služby</a>
+        <a href="./cenik.html">Ceník</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="scroll-top" id="scroll-top" aria-label="Zpět nahoru">↑</button>
+  <script src="./scripts/main.js"></script>
+</body>
+</html>
